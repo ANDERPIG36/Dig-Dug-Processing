@@ -8,5 +8,6 @@ void setup(){
 void update() {
   move();
   scavoMatrice();
+  aggiornaMatrice();
   controlloCollisioni();
 }

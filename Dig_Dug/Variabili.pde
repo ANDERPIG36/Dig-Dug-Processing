@@ -1,17 +1,6 @@
 // mappa livello
 int[][] mappa = new int[13][12];
-/*
-bit 0-15: terreno casella 0:vuoto 1:pieno
-
-
-forse:
-bit 16: macigno 0:non c'è 1:c'è
-bit 17: Pooka 0:non c'è 1:c'è
-bit 18: Fygar 0:non c'è 1:c'è
-bit 19: player 0:non c'è 1:c'è
-bit 20: fuoco
-bit 21: frutto
-*/
+//bit 0-15: terreno casella 0:vuoto 1:pieno
 
 //matrice per la casella
 boolean[][] scavo = new boolean[4][4];
@@ -52,19 +41,23 @@ class Pooka {
   int x, y;
   int gonfiore;
   boolean spettro;
+  int stato;
 }
 Pooka[] pooka = new Pooka[10];
 
 class Fygar{
   int x, y;
+  int subX, subY;
   int gonfiore; 
   boolean spettro;
   boolean isShooting;
+  int stato;
 }
 Fygar[] fygar = new Fygar[10];
 
 class Roccia{
   int x,y;
+  int subX, SubY;
   boolean isFalling;
   int sbriciolamento;
 }

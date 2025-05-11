@@ -41,6 +41,56 @@ void scavoMatrice(){
   mappa[playerY][playerX] = nuovoTerreno;
 }
 
+void aggiornaMatrice() {
+  for(int r = 0; r < 13; r++){
+    for(int c = 0; c < 12; c++){
+      casella = mappa[r][c];
+      
+      // Bit 0 = bit 1 OR bit 4
+      boolean bit1 = (casella & (1 << 1)) != 0;
+      boolean bit4 = (casella & (1 << 4)) != 0;
+      if (!bit1 && !bit4) {
+        casella &= ~(1 << 0); // spegni bit 0
+      }
+
+      // Bit 3 = bit 2 OR bit 7
+      boolean bit2 = (casella & (1 << 2)) != 0;
+      boolean bit7 = (casella & (1 << 7)) != 0;
+      if (!bit2 && !bit7) {
+        casella &= ~(1 << 3); // spegni bit 3
+      }
+
+      // Bit 12 = bit 8 OR bit 13
+      boolean bit8  = (casella & (1 << 8)) != 0;
+      boolean bit13 = (casella & (1 << 13)) != 0;
+      if (!bit8 && !bit13) {
+        casella &= ~(1 << 12); // spegni bit 12
+      }
+
+      // Bit 15 = bit 11 OR bit 14
+      boolean bit11 = (casella & (1 << 11)) != 0;
+      boolean bit14 = (casella & (1 << 14)) != 0;
+      if (!bit11 && !bit14) {
+        casella &= ~(1 << 15); // spegni bit 15
+      }
+      
+      // Bit 5,6,9,10 = bit 0 OR bit 3 OR bit 12 OR bit 15
+      boolean bit0  = (casella & (1 << 0))  != 0;
+      boolean bit3b = (casella & (1 << 3))  != 0;
+      boolean bit12b= (casella & (1 << 12)) != 0;
+      boolean bit15b= (casella & (1 << 15)) != 0;
+      if (!bit0 && !bit3b && !bit12b && !bit15b) {
+        casella &= ~(1 << 5);
+        casella &= ~(1 << 6);
+        casella &= ~(1 << 9);
+        casella &= ~(1 << 10);
+      }
+      
+      mappa[r][c] = casella;
+    }
+  }
+}
+
 void controlloCollisioni() {
   for (int i = 0; i < roccia.length; i++) {
     if (roccia[i] != null && roccia[i].x == playerX && roccia[i].y == playerY) {
