@@ -34,16 +34,29 @@ int ultimaMossa, comandoMossa;
 4:sinista
 */
 
+boolean inPartita;
+
 //x e y dove andranno disegnate le caselle della matrice 
 int xStampa, yStampa;
 
 class Pooka {
   int x, y;
+  int subX, subY;
   int gonfiore;
   boolean spettro;
   int stato;
+  
+  Pooka(int x, int y) {
+    this.x = x;
+    this.y = y;
+    this.subX = 1;
+    this.subY = 3;
+    this.gonfiore = 0;
+    this.spettro = false;
+    this.stato = 0;
+  }
 }
-Pooka[] pooka = new Pooka[10];
+ArrayList<Pooka> pooka = new ArrayList<Pooka>();
 
 class Fygar{
   int x, y;
@@ -52,16 +65,36 @@ class Fygar{
   boolean spettro;
   boolean isShooting;
   int stato;
+  
+  Fygar(int x, int y) {
+    this.x = x;
+    this.y = y;
+    this.subX = 1;
+    this.subY = 3;
+    this.gonfiore = 0;
+    this.spettro = false;
+    this.isShooting = false;
+    this.stato = 0;
+  }
 }
-Fygar[] fygar = new Fygar[10];
+ArrayList<Fygar> fygar = new ArrayList<Fygar>();
 
 class Roccia{
   int x,y;
-  int subX, SubY;
+  int subX, subY;
   boolean isFalling;
   int sbriciolamento;
+  
+  Roccia(int x, int y) {
+    this.x = x;
+    this.y = y;
+    this.isFalling = false;
+    this.sbriciolamento = 0;
+    this.subX = 1;
+    this.subY = 3;
+  }
 }
-Roccia[] roccia = new Roccia[10];
+ArrayList<Roccia> roccia = new ArrayList<Roccia>();
 
 void inizializzaImmagini(){
 

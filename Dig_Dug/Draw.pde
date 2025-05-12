@@ -35,6 +35,12 @@ void drawMap(){
         break;
       }
       
+      switch(mappa[r][c]){
+        default:
+          println(mappa[r][c]);      
+        break;
+      }
+      
       xStampa+=0; //mettere larghezza casella al posto dello 0
     }
     xStampa=0;
