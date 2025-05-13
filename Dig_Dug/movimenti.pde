@@ -11,26 +11,19 @@ void move() {
         }
       }
       else{
-        do{
-          if(ultimaMossa==3){
-            playerSubX++;
-            if(playerSubX>3){
-              playerSubX-= 4;
-              playerX++;
-            }
+        if(ultimaMossa==3){
+          playerSubX++;
+          if(playerSubX>3){
+            playerSubX-= 4;
+            playerX++;
           }
-          else{
-            playerSubX--;
-            if(playerSubX<0){
-              playerSubX+= 4;
-              playerX--;
-            }
+        }
+        else{
+          playerSubX--;
+          if(playerSubX<0){
+            playerSubX+= 4;
+            playerX--;
           }
-        }while(playerSubX!=1);
-        playerSubY--;
-        if(playerSubY<0){
-          playerSubY+= 4;
-          playerY--;
         }
       }
       break;
@@ -43,26 +36,19 @@ void move() {
         }
       }
       else{
-        do{
-          if(ultimaMossa==3){
-            playerSubX++;
-            if(playerSubX>3){
-              playerSubX-= 4;
-              playerX++;
-            }
+        if(ultimaMossa==3){
+          playerSubX++;
+          if(playerSubX>3){
+            playerSubX-= 4;
+            playerX++;
           }
-          else{
-            playerSubX--;
-            if(playerSubX<0){
-              playerSubX+= 4;
-              playerX--;
-            }
+        }
+        else{
+          playerSubX--;
+          if(playerSubX<0){
+            playerSubX+= 4;
+            playerX--;
           }
-        }while(playerSubX!=1);
-        playerSubY++;
-        if(playerSubY>3){
-          playerSubY-= 4;
-          playerY++;
         }
       }
       break;
@@ -75,26 +61,19 @@ void move() {
         }
       }
       else{
-        do{
-          if(ultimaMossa==1){
-            playerSubY--;
-            if(playerSubY<0){
-              playerSubY+= 4;
-              playerY--;
-            }
+        if(ultimaMossa==1){
+          playerSubY--;
+          if(playerSubY<0){
+            playerSubY+= 4;
+            playerY--;
           }
-          else{
-            playerSubY++;
-            if(playerSubY>3){
-              playerSubY-= 4;
-              playerY++;
-            }
+        }
+        else{
+          playerSubY++;
+          if(playerSubY>3){
+            playerSubY-= 4;
+            playerY++;
           }
-        }while(playerSubY!=1);
-        playerSubX++;
-        if(playerSubX>3){
-          playerSubX-= 4;
-          playerX++;
         }
       }
       break;
@@ -107,26 +86,19 @@ void move() {
         }
       }
       else{
-        do{
-          if(ultimaMossa==1){
-            playerSubY--;
-            if(playerSubY<0){
-              playerSubY+= 4;
-              playerY--;
-            }
+        if(ultimaMossa==1){
+          playerSubY--;
+          if(playerSubY<0){
+            playerSubY+= 4;
+            playerY--;
           }
-          else{
-            playerSubY++;
-            if(playerSubY>3){
-              playerSubY-= 4;
-              playerY++;
-            }
+        }
+        else{
+          playerSubY++;
+          if(playerSubY>3){
+            playerSubY-= 4;
+            playerY++;
           }
-        }while(playerSubY!=1);
-        playerSubX--;
-        if(playerSubX<0){
-          playerSubX+= 4;
-          playerX--;
         }
       }
       break;

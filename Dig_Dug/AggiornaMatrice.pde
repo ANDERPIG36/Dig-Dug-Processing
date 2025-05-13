@@ -94,7 +94,7 @@ void aggiornaMatrice() {
 void controlloEventi() {
   for(Roccia r : roccia){
     int centroCasella = (1 << 5) | (1 << 6) | (1 << 9) | (1 << 10);
-    if((mappa[r.x][r.y+1] & centroCasella)==0){
+    if(r.y + 1 < mappa[0].length && (mappa[r.x][r.y + 1] & centroCasella) == 0){
       r.isFalling=true;
     }
     else if(r.isFalling){

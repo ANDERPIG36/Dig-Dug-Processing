@@ -1,15 +1,19 @@
 void draw(){
+  update();
   background(0);
   drawMap();
   drawPlayer();
   drawMostri();
   drawRoccie();
+  drawGUI();
 }
 
 void drawMap(){
+  
   imageMode(CORNER);
   xStampa=0;
   yStampa=64;
+  
   for(int r = 0; r < 13; r++){
     for(int c = 0; c < 12; c++){
       
@@ -124,8 +128,8 @@ void drawMap(){
         case 36047:
           image(tunnel36047, xStampa, yStampa);
           break;
-        case 36448:
-          image(tunnel36448, xStampa, yStampa);
+        case 36048:
+          image(tunnel36048, xStampa, yStampa);
           break;
         case 36488:
           image(tunnel36488, xStampa, yStampa);
@@ -247,21 +251,23 @@ void drawMap(){
         case 65529:
           image(tunnel65529, xStampa, yStampa);
           break;
+        case 65535:
+          break;
         default:
           println(mappa[r][c]);
           break;
       }
-
       
       xStampa+=64; //mettere larghezza casella al posto dello 0
     }
+    
     xStampa=0;
     yStampa+=64; //mettere altezza casella al posto dello 0
   }
 }
 
 void drawPlayer(){
-  
+  image(tunnel0,(playerX * 64 + playerSubX * 16),((playerY * 64 + playerSubY * 16)+64));
 }
 
 void drawMostri(){
@@ -270,4 +276,8 @@ void drawMostri(){
 
 void drawRoccie(){
   
+}
+
+void drawGUI(){
+
 }

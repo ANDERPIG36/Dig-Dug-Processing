@@ -8,8 +8,11 @@ void setup(){
 }
 
 void update() {
-  move();
+  if(clock%10==1){
+    move();
+  }
   scavoMatrice();
   aggiornaMatrice();
   controlloEventi();
+  clock++;
 }

@@ -1,3 +1,5 @@
+int clock;
+
 // mappa livello
 int[][] mappa = new int[13][12];
 //bit 0-15: terreno casella 0:vuoto 1:pieno
