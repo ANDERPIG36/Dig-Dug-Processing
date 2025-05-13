@@ -3,7 +3,7 @@ void assegnaLivello(){
   playerX=5;
   playerY=5;
   playerSubX=1;
-  playerSubY=3;
+  playerSubY=1;
   
   switch(livello%100){
   

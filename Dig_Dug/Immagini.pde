@@ -7,16 +7,58 @@ PImage tunnel0, tunnel15, tunnel47, tunnel79, tunnel111, tunnel559, tunnel1103, 
   tunnel61455, tunnel61713, tunnel61727, tunnel61952, tunnel61984, tunnel61999, tunnel62225, tunnel62257, tunnel62271, tunnel62464,
   tunnel62528, tunnel62543, tunnel62972, tunnel63072, tunnel63087, tunnel63249, tunnel63345, tunnel63359, tunnel63624, tunnel63631,
   tunnel63897, tunnel64648, tunnel64712, tunnel64719, tunnel65160, tunnel65256, tunnel65263, tunnel65433, tunnel65529;
-
-
+PImage[][] animazionePlayerScavo = new PImage[2][6];
+PImage[][] animazionePlayerPompata = new PImage[2][6];
+PImage[][] animazionePlayerCamminata = new PImage[2][6];
+PImage rocciaFerma;
+PImage[] rocciaCadente = new PImage[3];
 
 void inizializzaImmagini(){
+  rocciaFerma= loadImage("generali/roccia/roccia.png");
+  for(int i=0; i<3; i++){
+    rocciaCadente[i] = loadImage("generali/roccia/rocciaCadente"+(i+1)+".png");
+  }
   for(int i=0; i<3; i++){
     for(int j=0; j<4; j++){
       terreno[i][j] = loadImage("terreno/terreno"+(i+1)+""+(j+1)+".png");
     }
   }
-  
+  animazionePlayerScavo[0][0] = loadImage("player/ScavoAnimazione/spriteScavaggio1.png");
+  animazionePlayerScavo[1][0] = loadImage("player/ScavoAnimazione/spriteScavaggioAnimato1.png");
+  animazionePlayerScavo[0][1] = loadImage("player/ScavoAnimazione/spriteScavaggio2.png");
+  animazionePlayerScavo[1][1] = loadImage("player/ScavoAnimazione/spriteScavaggioAnimato2.png");
+  animazionePlayerScavo[0][2] = loadImage("player/ScavoAnimazione/spriteScavaggio3.png");
+  animazionePlayerScavo[1][2] = loadImage("player/ScavoAnimazione/spriteScavaggioAnimato3.png");
+  animazionePlayerScavo[0][3] = loadImage("player/ScavoAnimazione/spriteScavaggio4.png");
+  animazionePlayerScavo[1][3] = loadImage("player/ScavoAnimazione/spriteScavaggioAnimato4.png");
+  animazionePlayerScavo[0][4] = loadImage("player/ScavoAnimazione/spriteScavaggio5.png");
+  animazionePlayerScavo[1][4] = loadImage("player/ScavoAnimazione/spriteScavaggioAnimato5.png");
+  animazionePlayerScavo[0][5] = loadImage("player/ScavoAnimazione/spriteScavaggio6.png");
+  animazionePlayerScavo[1][5] = loadImage("player/ScavoAnimazione/spriteScavaggioAnimato6.png");
+  animazionePlayerPompata[0][0] = loadImage("player/pompata/Pompata11.png");
+  animazionePlayerPompata[1][0] = loadImage("player/pompata/Pompata21.png");
+  animazionePlayerPompata[0][1] = loadImage("player/pompata/Pompata12.png");
+  animazionePlayerPompata[1][1] = loadImage("player/pompata/Pompata22.png");
+  animazionePlayerPompata[0][2] = loadImage("player/pompata/Pompata13.png");
+  animazionePlayerPompata[1][2] = loadImage("player/pompata/Pompata23.png");
+  animazionePlayerPompata[0][3] = loadImage("player/pompata/Pompata14.png");
+  animazionePlayerPompata[1][3] = loadImage("player/pompata/Pompata24.png");
+  animazionePlayerPompata[0][4] = loadImage("player/pompata/Pompata15.png");
+  animazionePlayerPompata[1][4] = loadImage("player/pompata/Pompata25.png");
+  animazionePlayerPompata[0][5] = loadImage("player/pompata/Pompata16.png");
+  animazionePlayerPompata[1][5] = loadImage("player/pompata/Pompata26.png");
+  animazionePlayerCamminata[0][0] = loadImage("player/CamminataAnimazione/camminata1.png");
+  animazionePlayerCamminata[1][0] = loadImage("player/CamminataAnimazione/camminataAnimata1.png");
+  animazionePlayerCamminata[0][1] = loadImage("player/CamminataAnimazione/camminata2.png");
+  animazionePlayerCamminata[1][1] = loadImage("player/CamminataAnimazione/camminataAnimata2.png");
+  animazionePlayerCamminata[0][2] = loadImage("player/CamminataAnimazione/camminata3.png");
+  animazionePlayerCamminata[1][2] = loadImage("player/CamminataAnimazione/camminataAnimata3.png");
+  animazionePlayerCamminata[0][3] = loadImage("player/CamminataAnimazione/camminata4.png");
+  animazionePlayerCamminata[1][3] = loadImage("player/CamminataAnimazione/camminataAnimata4.png");
+  animazionePlayerCamminata[0][4] = loadImage("player/CamminataAnimazione/camminata5.png");
+  animazionePlayerCamminata[1][4] = loadImage("player/CamminataAnimazione/camminataAnimata5.png");
+  animazionePlayerCamminata[0][5] = loadImage("player/CamminataAnimazione/camminata6.png");
+  animazionePlayerCamminata[1][5] = loadImage("player/CamminataAnimazione/camminataAnimata6.png");
   tunnel0 = loadImage("scavi/tunnel_0.png");
   tunnel15 = loadImage("scavi/tunnel_15.png");
   tunnel47 = loadImage("scavi/tunnel_47.png");

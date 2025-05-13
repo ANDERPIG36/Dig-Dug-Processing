@@ -83,7 +83,7 @@ ArrayList<Fygar> fygar = new ArrayList<Fygar>();
 
 class Roccia{
   int x,y;
-  int subX, subY;
+  int subY;
   boolean isFalling;
   int sbriciolamento;
   
@@ -92,8 +92,7 @@ class Roccia{
     this.y = y;
     this.isFalling = false;
     this.sbriciolamento = 0;
-    this.subX = 1;
-    this.subY = 3;
+    this.subY = 0;
   }
 }
 ArrayList<Roccia> roccia = new ArrayList<Roccia>();

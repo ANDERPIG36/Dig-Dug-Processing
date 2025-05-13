@@ -275,7 +275,16 @@ void drawMostri(){
 }
 
 void drawRoccie(){
+  imageMode(CORNER);
   
+  for (Roccia r : roccia){  
+    if(r.sbriciolamento>0){
+      image(rocciaCadente[r.sbriciolamento-1],(r.x * 64),((r.y * 64 + r.subY * 16)+64));
+    }
+    else if(r.sbriciolamento!=-1){
+      image(rocciaFerma,(r.x * 64),((r.y * 64 + r.subY * 16)+64));
+    } 
+  }
 }
 
 void drawGUI(){

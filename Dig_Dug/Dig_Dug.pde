@@ -8,7 +8,7 @@ void setup(){
 }
 
 void update() {
-  if(clock%10==1){
+  if(clock%6==1){
     move();
   }
   scavoMatrice();

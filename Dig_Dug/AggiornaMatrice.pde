@@ -1,34 +1,36 @@
-void scavoMatrice(){
+void scavoMatrice() {
   casella = mappa[playerY][playerX];
-  
+
+  // Inizializza scavo
   for (int sy = 0; sy < 4; sy++) {
     for (int sx = 0; sx < 4; sx++) {
       int bit = 1 << (sy*4 + sx);
       scavo[sy][sx] = (casella & bit) != 0;
     }
   }
-  
+
+  // Scava in base alla direzione con pattern 2x2 centrato
   switch (ultimaMossa) {
-    case 1: // su
-    case 2: // giù
-      for (int dx = 0; dx < 2; dx++) {
-        int sx = playerSubX + dx;
-        if (sx >= 0 && sx < 4) scavo[playerSubY][sx] = false;
-      }
-      break;
-      
-    case 3: // destra
-    case 4: // sinistra
-      for (int dy = 0; dy < 2; dy++) {
-        int sy = playerSubY + dy;
-        if (sy >= 0 && sy < 4) scavo[sy][playerSubX] = false;
-      }
-      break;
-      
-    default:
-      scavo[playerSubY][playerSubX] = false;
+  case 1: // SU
+  case 2: // GIÙ
+    // Scava due colonne centrali (1 e 2)
+    for (int dx = 1; dx <= 2; dx++) {
+      scavo[playerSubY][dx] = false;
+      if (playerSubY+1 < 4) scavo[playerSubY+1][dx] = false;
+    }
+    break;
+
+  case 3: // DESTRA
+  case 4: // SINISTRA
+    // Scava due righe centrali (1 e 2)
+    for (int dy = 1; dy <= 2; dy++) {
+      scavo[dy][playerSubX] = false;
+      if (playerSubX+1 < 4) scavo[dy][playerSubX+1] = false;
+    }
+    break;
   }
-  
+
+  // Aggiorna la mappa
   int nuovoTerreno = 0;
   for (int sy = 0; sy < 4; sy++) {
     for (int sx = 0; sx < 4; sx++) {
@@ -36,8 +38,7 @@ void scavoMatrice(){
         nuovoTerreno |= 1 << (sy * 4 + sx);
       }
     }
-  }  
-  
+  }
   mappa[playerY][playerX] = nuovoTerreno;
 }
 
@@ -92,13 +93,25 @@ void aggiornaMatrice() {
 }
 
 void controlloEventi() {
+  
   for(Roccia r : roccia){
-    int centroCasella = (1 << 5) | (1 << 6) | (1 << 9) | (1 << 10);
-    if(r.y + 1 < mappa[0].length && (mappa[r.x][r.y + 1] & centroCasella) == 0){
+    int centroCasella = (1 << 5) | (1 << 6) | (1 << 9) | (1 << 10);    
+
+    if(r.sbriciolamento>0){
+      if(clock%12==0){
+        r.sbriciolamento++;
+      }
+      if (r.sbriciolamento > 3) {
+        r.sbriciolamento=-1;
+      }
+    }
+
+    if(r.y + 1 < mappa[0].length && (mappa[r.y+1][r.x] & centroCasella) == 0){
       r.isFalling=true;
     }
     else if(r.isFalling){
-      //mettere distruzione roccia
+        r.sbriciolamento++;
+        r.isFalling=false;
     }
     
     if (r.x == playerX && r.y == playerY && r.isFalling) {
