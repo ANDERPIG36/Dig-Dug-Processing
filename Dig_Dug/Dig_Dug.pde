@@ -1,5 +1,5 @@
 void setup(){
-  size(1000,1000);
+  size(768,960);
   frameRate(60);
   inizializzaImmagini();
   livello = 0;

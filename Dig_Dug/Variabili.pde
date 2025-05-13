@@ -95,7 +95,3 @@ class Roccia{
   }
 }
 ArrayList<Roccia> roccia = new ArrayList<Roccia>();
-
-void inizializzaImmagini(){
-
-}
