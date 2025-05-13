@@ -9,6 +9,7 @@ void move() {
           playerSubY+= 4;
           playerY--;
         }
+        ultimaMossa = comandoMossa;
       }
       else{
         if(ultimaMossa==3){
@@ -34,6 +35,7 @@ void move() {
           playerSubY-= 4;
           playerY++;
         }
+        ultimaMossa = comandoMossa;
       }
       else{
         if(ultimaMossa==3){
@@ -59,6 +61,7 @@ void move() {
           playerSubX-= 4;
           playerX++;
         }
+        ultimaMossa = comandoMossa;
       }
       else{
         if(ultimaMossa==1){
@@ -84,6 +87,7 @@ void move() {
           playerSubX+= 4;
           playerX--;
         }
+        ultimaMossa = comandoMossa;
       }
       else{
         if(ultimaMossa==1){
@@ -103,5 +107,4 @@ void move() {
       }
       break;
   }
-  ultimaMossa = comandoMossa;
 }
