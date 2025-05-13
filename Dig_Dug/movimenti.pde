@@ -19,7 +19,7 @@ void move() {
             playerX++;
           }
         }
-        else{
+        else if(playerX>0||playerSubX>1){
           playerSubX--;
           if(playerSubX<0){
             playerSubX+= 4;
@@ -45,7 +45,7 @@ void move() {
             playerX++;
           }
         }
-        else{
+        else if(playerX>0||playerSubX>1){
           playerSubX--;
           if(playerSubX<0){
             playerSubX+= 4;
@@ -55,53 +55,57 @@ void move() {
       }
       break;
     case 3:
-      if(playerSubY==1){
-        playerSubX++;
-        if(playerSubX>3){
-          playerSubX-= 4;
-          playerX++;
-        }
-        ultimaMossa = comandoMossa;
-      }
-      else{
-        if(ultimaMossa==1){
-          playerSubY--;
-          if(playerSubY<0){
-            playerSubY+= 4;
-            playerY--;
+      if(true){
+        if(playerSubY==1){
+          playerSubX++;
+          if(playerSubX>3){
+            playerSubX-= 4;
+            playerX++;
           }
+          ultimaMossa = comandoMossa;
         }
         else{
-          playerSubY++;
-          if(playerSubY>3){
-            playerSubY-= 4;
-            playerY++;
+          if(ultimaMossa==1){
+            playerSubY--;
+            if(playerSubY<0){
+              playerSubY+= 4;
+              playerY--;
+            }
+          }
+          else{
+            playerSubY++;
+            if(playerSubY>3){
+              playerSubY-= 4;
+              playerY++;
+            }
           }
         }
       }
       break;
     case 4:
-      if(playerSubY==1){
-        playerSubX--;
-        if(playerSubX<0){
-          playerSubX+= 4;
-          playerX--;
-        }
-        ultimaMossa = comandoMossa;
-      }
-      else{
-        if(ultimaMossa==1){
-          playerSubY--;
-          if(playerSubY<0){
-            playerSubY+= 4;
-            playerY--;
+      if(playerX>0||playerSubX>1){
+        if(playerSubY==1){
+          playerSubX--;
+          if(playerSubX<0){
+            playerSubX+= 4;
+            playerX--;
           }
+          ultimaMossa = comandoMossa;
         }
         else{
-          playerSubY++;
-          if(playerSubY>3){
-            playerSubY-= 4;
-            playerY++;
+          if(ultimaMossa==1){
+            playerSubY--;
+            if(playerSubY<0){
+              playerSubY+= 4;
+              playerY--;
+            }
+          }
+          else{
+            playerSubY++;
+            if(playerSubY>3){
+              playerSubY-= 4;
+              playerY++;
+            }
           }
         }
       }
