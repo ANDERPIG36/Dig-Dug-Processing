@@ -11,5 +11,5 @@ void update() {
   move();
   scavoMatrice();
   aggiornaMatrice();
-  controlloCollisioni();
+  controlloEventi();
 }

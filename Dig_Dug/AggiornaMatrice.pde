@@ -91,22 +91,51 @@ void aggiornaMatrice() {
   }
 }
 
-void controlloCollisioni() {
-  for (int i = 0; i < roccia.length; i++) {
-    if (roccia[i] != null && roccia[i].x == playerX && roccia[i].y == playerY) {
+void controlloEventi() {
+  for(Roccia r : roccia){
+    int centroCasella = (1 << 5) | (1 << 6) | (1 << 9) | (1 << 10);
+    if((mappa[r.x][r.y+1] & centroCasella)==0){
+      r.isFalling=true;
+    }
+    else if(r.isFalling){
+      //mettere distruzione roccia
+    }
+    
+    if (r.x == playerX && r.y == playerY && r.isFalling) {
+      morte();
+    }
+    if (r.isFalling){
+      r.subY++;
+      if(r.subY>3){
+        r.subY -= 4;
+        r.y++;
+      }
+    }
+    
+    for (Pooka p : pooka) {
+      if (p.x == r.x && p.y == r.y) {
+        //schiaccia mostro
+      }
+    }
+    
+    for (Fygar f : fygar) {
+      if (f.x == r.x && f.y == r.y) {
+        //schiaccia mostro
+      }
+    }
+    
+  }
+  
+  for (Pooka p : pooka) {
+    if (p.x == playerX && p.y == playerY) {
+      morte();
+    }
+  }
+  
+  for (Fygar f : fygar) {
+    if (f.x == playerX && f.y == playerY) {
       morte();
     }
   }
 
-  for (int i = 0; i < pooka.length; i++) {
-    if (pooka[i] != null && pooka[i].x == playerX && pooka[i].y == playerY) {
-      morte();
-    }
-  }
-
-  for (int i = 0; i < fygar.length; i++) {
-    if (fygar[i] != null && fygar[i].x == playerX && fygar[i].y == playerY) {
-      morte();
-    }
-  }
 }
