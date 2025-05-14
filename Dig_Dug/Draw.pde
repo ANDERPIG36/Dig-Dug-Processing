@@ -275,7 +275,7 @@ void drawMap(){
   xStampa=704;
   
   for(int i=0;i<fioriGrandi;i++){
-    image(fiore10,xStampa,36);
+    image(fiore10[i%2],xStampa,36);
     xStampa-=64;
   }
   for(int i=0;i<fioriPiccoli;i++){

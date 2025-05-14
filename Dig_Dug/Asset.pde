@@ -15,10 +15,19 @@ PImage[][] animazionePlayerPompata = new PImage[2][6];
 PImage[][] animazionePlayerCamminata = new PImage[2][6];
 PImage rocciaFerma;
 PImage[] rocciaCadente = new PImage[3];
-PImage ananas, carota, cetriolo, fiore, fiore10, fioreRaccogliere, fungo, melanzana, peperone, pomodoro, ravanello, zucca;
+PImage fiore;
+PImage[] fiore10 = new PImage[2];
 PImage[][] animazionePooka = new PImage[2][2];
 PImage[][] animazionePookaGonfiato = new PImage[3][2];
 PImage[] animazionePookaFantasma = new PImage[2];
+PImage[] frutti = new PImage[10];
+PImage[][] pompa = new PImage[2][6];
+PImage[] fygarFantasma = new PImage[2];
+PImage[][] fygarGonfiore = new PImage[3][2];
+PImage[][] fygarFuoco = new PImage[3][2];
+PImage[][] fygarAnimazione = new PImage[2][2];
+PImage[] fygarAttacco = new PImage[2];
+
 
 void inizializzaAsset(){
   font = createFont("font.ttf", 32);
@@ -31,6 +40,20 @@ void inizializzaAsset(){
       terreno[i][j] = loadImage("terreno/terreno"+(i+1)+""+(j+1)+".png");
     }
   }
+  
+  pompa[0][0] = loadImage("player/pompa/tuboPompa1.png");
+  pompa[1][0] = loadImage("player/pompa/puntaPompa1.png");
+  pompa[0][1] = loadImage("player/pompa/tuboPompa2.png");
+  pompa[1][1] = loadImage("player/pompa/puntaPompa2.png");
+  pompa[0][2] = loadImage("player/pompa/tuboPompa3.png");
+  pompa[1][2] = loadImage("player/pompa/puntaPompa3.png");
+  pompa[0][3] = loadImage("player/pompa/tuboPompa4.png");
+  pompa[1][3] = loadImage("player/pompa/puntaPompa4.png");
+  pompa[0][4] = loadImage("player/pompa/tuboPompa5.png");
+  pompa[1][4] = loadImage("player/pompa/puntaPompa5.png");
+  pompa[0][5] = loadImage("player/pompa/tuboPompa6.png");
+  pompa[1][5] = loadImage("player/pompa/puntaPompa6.png");
+  
   animazionePlayerScavo[0][0] = loadImage("player/ScavoAnimazione/spriteScavaggio1.png");
   animazionePlayerScavo[1][0] = loadImage("player/ScavoAnimazione/spriteScavaggioAnimato1.png");
   animazionePlayerScavo[0][1] = loadImage("player/ScavoAnimazione/spriteScavaggio2.png");
@@ -43,6 +66,29 @@ void inizializzaAsset(){
   animazionePlayerScavo[1][4] = loadImage("player/ScavoAnimazione/spriteScavaggioAnimato5.png");
   animazionePlayerScavo[0][5] = loadImage("player/ScavoAnimazione/spriteScavaggio6.png");
   animazionePlayerScavo[1][5] = loadImage("player/ScavoAnimazione/spriteScavaggioAnimato6.png");
+  
+  fygarFuoco[0][0] = loadImage("cpu/fygar/fuoco/fygarFuoco1L.png");
+  fygarFuoco[1][0] = loadImage("cpu/fygar/fuoco/fygarFuoco2L.png");
+  fygarFuoco[2][0] = loadImage("cpu/fygar/fuoco/fygarFuoco3L.png");
+  fygarFuoco[0][1] = loadImage("cpu/fygar/fuoco/fygarFuoco1R.png");
+  fygarFuoco[1][1] = loadImage("cpu/fygar/fuoco/fygarFuoco2R.png");
+  fygarFuoco[2][1] = loadImage("cpu/fygar/fuoco/fygarFuoco3R.png");
+  
+  fygarAttacco[0] = loadImage("cpu/fygar/fygarPreparazioneR.png");
+  fygarAttacco[1] = loadImage("cpu/fygar/fygarPreparazioneL.png");
+  fygarAnimazione[0][0] = loadImage("cpu/fygar/fygarL.png");
+  fygarAnimazione[1][0] = loadImage("cpu/fygar/fygarR.png");
+  fygarAnimazione[0][1] = loadImage("cpu/fygar/fygarAnimazioneL.png");
+  fygarAnimazione[1][1] = loadImage("cpu/fygar/fygarAnimazioneR.png");
+  fygarGonfiore[0][0] = loadImage("cpu/fygar/fygarGonfiore1L.png");
+  fygarGonfiore[1][0] = loadImage("cpu/fygar/fygarGonfiore2L.png");
+  fygarGonfiore[2][0] = loadImage("cpu/fygar/fygarGonfiore3L.png");
+  fygarGonfiore[0][1] = loadImage("cpu/fygar/fygarGonfiore1R.png");
+  fygarGonfiore[1][1] = loadImage("cpu/fygar/fygarGonfiore2R.png");
+  fygarGonfiore[2][1] = loadImage("cpu/fygar/fygarGonfiore3R.png");
+  fygarFantasma[0] = loadImage("cpu/fygar/fantasma/fygarFantasma1.png");
+  fygarFantasma[1] = loadImage("cpu/fygar/fantasma/fygarFantasma2.png");
+  
   animazionePlayerPompata[0][0] = loadImage("player/pompata/Pompata11.png");
   animazionePlayerPompata[1][0] = loadImage("player/pompata/Pompata21.png");
   animazionePlayerPompata[0][1] = loadImage("player/pompata/Pompata12.png");
@@ -55,6 +101,7 @@ void inizializzaAsset(){
   animazionePlayerPompata[1][4] = loadImage("player/pompata/Pompata25.png");
   animazionePlayerPompata[0][5] = loadImage("player/pompata/Pompata16.png");
   animazionePlayerPompata[1][5] = loadImage("player/pompata/Pompata26.png");
+  
   animazionePlayerCamminata[0][0] = loadImage("player/CamminataAnimazione/camminata1.png");
   animazionePlayerCamminata[1][0] = loadImage("player/CamminataAnimazione/camminataAnimata1.png");
   animazionePlayerCamminata[0][1] = loadImage("player/CamminataAnimazione/camminata2.png");
@@ -67,6 +114,7 @@ void inizializzaAsset(){
   animazionePlayerCamminata[1][4] = loadImage("player/CamminataAnimazione/camminataAnimata5.png");
   animazionePlayerCamminata[0][5] = loadImage("player/CamminataAnimazione/camminata6.png");
   animazionePlayerCamminata[1][5] = loadImage("player/CamminataAnimazione/camminataAnimata6.png");
+  
   tunnel0 = loadImage("scavi/tunnel_0.png");
   tunnel15 = loadImage("scavi/tunnel_15.png");
   tunnel47 = loadImage("scavi/tunnel_47.png");
@@ -136,19 +184,24 @@ void inizializzaAsset(){
   tunnel65263 = loadImage("scavi/tunnel_65263.png");
   tunnel65433 = loadImage("scavi/tunnel_65433.png");
   tunnel65529 = loadImage("scavi/tunnel_65529.png");
+  
   menu = loadImage("digdug.png");
-  ananas = loadImage("generali/ananas.png");
-  carota = loadImage("generali/carota.png");
-  cetriolo = loadImage("generali/cetriolo.png");
+  
+  frutti[0] = loadImage("generali/zucca.png");
+  frutti[1] = loadImage("generali/ananas.png");
+  frutti[2] = loadImage("generali/carota.png");
+  frutti[3] = loadImage("generali/cetriolo.png");
+  frutti[4] = loadImage("generali/fioreraccogliere.png");
+  frutti[5] = loadImage("generali/fungo.png");
+  frutti[6] = loadImage("generali/melanzana.png");
+  frutti[7] = loadImage("generali/peperone.png");
+  frutti[8] = loadImage("generali/pomodoro.png");
+  frutti[9] = loadImage("generali/ravanello.png");
+
   fiore = loadImage("generali/fiore.png");
-  fiore10 = loadImage("generali/fiore10.png");
-  fioreRaccogliere = loadImage("generali/fioreraccogliere.png");
-  fungo = loadImage("generali/fungo.png");
-  melanzana = loadImage("generali/melanzana.png");
-  peperone = loadImage("generali/peperone.png");
-  pomodoro = loadImage("generali/pomodoro.png");
-  ravanello = loadImage("generali/ravanello.png");
-  zucca = loadImage("generali/zucca.png");
+  fiore10[0] = loadImage("generali/fiore101.png");
+  fiore10[1] = loadImage("generali/fiore102.png");
+
   animazionePooka[0][0] = loadImage("cpu/pooka/pookaL.png");
   animazionePooka[1][0] = loadImage("cpu/pooka/pookaR.png");
   animazionePooka[0][1] = loadImage("cpu/pooka/pookaCamminaL.png");
@@ -160,5 +213,5 @@ void inizializzaAsset(){
   animazionePookaGonfiato[1][1] = loadImage("cpu/pooka/pookaGonfiore2R.png");
   animazionePookaGonfiato[2][1] = loadImage("cpu/pooka/pookaGonfiore3R.png");
   animazionePookaFantasma[0] = loadImage("cpu/pooka/fantasma/PookaFantasma1.png");
-  animazionePookaFantasma[0] = loadImage("cpu/pooka/fantasma/PookaFantasma2.png");
+  animazionePookaFantasma[1] = loadImage("cpu/pooka/fantasma/PookaFantasma2.png");
 }
