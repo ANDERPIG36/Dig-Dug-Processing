@@ -1,11 +1,16 @@
 void draw(){
   update();
   background(0);
-  drawMap();
-  drawPlayer();
-  drawMostri();
-  drawRoccie();
-  drawGUI();
+  if(partita){
+    drawMap();
+    drawPlayer();
+    drawMostri();
+    drawRoccie();
+    drawGUI();
+  }
+  else{
+    background(menu);
+  }
 }
 
 void drawMap(){
@@ -264,14 +269,74 @@ void drawMap(){
     xStampa=0;
     yStampa+=64; //mettere altezza casella al posto dello 0
   }
+  
+  fioriGrandi= int ((livello+1)%100)/10;
+  fioriPiccoli= (livello+1)%10;
+  xStampa=704;
+  
+  for(int i=0;i<fioriGrandi;i++){
+    image(fiore10,xStampa,36);
+    xStampa-=64;
+  }
+  for(int i=0;i<fioriPiccoli;i++){
+    image(fiore,xStampa,68);
+    xStampa-=64;
+  }
 }
 
-void drawPlayer(){
-  image(tunnel0,(playerX * 64 + playerSubX * 16),((playerY * 64 + playerSubY * 16)+64));
+void drawPlayer() {
+  imageMode(CENTER);
+  currentFrame = (clock / frameDelay) % 2;
+  if (comandoMossa == 0) {
+    currentFrame = 0;
+  }
+
+  switch (ultimaMossa) {
+    case 1:
+      direzionePlayer = (direzionePlayerSalita == 2) ? 5 : 2;
+      break;
+    case 2:
+      direzionePlayer = (direzionePlayerSalita == 2) ? 4 : 1;
+      break;
+    case 3:
+      direzionePlayer = 0;
+      break;
+    case 4:
+      direzionePlayer = 3;
+      break;
+  }
+
+  PImage img = staScavando ? animazionePlayerScavo[currentFrame][direzionePlayer] : animazionePlayerCamminata[currentFrame][direzionePlayer];
+
+  image(img, (playerX * 64 + playerSubX * 16) + 16, (playerY * 64 + playerSubY * 16) + 80);
 }
+
 
 void drawMostri(){
+  imageMode(CENTER);
   
+  // Disegna i Pooka
+  for (Pooka p : pooka) {
+    int xPos = (p.x * 64 + p.subX * 16) + 16;
+    int yPos = (p.y * 64 + p.subY * 16) + 48;
+    
+    if (p.gonfiore > 0) {
+      // Pooka gonfiato
+      int frame = (clock / 10) % 2; // Animazione più lenta per il gonfiore
+      image(animazionePookaGonfiato[p.gonfiore-1][frame], xPos, yPos);
+    } 
+    else if (p.spettro) {
+      // Pooka in modalità fantasma
+      int frame = (clock / 10) % 2;
+      image(animazionePookaFantasma[frame], xPos, yPos);
+    } 
+    else {
+      // Pooka normale
+      int frame = (clock / 10) % 2; // Animazione più veloce per il movimento normale
+      int dir = (p.stato == 0) ? 0 : 1; // 0=sinistra, 1=destra
+      image(animazionePooka[dir][frame], xPos, yPos);
+    }
+  }
 }
 
 void drawRoccie(){
@@ -288,5 +353,25 @@ void drawRoccie(){
 }
 
 void drawGUI(){
+  int nViteD = (nVite > 8) ? 8 : nVite;
+  imageMode(CORNER);
+  textSize(32);
+  xStampa=0;
+  for(int i=0;i<nViteD;i++){
+    image(animazionePlayerScavo[0][0],xStampa,896);
+    xStampa+=64;
+  }
+  text("ROUND",640,928);
+  text(livello,640,960);
+  text("SCORE:",16,32);
+  text(score,128,32);
+  
+  if(tempoTesto>0){
+    textSize(64);
+    text("PLAYER 1\n\n\n READY!",224,384);
+  }
+}
+
+void animazioneIniziale(){
 
 }

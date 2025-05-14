@@ -1,4 +1,18 @@
 int clock;
+int tempoTesto;
+
+int statoPlayer; // per gestire le animazioni
+
+int direzionePlayer; // direzionePlayer
+
+int frameDelay = 10; // cambia sprite ogni 10 frame
+int currentFrame = (clock / frameDelay) % 2;
+
+boolean staScavando=false;
+
+boolean playerFermo=true;
+
+boolean partita = false;
 
 // mappa livello
 int[][] mappa = new int[13][12];
@@ -16,16 +30,18 @@ int playerX, playerY;
 //posizione del giocatore relativa alla casella
 int playerSubX, playerSubY;
 
+int direzionePlayerSalita = 1; //serve per gestire da che lato il player sale
+
 //numero livello
-int livello=0;
+int livello;
 //i livelli sono in realtà dallo 0 al 99 che si ripetono fino al 256 in cui il gioco originale crasha
 
 //punteggio
-int score=0;
+int score;
 //nel gioco originale il punteggio si ferma a 9.999.999 punti
 
 //numero vite
-int nVite=3;
+int nVite;
 
 //ultimo movimento fatto dal giocatore e movimento da comando
 int ultimaMossa, comandoMossa;
@@ -35,11 +51,15 @@ int ultimaMossa, comandoMossa;
 3:destra
 4:sinista
 */
+boolean attacco;
+int progressoAttacco;
 
 boolean inPartita;
 
 //x e y dove andranno disegnate le caselle della matrice 
 int xStampa, yStampa;
+
+int fioriGrandi,fioriPiccoli;
 
 class Pooka {
   int x, y;
@@ -86,6 +106,7 @@ class Roccia{
   int subY;
   boolean isFalling;
   int sbriciolamento;
+  int tempoCaduta;
   
   Roccia(int x, int y) {
     this.x = x;
@@ -93,6 +114,7 @@ class Roccia{
     this.isFalling = false;
     this.sbriciolamento = 0;
     this.subY = 0;
+    this.tempoCaduta = 0;
   }
 }
 ArrayList<Roccia> roccia = new ArrayList<Roccia>();

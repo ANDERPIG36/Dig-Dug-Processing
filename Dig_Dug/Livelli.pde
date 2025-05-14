@@ -1,7 +1,7 @@
 void assegnaLivello(){
   
   playerX=5;
-  playerY=5;
+  playerY=6;
   playerSubX=1;
   playerSubY=1;
   
@@ -34,7 +34,7 @@ void assegnaLivello(){
     fygar.clear();
     for(int i=0; i<=((int)livello/100); i++){
       pooka.add(new Pooka(1,4));
-      pooka.add(new Pooka(10,3));
+      pooka.add(new Pooka(10,2));
       pooka.add(new Pooka(8,10));
       
       fygar.add(new Fygar(2,8));

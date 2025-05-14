@@ -39,6 +39,10 @@ void scavoMatrice() {
       }
     }
   }
+  if(mappa[playerY][playerX]!=nuovoTerreno){
+    staScavando=true;
+    score+=10;
+  }
   mappa[playerY][playerX] = nuovoTerreno;
 }
 
@@ -93,7 +97,6 @@ void aggiornaMatrice() {
 }
 
 void controlloEventi() {
-  
   for(Roccia r : roccia){
     int centroCasella = (1 << 5) | (1 << 6) | (1 << 9) | (1 << 10);    
 
@@ -107,17 +110,21 @@ void controlloEventi() {
     }
 
     if(r.y + 1 < mappa[0].length && (mappa[r.y+1][r.x] & centroCasella) == 0){
-      r.isFalling=true;
+      if(r.tempoCaduta==0){
+        r.tempoCaduta=clock;
+        r.isFalling=true;
+      }
     }
     else if(r.isFalling){
         r.sbriciolamento++;
         r.isFalling=false;
     }
     
-    if (r.x == playerX && r.y == playerY && r.isFalling) {
+    if (r.x == playerX && r.y == playerY && (r.isFalling||r.sbriciolamento>0)) {
       morte();
+      break;
     }
-    if (r.isFalling){
+    if (r.isFalling&&(clock-r.tempoCaduta>50)){
       r.subY++;
       if(r.subY>3){
         r.subY -= 4;
@@ -142,12 +149,14 @@ void controlloEventi() {
   for (Pooka p : pooka) {
     if (p.x == playerX && p.y == playerY) {
       morte();
+      break;
     }
   }
   
   for (Fygar f : fygar) {
     if (f.x == playerX && f.y == playerY) {
       morte();
+      break;
     }
   }
 

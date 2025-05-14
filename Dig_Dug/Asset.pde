@@ -1,4 +1,7 @@
+PFont font;
+
 int coloreLivello;
+PImage menu;
 PImage[][] terreno = new PImage[3][4];
 PImage tunnel0, tunnel15, tunnel47, tunnel79, tunnel111, tunnel559, tunnel1103, tunnel1647, tunnel4369, tunnel4383,
   tunnel4401, tunnel4415, tunnel4465, tunnel4479, tunnel4881, tunnel4913, tunnel4927, tunnel5905, tunnel6001, tunnel6015,
@@ -12,8 +15,13 @@ PImage[][] animazionePlayerPompata = new PImage[2][6];
 PImage[][] animazionePlayerCamminata = new PImage[2][6];
 PImage rocciaFerma;
 PImage[] rocciaCadente = new PImage[3];
+PImage ananas, carota, cetriolo, fiore, fiore10, fioreRaccogliere, fungo, melanzana, peperone, pomodoro, ravanello, zucca;
+PImage[][] animazionePooka = new PImage[2][2];
+PImage[][] animazionePookaGonfiato = new PImage[3][2];
+PImage[] animazionePookaFantasma = new PImage[2];
 
-void inizializzaImmagini(){
+void inizializzaAsset(){
+  font = createFont("font.ttf", 32);
   rocciaFerma= loadImage("generali/roccia/roccia.png");
   for(int i=0; i<3; i++){
     rocciaCadente[i] = loadImage("generali/roccia/rocciaCadente"+(i+1)+".png");
@@ -128,5 +136,29 @@ void inizializzaImmagini(){
   tunnel65263 = loadImage("scavi/tunnel_65263.png");
   tunnel65433 = loadImage("scavi/tunnel_65433.png");
   tunnel65529 = loadImage("scavi/tunnel_65529.png");
-
+  menu = loadImage("digdug.png");
+  ananas = loadImage("generali/ananas.png");
+  carota = loadImage("generali/carota.png");
+  cetriolo = loadImage("generali/cetriolo.png");
+  fiore = loadImage("generali/fiore.png");
+  fiore10 = loadImage("generali/fiore10.png");
+  fioreRaccogliere = loadImage("generali/fioreraccogliere.png");
+  fungo = loadImage("generali/fungo.png");
+  melanzana = loadImage("generali/melanzana.png");
+  peperone = loadImage("generali/peperone.png");
+  pomodoro = loadImage("generali/pomodoro.png");
+  ravanello = loadImage("generali/ravanello.png");
+  zucca = loadImage("generali/zucca.png");
+  animazionePooka[0][0] = loadImage("cpu/pooka/pookaL.png");
+  animazionePooka[1][0] = loadImage("cpu/pooka/pookaR.png");
+  animazionePooka[0][1] = loadImage("cpu/pooka/pookaCamminaL.png");
+  animazionePooka[1][1] = loadImage("cpu/pooka/pookaCamminaR.png");
+  animazionePookaGonfiato[0][0] = loadImage("cpu/pooka/pookaGonfiore1L.png");
+  animazionePookaGonfiato[1][0] = loadImage("cpu/pooka/pookaGonfiore2L.png");
+  animazionePookaGonfiato[2][0] = loadImage("cpu/pooka/pookaGonfiore3L.png");
+  animazionePookaGonfiato[0][1] = loadImage("cpu/pooka/pookaGonfiore1R.png");
+  animazionePookaGonfiato[1][1] = loadImage("cpu/pooka/pookaGonfiore2R.png");
+  animazionePookaGonfiato[2][1] = loadImage("cpu/pooka/pookaGonfiore3R.png");
+  animazionePookaFantasma[0] = loadImage("cpu/pooka/fantasma/PookaFantasma1.png");
+  animazionePookaFantasma[0] = loadImage("cpu/pooka/fantasma/PookaFantasma2.png");
 }
