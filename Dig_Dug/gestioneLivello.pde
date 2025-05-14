@@ -2,7 +2,12 @@ void morte(){
   nVite--;
   delay(1000);
   if(nVite>0){
-    assegnaLivello();
+    playerX=5;
+    playerY=6;
+    playerSubX=1;
+    playerSubY=1;
+    ultimaMossa=3;
+    direzionePlayer=0;
   }
   else{
     livello=0;

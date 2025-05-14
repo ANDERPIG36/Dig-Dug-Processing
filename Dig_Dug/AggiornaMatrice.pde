@@ -43,6 +43,10 @@ void scavoMatrice() {
     staScavando=true;
     score+=10;
   }
+  else if(playerFermo){
+    staScavando=false;
+  }
+  
   mappa[playerY][playerX] = nuovoTerreno;
 }
 

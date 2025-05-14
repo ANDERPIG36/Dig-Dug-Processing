@@ -1,6 +1,7 @@
 void move() {
   switch (comandoMossa){
     case 0:
+     playerFermo=true;
      break;
     case 1:
       if(playerY>0||playerSubY>0){
@@ -29,6 +30,7 @@ void move() {
           }
         }
       }
+      playerFermo=false;
       break;
     case 2:
       if(playerY<12||playerSubY<1){
@@ -57,6 +59,7 @@ void move() {
           }
         }
       }
+      playerFermo=false;
       break;
     case 3:
       if(playerX<11||playerSubX<1){
@@ -85,6 +88,7 @@ void move() {
           }
         }
       }
+      playerFermo=false;
       break;
     case 4:
       if(playerX>0||playerSubX>1){
@@ -113,6 +117,7 @@ void move() {
           }
         }
       }
+      playerFermo=false;
       break;
   }
 }

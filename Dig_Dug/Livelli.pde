@@ -4,6 +4,8 @@ void assegnaLivello(){
   playerY=6;
   playerSubX=1;
   playerSubY=1;
+  ultimaMossa=3;
+  direzionePlayer=0;
   
   switch(livello%100){
   

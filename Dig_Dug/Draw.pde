@@ -318,7 +318,7 @@ void drawMostri(){
   // Disegna i Pooka
   for (Pooka p : pooka) {
     int xPos = (p.x * 64 + p.subX * 16) + 16;
-    int yPos = (p.y * 64 + p.subY * 16) + 48;
+    int yPos = (p.y * 64 + p.subY * 16) + 52;
     
     if (p.gonfiore > 0) {
       // Pooka gonfiato
