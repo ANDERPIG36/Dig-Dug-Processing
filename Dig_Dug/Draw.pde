@@ -337,6 +337,28 @@ void drawMostri(){
       image(animazionePooka[dir][frame], xPos, yPos);
     }
   }
+  
+  for (Fygar f : fygar) {
+    int xPos = (f.x * 64 + f.subX * 16) + 16;
+    int yPos = (f.y * 64 + f.subY * 16) + 48;
+    
+    if (f.gonfiore > 0) {
+      // Pooka gonfiato
+      int frame = (clock / 10) % 2; // Animazione più lenta per il gonfiore
+      image(fygarGonfiore[f.gonfiore-1][frame], xPos, yPos);
+    } 
+    else if (f.spettro) {
+      // Pooka in modalità fantasma
+      int frame = (clock / 10) % 2;
+      image(fygarFantasma[frame], xPos, yPos);
+    } 
+    else {
+      // Pooka normale
+      int frame = (clock / 10) % 2; // Animazione più veloce per il movimento normale
+      int dir = (f.stato == 0) ? 0 : 1; // 0=sinistra, 1=destra
+      image(fygarAnimazione[dir][frame], xPos, yPos);
+    }
+  }
 }
 
 void drawRoccie(){

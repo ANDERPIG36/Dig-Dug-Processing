@@ -152,6 +152,8 @@ void controlloEventi() {
   
   for (Pooka p : pooka) {
     if (p.x == playerX && p.y == playerY) {
+      monsterTouchedDigDug.rewind();
+      monsterTouchedDigDug.play();
       morte();
       break;
     }
@@ -159,6 +161,8 @@ void controlloEventi() {
   
   for (Fygar f : fygar) {
     if (f.x == playerX && f.y == playerY) {
+      monsterTouchedDigDug.rewind();
+      monsterTouchedDigDug.play();
       morte();
       break;
     }

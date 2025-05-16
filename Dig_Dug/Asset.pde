@@ -1,3 +1,6 @@
+Minim minim;
+AudioPlayer monsterTouchedDigDug;
+
 PFont font;
 
 int coloreLivello;
@@ -214,4 +217,6 @@ void inizializzaAsset(){
   animazionePookaGonfiato[2][1] = loadImage("cpu/pooka/pookaGonfiore3R.png");
   animazionePookaFantasma[0] = loadImage("cpu/pooka/fantasma/PookaFantasma1.png");
   animazionePookaFantasma[1] = loadImage("cpu/pooka/fantasma/PookaFantasma2.png");
+  
+  monsterTouchedDigDug = minim.loadFile("audio/14-Monster touched DigDug.mp3");
 }
