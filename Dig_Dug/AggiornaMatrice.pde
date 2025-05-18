@@ -110,10 +110,11 @@ void controlloEventi() {
       }
       if (r.sbriciolamento > 3) {
         r.sbriciolamento=-1;
+        roccieCadute++;
       }
     }
 
-    if(r.y + 1 < mappa[0].length && (mappa[r.y+1][r.x] & centroCasella) == 0){
+    if(r.y < mappa[0].length && (mappa[r.y+1][r.x] & centroCasella) == 0){
       if(r.tempoCaduta==0){
         r.tempoCaduta=clock;
         r.isFalling=true;
@@ -168,4 +169,13 @@ void controlloEventi() {
     }
   }
 
+  if(roccieCadute>1){
+    drawFrutto=true;
+    roccieCadute-=2;
+  }
+  
+  if(playerX==5&&playerY==6&&drawFrutto){
+    score+=((livello+3)%10)*100;
+    drawFrutto=false;
+  }
 }

@@ -43,6 +43,8 @@ int score;
 //numero vite
 int nVite;
 
+int roccieCadute=0;
+
 //ultimo movimento fatto dal giocatore e movimento da comando
 int ultimaMossa, comandoMossa;
 /*
@@ -55,6 +57,7 @@ boolean attacco;
 int progressoAttacco;
 
 boolean inPartita;
+boolean drawFrutto;
 
 //x e y dove andranno disegnate le caselle della matrice 
 int xStampa, yStampa;

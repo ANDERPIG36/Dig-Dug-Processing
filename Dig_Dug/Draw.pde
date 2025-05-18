@@ -392,6 +392,10 @@ void drawGUI(){
     textSize(64);
     text("PLAYER 1\n\n\n READY!",224,384);
   }
+  
+  if(drawFrutto){
+    image(frutti[(livello+2)%10],320,448);
+  }
 }
 
 void animazioneIniziale(){

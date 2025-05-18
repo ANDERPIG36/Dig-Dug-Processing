@@ -14,6 +14,7 @@ void setup(){
   livello = 0;
   nVite = 3;
   score = 0;
+  roccieCadute=0;
   assegnaLivello();
   tempoTesto=100;
 }
