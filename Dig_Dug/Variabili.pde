@@ -9,7 +9,7 @@ int frameDelay = 10; // cambia sprite ogni 10 frame
 int currentFrame = (clock / frameDelay) % 2;
 
 boolean staScavando=false;
-
+boolean isPlayerSchiacciato=false;
 boolean playerFermo=true;
 
 boolean partita = false;
@@ -69,6 +69,7 @@ class Pooka {
   int subX, subY;
   int gonfiore;
   boolean spettro;
+  boolean isPookaSchiacciato;
   int stato;
   
   Pooka(int x, int y) {
@@ -78,6 +79,7 @@ class Pooka {
     this.subY = 3;
     this.gonfiore = 0;
     this.spettro = false;
+    this.isPookaSchiacciato = false;
     this.stato = 0;
   }
 }
@@ -89,6 +91,7 @@ class Fygar{
   int gonfiore; 
   boolean spettro;
   boolean isShooting;
+  boolean isFygarSchiacciato;
   int stato;
   
   Fygar(int x, int y) {
@@ -99,6 +102,7 @@ class Fygar{
     this.gonfiore = 0;
     this.spettro = false;
     this.isShooting = false;
+    this.isFygarSchiacciato = false;
     this.stato = 0;
   }
 }

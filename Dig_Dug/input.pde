@@ -22,6 +22,8 @@ void keyPressed() {
       break;
     case ENTER:
       if(!partita){
+        gameStarted.rewind();
+        gameStarted.play();
         animazioneIniziale();
         partita=true;
       }

@@ -305,10 +305,14 @@ void drawPlayer() {
       direzionePlayer = 3;
       break;
   }
-
+  
+  if(isPlayerSchiacciato){
+    image(playerSchiacciato[direzionePlayerSalita-1], (playerX * 64 + playerSubX * 16) + 16, (playerY * 64 + playerSubY * 16) + 80);
+  }else{
   PImage img = staScavando ? animazionePlayerScavo[currentFrame][direzionePlayer] : animazionePlayerCamminata[currentFrame][direzionePlayer];
 
   image(img, (playerX * 64 + playerSubX * 16) + 16, (playerY * 64 + playerSubY * 16) + 80);
+  }
 }
 
 
@@ -330,7 +334,10 @@ void drawMostri(){
       int frame = (clock / 10) % 2;
       image(animazionePookaFantasma[frame], xPos, yPos);
     } 
-    else {
+    else if (p.isPookaSchiacciato){
+      image(pookaSchiacciato[0], xPos, yPos);
+      
+    }else{
       // Pooka normale
       int frame = (clock / 10) % 2; // Animazione più veloce per il movimento normale
       int dir = (p.stato == 0) ? 0 : 1; // 0=sinistra, 1=destra
@@ -352,7 +359,10 @@ void drawMostri(){
       int frame = (clock / 10) % 2;
       image(fygarFantasma[frame], xPos, yPos);
     } 
-    else {
+    else if (f.isFygarSchiacciato){
+      image(fygarSchiacciato[0], xPos, yPos);
+      
+    }else {
       // Pooka normale
       int frame = (clock / 10) % 2; // Animazione più veloce per il movimento normale
       int dir = (f.stato == 0) ? 0 : 1; // 0=sinistra, 1=destra

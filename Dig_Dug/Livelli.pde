@@ -6,6 +6,7 @@ void assegnaLivello(){
   playerSubY=1;
   ultimaMossa=3;
   direzionePlayer=0;
+  isPlayerSchiacciato = false;
   roccieCadute=0;
   drawFrutto=false;
   

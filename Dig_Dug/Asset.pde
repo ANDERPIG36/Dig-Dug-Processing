@@ -1,5 +1,5 @@
 Minim minim;
-AudioPlayer monsterTouchedDigDug;
+AudioPlayer gameStarted, fruitGrabbed, roundClear, digDugWalking, monsterEscaped, digDugWalkingFast, monsterTouchingDigDug, deathDigDug, gameover, monsterRunningAway, monsterSquashed, monsterBlownOut, rockDestruction, rockFalling, fygarFiring, harpoon, pumping, monsterMoving;
 
 PFont font;
 
@@ -30,6 +30,9 @@ PImage[][] fygarGonfiore = new PImage[3][2];
 PImage[][] fygarFuoco = new PImage[3][2];
 PImage[][] fygarAnimazione = new PImage[2][2];
 PImage[] fygarAttacco = new PImage[2];
+PImage[] fygarSchiacciato = new PImage[2];
+PImage[] pookaSchiacciato = new PImage[2];
+PImage[] playerSchiacciato = new PImage[2];
 
 
 void inizializzaAsset(){
@@ -217,6 +220,31 @@ void inizializzaAsset(){
   animazionePookaGonfiato[2][1] = loadImage("cpu/pooka/pookaGonfiore3R.png");
   animazionePookaFantasma[0] = loadImage("cpu/pooka/fantasma/PookaFantasma1.png");
   animazionePookaFantasma[1] = loadImage("cpu/pooka/fantasma/PookaFantasma2.png");
+  fygarSchiacciato[0] = loadImage("cpu/fygar/fygarSchiacciatoL.png");
+  fygarSchiacciato[1] = loadImage("cpu/fygar/fygarSchiacciatoR.png");
   
-  monsterTouchedDigDug = minim.loadFile("audio/14-Monster touched DigDug.mp3");
+  pookaSchiacciato[0] = loadImage("cpu/pooka/pookaSchiacciatoL.png");
+  pookaSchiacciato[1] = loadImage("cpu/pooka/pookaSchiacciatoR.png");
+  
+  playerSchiacciato[0] = loadImage("player/Schiacciato/playerSchiacciatoL.png");
+  playerSchiacciato[1] = loadImage("player/Schiacciato/playerSchiacciatoR.png");
+  
+  gameStarted = minim.loadFile("audio/gameStarted.mp3");
+  fruitGrabbed = minim.loadFile("audio/fruitGrabbed.mp3");
+  roundClear = minim.loadFile("audio/roundClear.mp3");
+  digDugWalking = minim.loadFile("audio/digDugWalking.mp3");
+  monsterEscaped = minim.loadFile("audio/monsterEscaped.mp3");
+  digDugWalkingFast = minim.loadFile("audio/digDugWalkingFast.mp3");
+  monsterTouchingDigDug = minim.loadFile("audio/monsterTouchingDigDug.mp3");
+  deathDigDug = minim.loadFile("audio/deathDigDug.mp3");
+  gameover = minim.loadFile("audio/gameover.mp3");
+  monsterRunningAway = minim.loadFile("audio/monsterRunningAway.mp3");
+  monsterSquashed = minim.loadFile("audio/monsterSquashed.mp3");
+  monsterBlownOut = minim.loadFile("audio/monsterBlownOut.mp3");
+  rockDestruction = minim.loadFile("audio/rockDestruction.mp3");
+  rockFalling = minim.loadFile("audio/rockFalling.mp3");
+  fygarFiring = minim.loadFile("audio/fygarFiring.mp3");
+  harpoon = minim.loadFile("audio/harpoon.mp3");
+  pumping = minim.loadFile("audio/pumping.mp3");
+  monsterMoving = minim.loadFile("audio/monsterMoving.mp3");
 }

@@ -111,25 +111,38 @@ void controlloEventi() {
       if (r.sbriciolamento > 3) {
         r.sbriciolamento=-1;
         roccieCadute++;
+        if(isPlayerSchiacciato){
+          morte();
+          break;
+        }  
       }
     }
 
     if(r.y < mappa[0].length && (mappa[r.y+1][r.x] & centroCasella) == 0){
       if(r.tempoCaduta==0){
+        rockFalling.rewind();
         r.tempoCaduta=clock;
         r.isFalling=true;
       }
     }
     else if(r.isFalling){
-        r.sbriciolamento++;
-        r.isFalling=false;
+      rockDestruction.rewind();
+      rockDestruction.play();
+      r.sbriciolamento++;
+      r.isFalling=false;
     }
     
     if (r.x == playerX && r.y == playerY && (r.isFalling||r.sbriciolamento>0)) {
-      morte();
-      break;
+      isPlayerSchiacciato = true;
+      playerSubY = r.subY + 1;
+      if(playerSubY>3){
+        playerSubY -= 4;
+        playerY++;
+      }
     }
+    
     if (r.isFalling&&(clock-r.tempoCaduta>50)){
+      rockFalling.play();
       r.subY++;
       if(r.subY>3){
         r.subY -= 4;
@@ -139,13 +152,23 @@ void controlloEventi() {
     
     for (Pooka p : pooka) {
       if (p.x == r.x && p.y == r.y) {
-        //schiaccia mostro
+        p.isPookaSchiacciato = true;
+        p.subY = r.subY + 1;
+        if(p.subY>3){
+          p.subY -= 4;
+          p.y++;
+        }
       }
     }
     
     for (Fygar f : fygar) {
       if (f.x == r.x && f.y == r.y) {
-        //schiaccia mostro
+        f.isFygarSchiacciato = true;
+        f.subY = r.subY + 1;
+        if(f.subY>3){
+          f.subY -= 4;
+          f.y++;
+        }
       }
     }
     
@@ -153,8 +176,8 @@ void controlloEventi() {
   
   for (Pooka p : pooka) {
     if (p.x == playerX && p.y == playerY) {
-      monsterTouchedDigDug.rewind();
-      monsterTouchedDigDug.play();
+      monsterTouchingDigDug.rewind();
+      monsterTouchingDigDug.play();
       morte();
       break;
     }
@@ -162,8 +185,8 @@ void controlloEventi() {
   
   for (Fygar f : fygar) {
     if (f.x == playerX && f.y == playerY) {
-      monsterTouchedDigDug.rewind();
-      monsterTouchedDigDug.play();
+      monsterTouchingDigDug.rewind();
+      monsterTouchingDigDug.play();
       morte();
       break;
     }
@@ -175,6 +198,8 @@ void controlloEventi() {
   }
   
   if(playerX==5&&playerY==6&&drawFrutto){
+    fruitGrabbed.rewind();
+    fruitGrabbed.play();
     score+=((livello+3)%10)*100;
     drawFrutto=false;
   }
