@@ -25,3 +25,14 @@ void morte(){
     tempoTesto=100;
   }
 }
+
+void controlloNextLevel(){
+   if(fygar.isEmpty() && pooka.isEmpty()){
+    roundClear.rewind();
+    roundClear.play();
+    delay(2500);
+    livello++;
+    roccieCadute=0;
+    assegnaLivello();
+   }
+}

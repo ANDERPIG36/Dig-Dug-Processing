@@ -13,6 +13,7 @@ boolean isPlayerSchiacciato=false;
 boolean playerFermo=true;
 
 boolean partita = false;
+int tempoVideo = 0;
 
 // mappa livello
 int[][] mappa = new int[13][12];

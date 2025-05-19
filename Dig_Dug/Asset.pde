@@ -1,3 +1,5 @@
+Movie videoIniziale;
+
 Minim minim;
 AudioPlayer gameStarted, fruitGrabbed, roundClear, digDugWalking, monsterEscaped, digDugWalkingFast, monsterTouchingDigDug, deathDigDug, gameover, monsterRunningAway, monsterSquashed, monsterBlownOut, rockDestruction, rockFalling, fygarFiring, harpoon, pumping, monsterMoving;
 
@@ -247,4 +249,6 @@ void inizializzaAsset(){
   harpoon = minim.loadFile("audio/harpoon.mp3");
   pumping = minim.loadFile("audio/pumping.mp3");
   monsterMoving = minim.loadFile("audio/monsterMoving.mp3");
+  
+  videoIniziale = new Movie(this, "videoIniziale.mp4");
 }

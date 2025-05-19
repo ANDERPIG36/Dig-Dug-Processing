@@ -9,7 +9,13 @@ void draw(){
     drawGUI();
   }
   else{
-    background(menu);
+    if(tempoVideo==0){
+      background(menu);
+    }
+    else{
+      videoIniziale.read();
+      image(videoIniziale, 0, 0, width, height);
+    }
   }
 }
 
@@ -406,8 +412,4 @@ void drawGUI(){
   if(drawFrutto){
     image(frutti[(livello+2)%10],320,448);
   }
-}
-
-void animazioneIniziale(){
-
 }

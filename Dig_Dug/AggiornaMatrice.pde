@@ -148,6 +148,25 @@ void controlloEventi() {
         r.subY -= 4;
         r.y++;
       }
+      switch(r.subY) {
+        case 0:
+          // spegne bit 1 e 2
+          mappa[r.y][r.x] &= ~((1 << 1) | (1 << 2));
+          break;
+        case 1:
+          // spegne bit 5 e 6
+          mappa[r.y][r.x] &= ~((1 << 5) | (1 << 6));
+          break;
+        case 2:
+          // spegne bit 9 e 10
+          mappa[r.y][r.x] &= ~((1 << 9) | (1 << 10));
+          break;
+        case 3:
+          // spegne bit 13 e 14
+          mappa[r.y][r.x] &= ~((1 << 13) | (1 << 14));
+          break;
+      }
+      aggiornaMatrice();
     }
     
     for (Pooka p : pooka) {

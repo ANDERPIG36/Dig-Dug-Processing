@@ -1,3 +1,5 @@
+import processing.video.*;
+
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -27,7 +29,14 @@ void update() {
     scavoMatrice();
     aggiornaMatrice();
     controlloEventi();
+    controlloNextLevel();
   }
   clock++;
   tempoTesto--;
+  if(tempoVideo>1){
+    tempoVideo--;
+  }
+  if(tempoVideo<100&&tempoVideo>0){
+    partita=true;
+  }
 }

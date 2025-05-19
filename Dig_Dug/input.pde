@@ -24,8 +24,9 @@ void keyPressed() {
       if(!partita){
         gameStarted.rewind();
         gameStarted.play();
-        animazioneIniziale();
-        partita=true;
+        delay(600);
+        tempoVideo=250;
+        videoIniziale.play();
       }
       break;
     case 'Z':
