@@ -13,6 +13,8 @@ boolean staScavando=false;
 boolean isPlayerSchiacciato=false;
 boolean playerFermo=true;
 
+boolean ultimoMostro=false;
+
 boolean partita = false;
 int tempoVideo = 0;
 

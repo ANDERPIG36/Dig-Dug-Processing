@@ -178,12 +178,16 @@ void attacco(){
 void pompaMostro(){
   for (Pooka p : pooka) {
     if(p.isGrabbed){
+      pumping.rewind();
+      pumping.play();
       p.gonfiore++;
     }
   }
   
   for (Fygar f : fygar) {
     if(f.isGrabbed){
+      pumping.rewind();
+      pumping.play();
       f.gonfiore++;
     }
   }

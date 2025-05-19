@@ -42,6 +42,8 @@ void keyPressed() {
         attaccoAvanzando=true;
         fineAttaccoX=playerX;
         fineAttaccoY=playerY;
+        harpoon.rewind();
+        harpoon.play();
       }
       break;
   }

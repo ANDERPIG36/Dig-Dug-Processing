@@ -205,6 +205,8 @@ void controlloEventi() {
       if(p.gonfiore==4){
         score+=400;
         mostroGrabbato=false;
+        monsterBlownOut.rewind();
+        monsterBlownOut.play();
         pooka.remove(p);
         break;
       }
@@ -237,6 +239,8 @@ void controlloEventi() {
       if(f.gonfiore==4){
         score+=600;
         mostroGrabbato=false;
+        monsterBlownOut.rewind();
+        monsterBlownOut.play();
         fygar.remove(f);
         break;
       }

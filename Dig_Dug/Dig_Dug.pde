@@ -31,6 +31,42 @@ void update() {
     controlloEventi();
     controlloNextLevel();
     gestioneAttacco();
+    
+    if (!playerFermo) {
+      if (!ultimoMostro) {
+        // Se non sta già suonando, fallo partire
+        if (!digDugWalking.isPlaying()) {
+          digDugWalking.rewind();
+          digDugWalking.play();
+        }
+    
+        // Metti in pausa e riavvolgi l'altro solo se sta suonando
+        if (digDugWalkingFast.isPlaying()) {
+          digDugWalkingFast.pause();
+          digDugWalkingFast.rewind();
+        }
+      } else {
+        if (!digDugWalkingFast.isPlaying()) {
+          digDugWalkingFast.rewind();
+          digDugWalkingFast.play();
+        }
+    
+        if (digDugWalking.isPlaying()) {
+          digDugWalking.pause();
+          digDugWalking.rewind();
+        }
+      }
+    } else {
+      if (digDugWalking.isPlaying()) {
+        digDugWalking.pause();
+        digDugWalking.rewind();
+      }
+      if (digDugWalkingFast.isPlaying()) {
+        digDugWalkingFast.pause();
+        digDugWalkingFast.rewind();
+      }
+    }
+    
   }
   clock++;
   tempoTesto--;
