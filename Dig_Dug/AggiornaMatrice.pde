@@ -203,7 +203,10 @@ void controlloEventi() {
     
     if(p.gonfiore>0){
       if(p.gonfiore==4){
-        //metteremorte
+        score+=400;
+        mostroGrabbato=false;
+        pooka.remove(p);
+        break;
       }
       if(clock%100==0){
         p.gonfiore--;
@@ -232,7 +235,10 @@ void controlloEventi() {
     
     if(f.gonfiore>0){
       if(f.gonfiore==4){
-        //metteremorte
+        score+=600;
+        mostroGrabbato=false;
+        fygar.remove(f);
+        break;
       }
       if(clock%100==0){
         f.gonfiore--;
