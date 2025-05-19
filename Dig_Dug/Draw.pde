@@ -7,6 +7,7 @@ void draw(){
     drawMostri();
     drawRoccie();
     drawGUI();
+    drawAttacco();
   }
   else{
     if(tempoVideo==0){
@@ -411,5 +412,27 @@ void drawGUI(){
   
   if(drawFrutto){
     image(frutti[(livello+2)%10],320,448);
+  }
+}
+
+void drawAttacco(){
+  imageMode(CORNER);
+  if(fineAttaccoX>playerX){
+    //attacca verso destra
+    for(int i=0; i<(fineAttaccoX-playerX); i++){
+      println("n");
+      image(pompa[0][0],((playerX*64)+i*64),(playerY+1)*64);
+    }
+  }
+  else if(fineAttaccoX<playerX){
+    //attacco verso sinistra
+    
+  }
+  else if(fineAttaccoY>playerY){
+    //attacco verso il basso
+  }
+  else if(fineAttaccoY<playerY){
+    //attacco verso l'alto
+  
   }
 }

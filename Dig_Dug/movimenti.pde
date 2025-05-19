@@ -22,7 +22,7 @@ void move() {
                 playerX++;
               }
             }
-            else if((playerX>0||playerSubX>1) && isMacigno(playerX-1,playerY)){
+            else if((playerX>0||playerSubX>1) && isMacigno(playerX,playerY-1)){
               playerSubX--;
               if(playerSubX<0){
                 playerSubX+= 4;
@@ -53,7 +53,7 @@ void move() {
                 playerX++;
               }
             }
-            else if((playerX>0||playerSubX>1) && isMacigno(playerX-1,playerY-1)){
+            else if((playerX>0||playerSubX>1) && isMacigno(playerX+1,playerY-1)){
               playerSubX--;
               if(playerSubX<0){
                 playerSubX+= 4;
@@ -77,14 +77,14 @@ void move() {
             ultimaMossa = comandoMossa;
           }
           else{
-            if((ultimaMossa==1&&(playerY>0||playerSubY>0)) && isMacigno(playerX,playerY-1)){
+            if((ultimaMossa==1&&(playerY>0||playerSubY>0)) && isMacigno(playerX+1,playerY)){
               playerSubY--;
               if(playerSubY<0){
                 playerSubY+= 4;
                 playerY--;
               }
             }
-            else if((playerY<12||playerSubY<1) && isMacigno(playerX,playerY+1)){
+            else if((playerY<12||playerSubY<1) && isMacigno(playerX+1,playerY) && isMacigno(playerX,playerY)){
               playerSubY++;
               if(playerSubY>3){
                 playerSubY-= 4;
@@ -108,14 +108,14 @@ void move() {
             ultimaMossa = comandoMossa;
           }
           else{
-            if((ultimaMossa==1&&(playerY>0||playerSubY>0)) && isMacigno(playerX,playerY-1)){
+            if((ultimaMossa==1&&(playerY>0||playerSubY>0)) && isMacigno(playerX-1,playerY)){
               playerSubY--;
               if(playerSubY<0){
                 playerSubY+= 4;
                 playerY--;
               }
             }
-            else if((playerY<12||playerSubY<1) && isMacigno(playerX,playerY+1)){
+            else if((playerY<12||playerSubY<1) && isMacigno(playerX-1,playerY) && isMacigno(playerX,playerY)){
               playerSubY++;
               if(playerSubY>3){
                 playerSubY-= 4;
@@ -130,13 +130,62 @@ void move() {
   }
 }
 
-void IniziaAttacco(){
-  switch(ultimaMossa){
+void gestioneAttacco(){
+  if(!mostroGrabbato){
+    attacco();
+  }
+}
+
+void attacco(){
+  switch(direzionePlayerSalita){
+    case 0:
+      if(fineAttaccoX-playerX<4 && attaccoAvanzando){
+        fineAttaccoX++;
+      }
+      else if(fineAttaccoX-playerX>=0 && !attaccoAvanzando){
+        fineAttaccoX--;
+      }
+      break;
     case 1:
-      attacco=true;
-    case 2:
-    case 3:
     case 4:
+      if(playerY-fineAttaccoY<4 && attaccoAvanzando){
+        fineAttaccoX--;
+      }
+      else if(playerY-fineAttaccoY>=0 && !attaccoAvanzando){
+        fineAttaccoY++;
+      }
+      break;
+    case 3:
+      if(playerX-fineAttaccoX<4 && attaccoAvanzando){
+        fineAttaccoX--;
+      }
+      else if(playerX-fineAttaccoX>=0 && !attaccoAvanzando){
+        fineAttaccoX++;
+      }
+      break;
+    case 2:
+    case 5:
+      if(fineAttaccoY-playerY<4 && attaccoAvanzando){
+        fineAttaccoY++;
+      }
+      else if(fineAttaccoY-playerY>=0 && !attaccoAvanzando){
+        fineAttaccoY--;
+      }
+      break;
+  }
+}
+
+void pompaMostro(){
+  for (Pooka p : pooka) {
+    if(p.isGrabbed){
+      p.gonfiore++;
+    }
+  }
+  
+  for (Fygar f : fygar) {
+    if(f.isGrabbed){
+      f.gonfiore++;
+    }
   }
 }
 

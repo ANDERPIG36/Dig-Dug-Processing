@@ -30,11 +30,15 @@ void update() {
     aggiornaMatrice();
     controlloEventi();
     controlloNextLevel();
+    gestioneAttacco();
   }
   clock++;
   tempoTesto--;
   if(tempoVideo>1){
     tempoVideo--;
+  }
+  if(tempoFrutto>0){
+    tempoFrutto--;
   }
   if(tempoVideo<100&&tempoVideo>0){
     partita=true;

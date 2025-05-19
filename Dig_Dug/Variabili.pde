@@ -1,5 +1,6 @@
 int clock;
 int tempoTesto;
+int tempoFrutto=0;
 
 int statoPlayer; // per gestire le animazioni
 
@@ -44,6 +45,11 @@ int score;
 //numero vite
 int nVite;
 
+int fineAttaccoX, fineAttaccoY;
+boolean attaccoAvanzando=false;
+boolean mostroGrabbato=false;
+boolean staAttaccando=false;
+
 int roccieCadute=0;
 
 //ultimo movimento fatto dal giocatore e movimento da comando
@@ -54,8 +60,6 @@ int ultimaMossa, comandoMossa;
 3:destra
 4:sinista
 */
-boolean attacco;
-int progressoAttacco;
 
 boolean inPartita;
 boolean drawFrutto;
@@ -71,6 +75,7 @@ class Pooka {
   int gonfiore;
   boolean spettro;
   boolean isPookaSchiacciato;
+  boolean isGrabbed;
   int stato;
   
   Pooka(int x, int y) {
@@ -81,6 +86,7 @@ class Pooka {
     this.gonfiore = 0;
     this.spettro = false;
     this.isPookaSchiacciato = false;
+    this.isGrabbed = false;
     this.stato = 0;
   }
 }
@@ -93,6 +99,7 @@ class Fygar{
   boolean spettro;
   boolean isShooting;
   boolean isFygarSchiacciato;
+  boolean isGrabbed;
   int stato;
   
   Fygar(int x, int y) {
@@ -104,6 +111,7 @@ class Fygar{
     this.spettro = false;
     this.isShooting = false;
     this.isFygarSchiacciato = false;
+    this.isGrabbed = false;
     this.stato = 0;
   }
 }

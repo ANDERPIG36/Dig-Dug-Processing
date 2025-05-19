@@ -200,6 +200,26 @@ void controlloEventi() {
       morte();
       break;
     }
+    
+    if(p.gonfiore>0){
+      if(p.gonfiore==4){
+        //metteremorte
+      }
+      if(clock%100==0){
+        p.gonfiore--;
+      }
+    }
+    
+    if(p.x == fineAttaccoX && p.y == fineAttaccoY){
+      mostroGrabbato=true;
+      p.isGrabbed=true;
+    }
+    
+    if(p.isGrabbed&&clock%200==0){
+      mostroGrabbato=false;
+      p.isGrabbed=false;
+    }
+    
   }
   
   for (Fygar f : fygar) {
@@ -209,11 +229,35 @@ void controlloEventi() {
       morte();
       break;
     }
+    
+    if(f.gonfiore>0){
+      if(f.gonfiore==4){
+        //metteremorte
+      }
+      if(clock%100==0){
+        f.gonfiore--;
+      }
+    }
+    
+    if(f.x == fineAttaccoX && f.y == fineAttaccoY){
+      mostroGrabbato=true;
+      f.isGrabbed=true;
+    }
+    
+    if(f.isGrabbed&&clock%200==0){
+      mostroGrabbato=false;
+      f.isGrabbed=false;
+    }
+    
   }
 
   if(roccieCadute>1){
     drawFrutto=true;
+    tempoFrutto=500;
     roccieCadute-=2;
+  }
+  if(tempoFrutto==0){
+    drawFrutto=false;
   }
   
   if(playerX==5&&playerY==6&&drawFrutto){

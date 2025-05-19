@@ -5,7 +5,8 @@ void keyPressed() {
       if(ultimaMossa==3)
         direzionePlayerSalita=1;
       else if(ultimaMossa==4)
-        direzionePlayerSalita=2; 
+        direzionePlayerSalita=2;
+      staAttaccando=false;
       break;
     case DOWN:
       comandoMossa=2;
@@ -13,12 +14,15 @@ void keyPressed() {
         direzionePlayerSalita=1;
       else if(ultimaMossa==4)
         direzionePlayerSalita=2; 
+      staAttaccando=false;
       break;
     case RIGHT:
       comandoMossa=3;
+      staAttaccando=false;
       break;
     case LEFT:
       comandoMossa=4;
+      staAttaccando=false;
       break;
     case ENTER:
       if(!partita){
@@ -30,7 +34,15 @@ void keyPressed() {
       }
       break;
     case 'Z':
-      IniziaAttacco();
+      if(mostroGrabbato){
+        pompaMostro();
+      }
+      else if(!staAttaccando){
+        staAttaccando=true;
+        attaccoAvanzando=true;
+        fineAttaccoX=playerX;
+        fineAttaccoY=playerY;
+      }
       break;
   }
 }
