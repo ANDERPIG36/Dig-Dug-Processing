@@ -2,11 +2,14 @@ void mobIA(){
   convertiMatrice();
   
   for (Pooka p : pooka) {
+    
     if(ultimoMostro){
       p.stato=3;
     }
     switch(p.stato){
-      
+      case 0:
+      cercaStradaDFSPooka(p,p.x,p.y);
+      break;
     }
   }
   
@@ -44,50 +47,83 @@ void mobIA(){
     if(f.isShooting || f.statoAttacco>0){
       switch(f.statoAttacco){
         case -3:
-          if(clock%140==0){
+          if(clock%70==0){
             f.statoAttacco = -2;
             f.isShooting=false;
           }
         break;
         case -2:
-          if(clock%60==0){
+          if(clock%30==0){
             f.statoAttacco = f.isShooting ? -3 : -1;
           }
         break;
         case -1:
-          if(clock%60==0){
+          if(clock%30==0){
             f.statoAttacco = f.isShooting ? -2 : 0;
           }
         break;
         case 0:
-          if(clock%160==0){
+          if(clock%100==0){
             f.statoAttacco = f.direzioneAttacco ? -1 : 1;
           }
         break;
         case 1:
-          if(clock%60==0){
+          if(clock%30==0){
             f.statoAttacco = f.isShooting ? 2 : 0;
           }
         break;
         case 2:
-          if(clock%60==0){
+          if(clock%30==0){
             f.statoAttacco = f.isShooting ? 3 : 1;
             fygarFiring.rewind();
             fygarFiring.play();
           }
         break;
         case 3:
-          if(clock%140==0){
+          if(clock%70==0){
             f.statoAttacco = 2;
             f.isShooting=false;
           }
         break;
       }
     }
+    
+    switch(f.stato){
+      case 0:
+      cercaStradaDFSFygar(f,f.x,f.y);
+      break;
+    }
   }
 }
 
-void cercaStradaDFS(){
+void cercaStradaDFSPooka(Pooka m, int x, int y){
+  if ((percorso[x][y] & (1 << 0)) != 0) {
+    m.strada.add(0);
+  }
+  else{
+    return;
+  }
+  if ((percorso[x][y] & (1 << 1)) != 0) {
+    m.strada.add(1);
+  }
+  else{
+    return;
+  }
+  if ((percorso[x][y] & (1 << 2)) != 0) {
+    m.strada.add(2);
+  }
+  else{
+    return;
+  }
+  if ((percorso[x][y] & (1 << 3)) != 0) {
+    m.strada.add(3);
+  }
+  else{
+    return;
+  }
+}
+
+void cercaStradaDFSFygar(Fygar m, int xAttuale, int yAttuale){
 
 }
 

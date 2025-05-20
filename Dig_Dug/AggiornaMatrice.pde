@@ -220,6 +220,8 @@ void controlloEventi() {
       break;
     }
     
+    
+    
     if(p.gonfiore>0){
       if(p.gonfiore==3){
         score+=400;
@@ -270,6 +272,80 @@ void controlloEventi() {
       monsterTouchingDigDug.rewind();
       monsterTouchingDigDug.play();
       morte();
+      break;
+    }
+    
+    if(f.isShooting&&f.statoAttacco!=0){
+      int xPos = (f.x * 64 + f.subX * 16) + 16;
+      int yPos = (f.y * 64 + f.subY * 16) + 48;
+      switch (f.statoAttacco) {
+        case -3:
+            if (!(playerX + 32 < (xPos - 110 - 188 / 2) ||
+                  playerX - 32 > (xPos - 110 + 188 / 2) ||
+                  playerY + 32 < (yPos - 64 / 2) ||
+                  playerY - 32 > (yPos + 64 / 2))) {
+              monsterTouchingDigDug.rewind();
+              monsterTouchingDigDug.play();
+              morte();
+            }
+            break;
+    
+        case -2:
+            if (!(playerX + 32 < (xPos - 80 - 128 / 2) ||
+                  playerX - 32 > (xPos - 80 + 128 / 2) ||
+                  playerY + 32 < (yPos - 64 / 2) ||
+                  playerY - 32 > (yPos + 64 / 2))) {
+              monsterTouchingDigDug.rewind();
+              monsterTouchingDigDug.play();
+              morte();
+            }
+            break;
+    
+        case -1:
+            if (!(playerX + 32 < (xPos - 32 - 64 / 2) ||
+                  playerX - 32 > (xPos - 32 + 64 / 2) ||
+                  playerY + 32 < (yPos - 64 / 2) ||
+                  playerY - 32 > (yPos + 64 / 2))) {
+              monsterTouchingDigDug.rewind();
+              monsterTouchingDigDug.play();
+              morte();
+            }
+            break;
+    
+        case 1:
+            if (!(playerX + 32 < (xPos + 32 - 64 / 2) ||
+                  playerX - 32 > (xPos + 32 + 64 / 2) ||
+                  playerY + 32 < (yPos - 64 / 2) ||
+                  playerY - 32 > (yPos + 64 / 2))) {
+              monsterTouchingDigDug.rewind();
+              monsterTouchingDigDug.play();
+              morte();
+            }
+            break;
+    
+        case 2:
+            if (!(playerX + 32 < (xPos + 80 - 128 / 2) ||
+                  playerX - 32 > (xPos + 80 + 128 / 2) ||
+                  playerY + 32 < (yPos - 64 / 2) ||
+                  playerY - 32 > (yPos + 64 / 2))) {
+              monsterTouchingDigDug.rewind();
+              monsterTouchingDigDug.play();
+              morte();
+            }
+            break;
+    
+        case 3:
+            if (!(playerX + 32 < (xPos + 110 - 188 / 2) ||
+                  playerX - 32 > (xPos + 110 + 188 / 2) ||
+                  playerY + 32 < (yPos - 64 / 2) ||
+                  playerY - 32 > (yPos + 64 / 2))) {
+              monsterTouchingDigDug.rewind();
+              monsterTouchingDigDug.play();
+              morte();
+            }
+            break;
+       }
+
       break;
     }
     
