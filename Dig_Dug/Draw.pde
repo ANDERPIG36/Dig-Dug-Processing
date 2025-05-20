@@ -317,8 +317,8 @@ void drawPlayer() {
   }
   else if(staAttaccando){
     if(mostroGrabbato){
-    }
-    else{
+      image(animazionePlayerPompata[pompaggio][direzionePlayer], (playerX * 64 + playerSubX * 16) + 16, (playerY * 64 + playerSubY * 16) + 80);
+    }else{
        image(playerAttacco[direzionePlayer], (playerX * 64 + playerSubX * 16) + 16, (playerY * 64 + playerSubY * 16) + 80);
     }
   }
@@ -422,34 +422,45 @@ void drawGUI(){
   }
 }
 
-void drawAttacco(){
+void drawAttacco() {
   imageMode(CORNER);
-  if(staAttaccando){
-    if(fineAttaccoX>playerX){
-      //attacca verso destra
-      for(int i=0; i<(fineAttaccoX-playerX)-1; i++){
-        image(pompa[0][0],((playerX*64)+i*64)+20,(playerY+1)*64);
-        if(i==(fineAttaccoX-playerX)-2)
-          image(pompa[1][0],((playerX*64)+i*64)+20,(playerY+1)*64);
+  if (staAttaccando) {
+    
+    if (fineAttaccoX > playerX) {
+      // Attacco verso destra
+      int distanza = fineAttaccoX - playerX;
+      for (int i = 0; i < distanza - 1; i++) {
+        image(pompa[0][0], (playerX * 64 + i * 64) + 30, (playerY + 1) * 64);
       }
+      image(pompa[1][0], (playerX * 64 + (distanza - 1) * 64) + 30, (playerY + 1) * 64);
     }
-    else if(fineAttaccoX<playerX){
-      //attacco verso sinistra
-      for(int i=0; i<(fineAttaccoX-playerX); i++){
-        image(pompa[0][1],((playerX*64)+i*64)+20,(playerY+1)*64);
+
+    else if (fineAttaccoX < playerX) {
+      // Attacco verso sinistra
+      int distanza = playerX - fineAttaccoX;
+      for (int i = 0; i < distanza - 1; i++) {
+        image(pompa[0][3], (playerX * 64 - i * 64) - 20, (playerY + 1) * 64);
       }
+      image(pompa[1][3], (playerX * 64 - (distanza - 1) * 64) - 20, (playerY + 1) * 64);
     }
-    else if(fineAttaccoY>playerY){
-      //attacco verso il basso
-      for(int i=0; i<(fineAttaccoX-playerX); i++){
-        image(pompa[0][2],((playerX*64)+i*64)+20,(playerY+1)*64);
+
+    else if (fineAttaccoY > playerY) {
+      // Attacco verso il basso
+      int distanza = fineAttaccoY - playerY;
+      for (int i = 0; i < distanza - 1; i++) {
+        image(pompa[0][1], (playerX * 64)+20, ((playerY + 1 + i) * 64)+20);
       }
+      image(pompa[1][1], (playerX * 64)+20, ((playerY + 1 + (distanza - 1)) * 64)+20);
     }
-    else if(fineAttaccoY<playerY){
-      //attacco verso l'alto
-      for(int i=0; i<(fineAttaccoX-playerX); i++){
-        image(pompa[0][3],((playerX*64)+i*64)+20,(playerY+1)*64);
+
+    else if (fineAttaccoY < playerY) {
+      // Attacco verso l'alto
+      int distanza = playerY - fineAttaccoY;
+      for (int i = 0; i < distanza - 1; i++) {
+        image(pompa[0][2], (playerX * 64), ((playerY + 1 - i) * 64)-20);
       }
+      image(pompa[1][2], (playerX * 64), ((playerY + 1 - (distanza - 1)) * 64)-20);
     }
+
   }
 }

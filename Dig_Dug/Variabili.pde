@@ -18,6 +18,8 @@ boolean ultimoMostro=false;
 boolean partita = false;
 int tempoVideo = 0;
 int tempoPompa = 0;
+int pompaggio; //0 schiacciato, 1 alzato
+int timerPompaggio;
 
 // mappa livello
 int[][] mappa = new int[13][12];
@@ -81,6 +83,7 @@ class Pooka {
   boolean isPookaSchiacciato;
   boolean isGrabbed;
   int stato;
+  int tempoMorte;
   
   Pooka(int x, int y) {
     this.x = x;
@@ -92,6 +95,7 @@ class Pooka {
     this.isPookaSchiacciato = false;
     this.isGrabbed = false;
     this.stato = 0;
+    this.tempoMorte=-1;
   }
 }
 ArrayList<Pooka> pooka = new ArrayList<Pooka>();
@@ -105,6 +109,7 @@ class Fygar{
   boolean isFygarSchiacciato;
   boolean isGrabbed;
   int stato;
+  int tempoMorte;
   
   Fygar(int x, int y) {
     this.x = x;
@@ -117,6 +122,7 @@ class Fygar{
     this.isFygarSchiacciato = false;
     this.isGrabbed = false;
     this.stato = 0;
+    this.tempoMorte=-1;
   }
 }
 ArrayList<Fygar> fygar = new ArrayList<Fygar>();

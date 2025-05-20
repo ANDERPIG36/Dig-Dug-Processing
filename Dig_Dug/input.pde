@@ -40,6 +40,8 @@ void keyPressed() {
     case 'Z':
       if(mostroGrabbato&&tempoPompa>20){
         pompaMostro();
+        pompaggio=0;
+        timerPompaggio=15;
       }
       else if(!staAttaccando){
         staAttaccando=true;

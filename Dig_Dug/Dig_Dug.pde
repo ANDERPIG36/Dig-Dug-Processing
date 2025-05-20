@@ -68,6 +68,12 @@ void update() {
     }
     
   }
+  tempi();
+  println(clock);
+  
+}
+
+void tempi(){
   clock++;
   tempoTesto--;
   if(tempoVideo>1){
@@ -80,6 +86,8 @@ void update() {
     partita=true;
   }
   tempoPompa++;
-  println(clock);
-  
+  timerPompaggio--;
+  if(timerPompaggio<0){
+    pompaggio=1;
+  }
 }

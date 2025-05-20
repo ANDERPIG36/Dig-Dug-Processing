@@ -139,62 +139,70 @@ void gestioneAttacco() {
 
 void attacco() {
   int centroCasella = (1 << 5) | (1 << 6) | (1 << 9) | (1 << 10);
-  
-  switch(direzionePlayer) {
-  case 0:
-    if (fineAttaccoX + 1 <= 11) {
-      if ((mappa[fineAttaccoY][fineAttaccoX + 1] & centroCasella) != 0) {
-        attaccoAvanzando = false;
+
+  switch (direzionePlayer) {
+    case 0: // destra
+      if (attaccoAvanzando) {
+        if (fineAttaccoX + 1 <= 11 && (mappa[fineAttaccoY][fineAttaccoX + 1] & centroCasella) == 0 && fineAttaccoX - playerX < 4) {
+          fineAttaccoX++;
+        } else {
+          attaccoAvanzando = false;
+        }
+      } else {
+        if (fineAttaccoX > playerX) {
+          fineAttaccoX--;
+        }
       }
-    }
-    if (fineAttaccoX-playerX<4 && attaccoAvanzando) {
-      fineAttaccoX++;
-    } else if (fineAttaccoX-playerX>=0 && !attaccoAvanzando) {
-      fineAttaccoX--;
-    }
-    break;
-  case 2:
-  case 5:
-    if (fineAttaccoY - 1 >= 0) {
-      if ((mappa[fineAttaccoY - 1][fineAttaccoX] & centroCasella) != 0) {
-        attaccoAvanzando = false;
+      break;
+
+    case 1:
+    case 4: // giù
+      if (attaccoAvanzando) {
+        if (fineAttaccoY + 1 <= 12 && (mappa[fineAttaccoY + 1][fineAttaccoX] & centroCasella) == 0 && fineAttaccoY - playerY < 4) {
+          fineAttaccoY++;
+        } else {
+          attaccoAvanzando = false;
+        }
+      } else {
+        if (fineAttaccoY > playerY) {
+          fineAttaccoY--;
+        }
       }
-    }
-    if (playerY-fineAttaccoY<4 && attaccoAvanzando) {
-      fineAttaccoY--;
-    } else if (playerY-fineAttaccoY>=0 && !attaccoAvanzando) {
-      fineAttaccoY++;
-    }
-    break;
-  case 3:
-    if (fineAttaccoX - 1 >= 0) {
-      if ((mappa[fineAttaccoY][fineAttaccoX - 1] & centroCasella) != 0) {
-        attaccoAvanzando = false;
+      break;
+
+    case 2:
+    case 5: // su
+      if (attaccoAvanzando) {
+        if (fineAttaccoY - 1 >= 0 && (mappa[fineAttaccoY - 1][fineAttaccoX] & centroCasella) == 0 && playerY - fineAttaccoY < 4) {
+          fineAttaccoY--;
+        } else {
+          attaccoAvanzando = false;
+        }
+      } else {
+        if (fineAttaccoY < playerY) {
+          fineAttaccoY++;
+        }
       }
-    }
-    if (playerX-fineAttaccoX<4 && attaccoAvanzando) {
-      fineAttaccoX--;
-    } else if (playerX-fineAttaccoX>=0 && !attaccoAvanzando) {
-      fineAttaccoX++;
-    }
-    break;
-  case 1:
-  case 4:
-    if (fineAttaccoY + 1 <= 12) {
-      if ((mappa[fineAttaccoY + 1][fineAttaccoX] & centroCasella) != 0) {
-        attaccoAvanzando = false;
+      break;
+
+    case 3: // sinistra
+      if (attaccoAvanzando) {
+        if (fineAttaccoX - 1 >= 0 && (mappa[fineAttaccoY][fineAttaccoX - 1] & centroCasella) == 0 && playerX - fineAttaccoX < 4) {
+          fineAttaccoX--;
+        } else {
+          attaccoAvanzando = false;
+        }
+      } else {
+        if (fineAttaccoX < playerX) {
+          fineAttaccoX++;
+        }
       }
-    }
-    if (fineAttaccoY-playerY<4 && attaccoAvanzando) {
-      fineAttaccoY++;
-    } else if (fineAttaccoY-playerY>=0 && !attaccoAvanzando) {
-      fineAttaccoY--;
-    }
-    break;
+      break;
   }
-  if(fineAttaccoX==playerX && fineAttaccoY==playerY){
-    staAttaccando=false;
-    mostroGrabbato=false;
+
+  if (fineAttaccoX == playerX && fineAttaccoY == playerY) {
+    staAttaccando = false;
+    mostroGrabbato = false;
   }
 }
 

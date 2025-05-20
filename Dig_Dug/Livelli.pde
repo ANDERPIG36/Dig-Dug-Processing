@@ -9,6 +9,7 @@ void assegnaLivello(){
   isPlayerSchiacciato = false;
   roccieCadute=0;
   drawFrutto=false;
+  ultimoMostro=false;
   
   coloreLivello=(int)(livello+1)/5;
   coloreLivello=coloreLivello%3;

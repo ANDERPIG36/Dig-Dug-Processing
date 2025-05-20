@@ -194,6 +194,16 @@ void controlloEventi() {
   }
   
   for (Pooka p : pooka) {
+    if(p.tempoMorte>=0){
+      p.tempoMorte--;
+      if(p.tempoMorte==0){
+        monsterBlownOut.rewind();
+        monsterBlownOut.play();
+        pooka.remove(p);
+      }
+     break;
+    }
+    
     if (p.x == playerX && p.y == playerY && p.gonfiore==0) {
       monsterTouchingDigDug.rewind();
       monsterTouchingDigDug.play();
@@ -202,12 +212,10 @@ void controlloEventi() {
     }
     
     if(p.gonfiore>0){
-      if(p.gonfiore==4){
+      if(p.gonfiore==3){
         score+=400;
         mostroGrabbato=false;
-        monsterBlownOut.rewind();
-        monsterBlownOut.play();
-        pooka.remove(p);
+        p.tempoMorte=30;
         break;
       }
       if(clock%100==0){
@@ -220,8 +228,9 @@ void controlloEventi() {
       p.isGrabbed=true;
     }
     
-    if(p.isGrabbed&&clock%200==0){
+    if(p.isGrabbed&&clock%130==0){
       mostroGrabbato=false;
+      attaccoAvanzando=false;
       p.isGrabbed=false;
     }
     
@@ -232,6 +241,17 @@ void controlloEventi() {
   }
   
   for (Fygar f : fygar) {
+    
+    if(f.tempoMorte>=0){
+      f.tempoMorte--;
+      if(f.tempoMorte==0){
+        monsterBlownOut.rewind();
+        monsterBlownOut.play();
+        fygar.remove(f);
+      }
+     break;
+    }
+    
     if (f.x == playerX && f.y == playerY && f.gonfiore==0) {
       monsterTouchingDigDug.rewind();
       monsterTouchingDigDug.play();
@@ -240,12 +260,10 @@ void controlloEventi() {
     }
     
     if(f.gonfiore>0){
-      if(f.gonfiore==4){
+      if(f.gonfiore==3){
         score+=600;
         mostroGrabbato=false;
-        monsterBlownOut.rewind();
-        monsterBlownOut.play();
-        fygar.remove(f);
+        f.tempoMorte=30;
         break;
       }
       if(clock%100==0){
@@ -258,8 +276,9 @@ void controlloEventi() {
       f.isGrabbed=true;
     }
     
-    if(f.isGrabbed&&clock%200==0){
+    if(f.isGrabbed&&clock%130==0){
       mostroGrabbato=false;
+      attaccoAvanzando=false;
       f.isGrabbed=false;
     }
     
@@ -284,4 +303,13 @@ void controlloEventi() {
     score+=((livello+3)%10)*100;
     drawFrutto=false;
   }
+  
+  if(nVite<8){
+    if(score>=2000){
+     nVite++;
+     score-=2000;
+    }
+  }
+  
+  ultimoMostro = (pooka.size() + fygar.size() == 1);
 }
