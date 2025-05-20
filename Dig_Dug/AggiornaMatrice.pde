@@ -194,7 +194,7 @@ void controlloEventi() {
   }
   
   for (Pooka p : pooka) {
-    if (p.x == playerX && p.y == playerY) {
+    if (p.x == playerX && p.y == playerY && p.gonfiore==0) {
       monsterTouchingDigDug.rewind();
       monsterTouchingDigDug.play();
       morte();
@@ -232,7 +232,7 @@ void controlloEventi() {
   }
   
   for (Fygar f : fygar) {
-    if (f.x == playerX && f.y == playerY) {
+    if (f.x == playerX && f.y == playerY && f.gonfiore==0) {
       monsterTouchingDigDug.rewind();
       monsterTouchingDigDug.play();
       morte();

@@ -14,7 +14,7 @@ void move() {
           }
           ultimaMossa = comandoMossa;
         } else {
-          if ((ultimaMossa==3&&(playerX<11||playerSubX<1)) && isMacigno(playerX+1, playerY-1) && isMacigno(playerX, playerY)) {
+          if ((ultimaMossa==3&&(playerX<11||playerSubX<1)) && isMacigno(playerX, playerY-1) && isMacigno(playerX, playerY)) {
             playerSubX++;
             if (playerSubX>3) {
               playerSubX-= 4;
@@ -124,9 +124,11 @@ void move() {
 
 void gestioneAttacco() {
   if (!mostroGrabbato) {
-    if(clock%15==0){  
+    if(clock%15==0){
+      bordiAttacco();
       controlloAvanzamentoAttacco();
       attacco();
+      bordiAttacco();
     }
   }
   if(!staAttaccando){
@@ -136,8 +138,15 @@ void gestioneAttacco() {
 }
 
 void attacco() {
+  int centroCasella = (1 << 5) | (1 << 6) | (1 << 9) | (1 << 10);
+  
   switch(direzionePlayer) {
   case 0:
+    if (fineAttaccoX + 1 <= 11) {
+      if ((mappa[fineAttaccoY][fineAttaccoX + 1] & centroCasella) != 0) {
+        attaccoAvanzando = false;
+      }
+    }
     if (fineAttaccoX-playerX<4 && attaccoAvanzando) {
       fineAttaccoX++;
     } else if (fineAttaccoX-playerX>=0 && !attaccoAvanzando) {
@@ -146,6 +155,11 @@ void attacco() {
     break;
   case 2:
   case 5:
+    if (fineAttaccoY - 1 >= 0) {
+      if ((mappa[fineAttaccoY - 1][fineAttaccoX] & centroCasella) != 0) {
+        attaccoAvanzando = false;
+      }
+    }
     if (playerY-fineAttaccoY<4 && attaccoAvanzando) {
       fineAttaccoY--;
     } else if (playerY-fineAttaccoY>=0 && !attaccoAvanzando) {
@@ -153,6 +167,11 @@ void attacco() {
     }
     break;
   case 3:
+    if (fineAttaccoX - 1 >= 0) {
+      if ((mappa[fineAttaccoY][fineAttaccoX - 1] & centroCasella) != 0) {
+        attaccoAvanzando = false;
+      }
+    }
     if (playerX-fineAttaccoX<4 && attaccoAvanzando) {
       fineAttaccoX--;
     } else if (playerX-fineAttaccoX>=0 && !attaccoAvanzando) {
@@ -161,6 +180,11 @@ void attacco() {
     break;
   case 1:
   case 4:
+    if (fineAttaccoY + 1 <= 12) {
+      if ((mappa[fineAttaccoY + 1][fineAttaccoX] & centroCasella) != 0) {
+        attaccoAvanzando = false;
+      }
+    }
     if (fineAttaccoY-playerY<4 && attaccoAvanzando) {
       fineAttaccoY++;
     } else if (fineAttaccoY-playerY>=0 && !attaccoAvanzando) {
@@ -190,28 +214,66 @@ void pompaMostro() {
       f.gonfiore++;
     }
   }
+  tempoPompa=0;
 }
 
-void controlloAvanzamentoAttacco(){
-  if(playerX<fineAttaccoX){
-    if(fineAttaccoX-playerX>=4){
-      attaccoAvanzando=false;
+void controlloAvanzamentoAttacco() {
+  int centroCasella = (1 << 5) | (1 << 6) | (1 << 9) | (1 << 10);
+
+  if (playerX < fineAttaccoX) {
+    if (fineAttaccoX + 1 <= 11) {
+      if ((mappa[fineAttaccoY][fineAttaccoX + 1] & centroCasella) != 0) {
+        attaccoAvanzando = false;
+      }
+    }
+    if (fineAttaccoX - playerX >= 4) {
+      attaccoAvanzando = false;
     }
   }
-  else if(playerX>fineAttaccoX){
-    if(playerX-fineAttaccoX>=4){
-      attaccoAvanzando=false;
+  else if (playerX > fineAttaccoX) {
+    if (fineAttaccoX - 1 >= 0) {
+      if ((mappa[fineAttaccoY][fineAttaccoX - 1] & centroCasella) != 0) {
+        attaccoAvanzando = false;
+      }
+    }
+    if (playerX - fineAttaccoX >= 4) {
+      attaccoAvanzando = false;
     }
   }
-  else if(playerY<fineAttaccoY){
-    if(fineAttaccoY-playerY>=4){
-      attaccoAvanzando=false;
+  else if (playerY < fineAttaccoY) {
+    if (fineAttaccoY + 1 <= 12) {
+      if ((mappa[fineAttaccoY + 1][fineAttaccoX] & centroCasella) != 0) {
+        attaccoAvanzando = false;
+      }
+    }
+    if (fineAttaccoY - playerY >= 4) {
+      attaccoAvanzando = false;
     }
   }
-  else if(playerY>fineAttaccoY){
-    if(playerY-fineAttaccoY>=4){
-      attaccoAvanzando=false;
+  else if (playerY > fineAttaccoY) {
+    if (fineAttaccoY - 1 >= 0) {
+      if ((mappa[fineAttaccoY - 1][fineAttaccoX] & centroCasella) != 0) {
+        attaccoAvanzando = false;
+      }
     }
+    if (playerY - fineAttaccoY >= 4) {
+      attaccoAvanzando = false;
+    }
+  }
+}
+
+void bordiAttacco(){
+  if(fineAttaccoX>11){
+    fineAttaccoX=11;
+  }
+  if(fineAttaccoY>12){
+    fineAttaccoY=12;
+  }
+  if(fineAttaccoX<0){
+    fineAttaccoX=0;
+  }
+  if(fineAttaccoY<0){
+    fineAttaccoY=0;
   }
 }
 

@@ -266,7 +266,6 @@ void drawMap(){
         case 65535:
           break;
         default:
-          println(mappa[r][c]);
           break;
       }
       

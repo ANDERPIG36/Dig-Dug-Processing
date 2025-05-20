@@ -38,7 +38,7 @@ void keyPressed() {
       }
       break;
     case 'Z':
-      if(mostroGrabbato){
+      if(mostroGrabbato&&tempoPompa>20){
         pompaMostro();
       }
       else if(!staAttaccando){

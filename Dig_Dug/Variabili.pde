@@ -17,6 +17,7 @@ boolean ultimoMostro=false;
 
 boolean partita = false;
 int tempoVideo = 0;
+int tempoPompa = 0;
 
 // mappa livello
 int[][] mappa = new int[13][12];
