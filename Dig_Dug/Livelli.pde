@@ -10,6 +10,9 @@ void assegnaLivello(){
   roccieCadute=0;
   drawFrutto=false;
   
+  coloreLivello=(int)(livello+1)/5;
+  coloreLivello=coloreLivello%3;
+  
   if(livello>=256){
     mappa = new int[][] {
       {00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000, 00000},

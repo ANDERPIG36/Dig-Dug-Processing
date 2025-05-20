@@ -7,6 +7,7 @@ void keyPressed() {
       else if(ultimaMossa==4)
         direzionePlayerSalita=2;
       staAttaccando=false;
+      mostroGrabbato=false;
       break;
     case DOWN:
       comandoMossa=2;
@@ -15,14 +16,17 @@ void keyPressed() {
       else if(ultimaMossa==4)
         direzionePlayerSalita=2; 
       staAttaccando=false;
+      mostroGrabbato=false;
       break;
     case RIGHT:
       comandoMossa=3;
       staAttaccando=false;
+      mostroGrabbato=false;
       break;
     case LEFT:
       comandoMossa=4;
       staAttaccando=false;
+      mostroGrabbato=false;
       break;
     case ENTER:
       if(!partita){

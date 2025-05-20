@@ -39,6 +39,7 @@ int direzionePlayerSalita = 1; //serve per gestire da che lato il player sale
 //numero livello
 int livello;
 //i livelli sono in realtà dallo 0 al 99 che si ripetono fino al 256 in cui il gioco originale crasha
+int coloreLivello;
 
 //punteggio
 int score;

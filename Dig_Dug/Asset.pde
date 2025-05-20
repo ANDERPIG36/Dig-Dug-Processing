@@ -5,7 +5,6 @@ AudioPlayer gameStarted, fruitGrabbed, roundClear, digDugWalking, monsterEscaped
 
 PFont font;
 
-int coloreLivello;
 PImage menu;
 PImage[][] terreno = new PImage[3][4];
 PImage tunnel0, tunnel15, tunnel47, tunnel79, tunnel111, tunnel559, tunnel1103, tunnel1647, tunnel4369, tunnel4383,
@@ -35,6 +34,7 @@ PImage[] fygarAttacco = new PImage[2];
 PImage[] fygarSchiacciato = new PImage[2];
 PImage[] pookaSchiacciato = new PImage[2];
 PImage[] playerSchiacciato = new PImage[2];
+PImage[] playerAttacco = new PImage[6];
 
 
 void inizializzaAsset(){
@@ -61,6 +61,13 @@ void inizializzaAsset(){
   pompa[1][4] = loadImage("player/pompa/puntaPompa5.png");
   pompa[0][5] = loadImage("player/pompa/tuboPompa6.png");
   pompa[1][5] = loadImage("player/pompa/puntaPompa6.png");
+  
+  playerAttacco[0] = loadImage("player/playerAttacco/playerAttacco1.png");
+  playerAttacco[1] = loadImage("player/playerAttacco/playerAttacco2.png");
+  playerAttacco[2] = loadImage("player/playerAttacco/playerAttacco3.png");
+  playerAttacco[3] = loadImage("player/playerAttacco/playerAttacco4.png");
+  playerAttacco[4] = loadImage("player/playerAttacco/playerAttacco5.png");
+  playerAttacco[5] = loadImage("player/playerAttacco/playerAttacco6.png");
   
   animazionePlayerScavo[0][0] = loadImage("player/ScavoAnimazione/spriteScavaggio1.png");
   animazionePlayerScavo[1][0] = loadImage("player/ScavoAnimazione/spriteScavaggioAnimato1.png");

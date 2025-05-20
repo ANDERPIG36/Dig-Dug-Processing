@@ -79,4 +79,7 @@ void update() {
   if(tempoVideo<100&&tempoVideo>0){
     partita=true;
   }
+  
+  println(fineAttaccoX+" "+fineAttaccoY+"  "+clock);
+  
 }

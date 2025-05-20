@@ -225,6 +225,10 @@ void controlloEventi() {
       p.isGrabbed=false;
     }
     
+    if(!mostroGrabbato){
+      p.isGrabbed=false;
+    }
+    
   }
   
   for (Fygar f : fygar) {
@@ -256,6 +260,10 @@ void controlloEventi() {
     
     if(f.isGrabbed&&clock%200==0){
       mostroGrabbato=false;
+      f.isGrabbed=false;
+    }
+    
+    if(!mostroGrabbato){
       f.isGrabbed=false;
     }
     

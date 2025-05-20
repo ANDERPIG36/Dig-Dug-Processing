@@ -1,6 +1,8 @@
 void morte(){
   nVite--;
   delay(1000);
+  digDugWalking.pause();
+  digDugWalkingFast.pause();
   deathDigDug.rewind();
   deathDigDug.play();
   delay(2500);

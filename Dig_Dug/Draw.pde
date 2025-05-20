@@ -315,7 +315,15 @@ void drawPlayer() {
   
   if(isPlayerSchiacciato){
     image(playerSchiacciato[direzionePlayerSalita-1], (playerX * 64 + playerSubX * 16) + 16, (playerY * 64 + playerSubY * 16) + 80);
-  }else{
+  }
+  else if(staAttaccando){
+    if(mostroGrabbato){
+    }
+    else{
+       image(playerAttacco[direzionePlayer], (playerX * 64 + playerSubX * 16) + 16, (playerY * 64 + playerSubY * 16) + 80);
+    }
+  }
+  else{
   PImage img = staScavando ? animazionePlayerScavo[currentFrame][direzionePlayer] : animazionePlayerCamminata[currentFrame][direzionePlayer];
 
   image(img, (playerX * 64 + playerSubX * 16) + 16, (playerY * 64 + playerSubY * 16) + 80);
@@ -417,22 +425,32 @@ void drawGUI(){
 
 void drawAttacco(){
   imageMode(CORNER);
-  if(fineAttaccoX>playerX){
-    //attacca verso destra
-    for(int i=0; i<(fineAttaccoX-playerX); i++){
-      println("n");
-      image(pompa[0][0],((playerX*64)+i*64),(playerY+1)*64);
+  if(staAttaccando){
+    if(fineAttaccoX>playerX){
+      //attacca verso destra
+      for(int i=0; i<(fineAttaccoX-playerX)-1; i++){
+        image(pompa[0][0],((playerX*64)+i*64)+20,(playerY+1)*64);
+        if(i==(fineAttaccoX-playerX)-2)
+          image(pompa[1][0],((playerX*64)+i*64)+20,(playerY+1)*64);
+      }
     }
-  }
-  else if(fineAttaccoX<playerX){
-    //attacco verso sinistra
-    
-  }
-  else if(fineAttaccoY>playerY){
-    //attacco verso il basso
-  }
-  else if(fineAttaccoY<playerY){
-    //attacco verso l'alto
-  
+    else if(fineAttaccoX<playerX){
+      //attacco verso sinistra
+      for(int i=0; i<(fineAttaccoX-playerX); i++){
+        image(pompa[0][1],((playerX*64)+i*64)+20,(playerY+1)*64);
+      }
+    }
+    else if(fineAttaccoY>playerY){
+      //attacco verso il basso
+      for(int i=0; i<(fineAttaccoX-playerX); i++){
+        image(pompa[0][2],((playerX*64)+i*64)+20,(playerY+1)*64);
+      }
+    }
+    else if(fineAttaccoY<playerY){
+      //attacco verso l'alto
+      for(int i=0; i<(fineAttaccoX-playerX); i++){
+        image(pompa[0][3],((playerX*64)+i*64)+20,(playerY+1)*64);
+      }
+    }
   }
 }
