@@ -28,7 +28,7 @@ PImage[] frutti = new PImage[10];
 PImage[][] pompa = new PImage[2][6];
 PImage[] fygarFantasma = new PImage[2];
 PImage[][] fygarGonfiore = new PImage[3][2];
-PImage[][] fygarFuoco = new PImage[3][2];
+PImage[] fygarFuoco = new PImage[6];
 PImage[][] fygarAnimazione = new PImage[2][2];
 PImage[] fygarAttacco = new PImage[2];
 PImage[] fygarSchiacciato = new PImage[2];
@@ -82,12 +82,12 @@ void inizializzaAsset(){
   animazionePlayerScavo[0][5] = loadImage("player/ScavoAnimazione/spriteScavaggio6.png");
   animazionePlayerScavo[1][5] = loadImage("player/ScavoAnimazione/spriteScavaggioAnimato6.png");
   
-  fygarFuoco[0][0] = loadImage("cpu/fygar/fuoco/fygarFuoco1L.png");
-  fygarFuoco[1][0] = loadImage("cpu/fygar/fuoco/fygarFuoco2L.png");
-  fygarFuoco[2][0] = loadImage("cpu/fygar/fuoco/fygarFuoco3L.png");
-  fygarFuoco[0][1] = loadImage("cpu/fygar/fuoco/fygarFuoco1R.png");
-  fygarFuoco[1][1] = loadImage("cpu/fygar/fuoco/fygarFuoco2R.png");
-  fygarFuoco[2][1] = loadImage("cpu/fygar/fuoco/fygarFuoco3R.png");
+  fygarFuoco[0] = loadImage("cpu/fygar/fuoco/fygarFuoco3L.png");
+  fygarFuoco[1] = loadImage("cpu/fygar/fuoco/fygarFuoco2L.png");
+  fygarFuoco[2] = loadImage("cpu/fygar/fuoco/fygarFuoco1L.png");
+  fygarFuoco[3] = loadImage("cpu/fygar/fuoco/fygarFuoco1R.png");
+  fygarFuoco[4] = loadImage("cpu/fygar/fuoco/fygarFuoco2R.png");
+  fygarFuoco[5] = loadImage("cpu/fygar/fuoco/fygarFuoco3R.png");
   
   fygarAttacco[0] = loadImage("cpu/fygar/fygarPreparazioneR.png");
   fygarAttacco[1] = loadImage("cpu/fygar/fygarPreparazioneL.png");

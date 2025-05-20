@@ -31,6 +31,7 @@ void update() {
     controlloEventi();
     controlloNextLevel();
     gestioneAttacco();
+    mobIA();
     
     if (!playerFermo) {
       if (!ultimoMostro) {
@@ -69,7 +70,6 @@ void update() {
     
   }
   tempi();
-  println(clock);
   
 }
 

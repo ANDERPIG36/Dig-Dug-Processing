@@ -364,20 +364,46 @@ void drawMostri(){
     int yPos = (f.y * 64 + f.subY * 16) + 48;
     
     if (f.gonfiore > 0) {
-      // Pooka gonfiato
+      // Fygar gonfiato
       int frame = (clock / 10) % 2; // Animazione più lenta per il gonfiore
       image(fygarGonfiore[f.gonfiore-1][frame], xPos, yPos);
     } 
     else if (f.spettro) {
-      // Pooka in modalità fantasma
+      // Fygar in modalità fantasma
       int frame = (clock / 10) % 2;
       image(fygarFantasma[frame], xPos, yPos);
     } 
     else if (f.isFygarSchiacciato){
       image(fygarSchiacciato[0], xPos, yPos);
-      
+    }else if(f.isShooting){
+      if(f.statoAttacco==0){
+        image(fygarAttacco[0], xPos, yPos);
+      }else{
+        image(fygarAnimazione[0][0], xPos, yPos);
+        switch(f.statoAttacco){
+          case -3:
+            image(fygarFuoco[f.statoAttacco+3], xPos-110, yPos);
+            break;
+          case -2:
+            image(fygarFuoco[f.statoAttacco+3], xPos-80, yPos);
+            break;
+          case -1:
+            image(fygarFuoco[f.statoAttacco+3], xPos-32, yPos);
+            break;
+          case 1:
+            image(fygarFuoco[f.statoAttacco+2], xPos+32, yPos);
+            break;
+          case 2:
+            image(fygarFuoco[f.statoAttacco+2], xPos+80, yPos);
+            break;
+          case 3:
+            image(fygarFuoco[f.statoAttacco+2], xPos+110, yPos);
+            break;
+        }
+        
+      }
     }else {
-      // Pooka normale
+      // Fygar normale
       int frame = (clock / 10) % 2; // Animazione più veloce per il movimento normale
       int dir = (f.stato == 0) ? 0 : 1; // 0=sinistra, 1=destra
       image(fygarAnimazione[dir][frame], xPos, yPos);
