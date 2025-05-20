@@ -25,6 +25,7 @@ int timerPompaggio;
 int[][] mappa = new int[13][12];
 //bit 0-15: terreno casella 0:vuoto 1:pieno
 int[][] percorso = new int[13][12];
+boolean[][] visitato = new boolean [13][12];
 
 //matrice per la casella
 boolean[][] scavo = new boolean[4][4];

@@ -360,6 +360,7 @@ void drawMostri(){
   }
   
   for (Fygar f : fygar) {
+    int dirAttack;
     int xPos = (f.x * 64 + f.subX * 16) + 16;
     int yPos = (f.y * 64 + f.subY * 16) + 48;
     
@@ -376,10 +377,14 @@ void drawMostri(){
     else if (f.isFygarSchiacciato){
       image(fygarSchiacciato[0], xPos, yPos);
     }else if(f.isShooting){
+      if (f.direzioneAttacco)
+        dirAttack=0;
+      else
+        dirAttack=1;
       if(f.statoAttacco==0){
-        image(fygarAttacco[0], xPos, yPos);
+        image(fygarAttacco[dirAttack], xPos, yPos);
       }else{
-        image(fygarAnimazione[0][0], xPos, yPos);
+        image(fygarAnimazione[dirAttack][0], xPos, yPos);
         switch(f.statoAttacco){
           case -3:
             image(fygarFuoco[f.statoAttacco+3], xPos-110, yPos);
@@ -405,7 +410,7 @@ void drawMostri(){
     }else {
       // Fygar normale
       int frame = (clock / 10) % 2; // Animazione più veloce per il movimento normale
-      int dir = (f.stato == 0) ? 0 : 1; // 0=sinistra, 1=destra
+      int dir = 0; // Qua va messa la direzione
       image(fygarAnimazione[dir][frame], xPos, yPos);
     }
   }

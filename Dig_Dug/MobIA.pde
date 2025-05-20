@@ -8,7 +8,16 @@ void mobIA(){
     }
     switch(p.stato){
       case 0:
-      cercaStradaDFSPooka(p,p.x,p.y);
+      p.strada.clear();
+      visitato = new boolean[13][12];
+      boolean trovato = cercaStradaDFSPooka(p,p.x,p.y);
+      if(trovato){
+        reverseArrayList(p.strada);
+      }
+      else{
+        p.stato=2;
+      }
+      println(p.strada);
       break;
     }
   }
@@ -96,35 +105,67 @@ void mobIA(){
   }
 }
 
-void cercaStradaDFSPooka(Pooka m, int x, int y){
+boolean cercaStradaDFSPooka(Pooka m, int x, int y) {
+  // se siamo fuori dalla mappa o già visitati, ritorna falso
+  if (x < 0 || x >= percorso.length || y < 0 || y >= percorso[0].length) return false;
+  if (visitato[x][y]) return false;
+  
+  // segna visitato
+  visitato[x][y] = true;
+  
+  // se siamo sul player, la strada è trovata
+  if (x == playerX && y == playerY) {
+    return true;
+  }
+  
+  // esplora in ordine: su, giù, destra, sinistra (puoi cambiare)
+  
+  // Su (bit 0)
   if ((percorso[x][y] & (1 << 0)) != 0) {
-    m.strada.add(0);
+    if (cercaStradaDFSPooka(m, x, y - 1)) {
+      m.strada.add(0);  // aggiungi la direzione usata per tornare indietro (backtracking)
+      return true;
+    }
   }
-  else{
-    return;
-  }
+  
+  // Giù (bit 1)
   if ((percorso[x][y] & (1 << 1)) != 0) {
-    m.strada.add(1);
+    if (cercaStradaDFSPooka(m, x, y + 1)) {
+      m.strada.add(1);
+      return true;
+    }
   }
-  else{
-    return;
-  }
+  
+  // Destra (bit 2)
   if ((percorso[x][y] & (1 << 2)) != 0) {
-    m.strada.add(2);
+    if (cercaStradaDFSPooka(m, x + 1, y)) {
+      m.strada.add(2);
+      return true;
+    }
   }
-  else{
-    return;
-  }
+  
+  // Sinistra (bit 3)
   if ((percorso[x][y] & (1 << 3)) != 0) {
-    m.strada.add(3);
+    if (cercaStradaDFSPooka(m, x - 1, y)) {
+      m.strada.add(3);
+      return true;
+    }
   }
-  else{
-    return;
-  }
+  
+  return false;
 }
 
-void cercaStradaDFSFygar(Fygar m, int xAttuale, int yAttuale){
+void cercaStradaDFSFygar(Fygar m, int x, int y){
 
+}
+
+void reverseArrayList(ArrayList<Integer> list) {
+  int n = list.size();
+  for (int i = 0; i < n / 2; i++) {
+    int temp = list.get(i);
+    list.set(i, list.get(n - 1 - i));
+    list.set(n - 1 - i, temp);
+  }
 }
 
 void convertiMatrice() {
