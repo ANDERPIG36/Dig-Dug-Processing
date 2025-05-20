@@ -87,6 +87,10 @@ void mobIA(){
   }
 }
 
+void cercaStradaDFS(){
+
+}
+
 void convertiMatrice() {
   for (int y = 0; y < 13; y++) {
     for (int x = 0; x < 12; x++) {

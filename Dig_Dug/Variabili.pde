@@ -26,7 +26,6 @@ int[][] mappa = new int[13][12];
 //bit 0-15: terreno casella 0:vuoto 1:pieno
 int[][] percorso = new int[13][12];
 
-
 //matrice per la casella
 boolean[][] scavo = new boolean[4][4];
 
@@ -86,6 +85,7 @@ class Pooka {
   boolean isGrabbed;
   int stato;
   int tempoMorte;
+  ArrayList<Integer> strada = new ArrayList<>();
   
   Pooka(int x, int y) {
     this.x = x;
@@ -114,6 +114,7 @@ class Fygar{
   int stato;
   int tempoMorte;
   int statoAttacco;
+  ArrayList<Integer> strada = new ArrayList<>();
   
   Fygar(int x, int y) {
     this.x = x;

@@ -171,6 +171,8 @@ void controlloEventi() {
     
     for (Pooka p : pooka) {
       if (p.x == r.x && p.y == r.y) {
+        if(!p.isPookaSchiacciato)
+          p.tempoMorte = 30;
         p.isPookaSchiacciato = true;
         p.subY = r.subY + 1;
         if(p.subY>3){
@@ -182,6 +184,8 @@ void controlloEventi() {
     
     for (Fygar f : fygar) {
       if (f.x == r.x && f.y == r.y) {
+        if(!f.isFygarSchiacciato)
+          f.tempoMorte = 30;
         f.isFygarSchiacciato = true;
         f.subY = r.subY + 1;
         if(f.subY>3){
@@ -197,8 +201,13 @@ void controlloEventi() {
     if(p.tempoMorte>=0){
       p.tempoMorte--;
       if(p.tempoMorte==0){
-        monsterBlownOut.rewind();
-        monsterBlownOut.play();
+        if(p.isPookaSchiacciato){
+          monsterSquashed.rewind();
+          monsterSquashed.play();
+        }else{
+          monsterBlownOut.rewind();
+          monsterBlownOut.play();
+        }
         pooka.remove(p);
       }
      break;
@@ -245,8 +254,13 @@ void controlloEventi() {
     if(f.tempoMorte>=0){
       f.tempoMorte--;
       if(f.tempoMorte==0){
-        monsterBlownOut.rewind();
-        monsterBlownOut.play();
+        if(f.isFygarSchiacciato){
+          monsterSquashed.rewind();
+          monsterSquashed.play();
+        }else{
+          monsterBlownOut.rewind();
+          monsterBlownOut.play();
+        }
         fygar.remove(f);
       }
      break;

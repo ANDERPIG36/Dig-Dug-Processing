@@ -10,6 +10,9 @@ void assegnaLivello(){
   roccieCadute=0;
   drawFrutto=false;
   ultimoMostro=false;
+  staAttaccando=false;
+  attaccoAvanzando=false;
+  mostroGrabbato=false;
   
   coloreLivello=(int)(livello+1)/5;
   coloreLivello=coloreLivello%3;
