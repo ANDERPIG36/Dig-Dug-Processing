@@ -108,8 +108,10 @@ class Fygar{
   boolean isShooting;
   boolean isFygarSchiacciato;
   boolean isGrabbed;
+  boolean direzioneAttacco;
   int stato;
   int tempoMorte;
+  int statoAttacco;
   
   Fygar(int x, int y) {
     this.x = x;
@@ -123,6 +125,7 @@ class Fygar{
     this.isGrabbed = false;
     this.stato = 0;
     this.tempoMorte=-1;
+    this.statoAttacco=0;
   }
 }
 ArrayList<Fygar> fygar = new ArrayList<Fygar>();

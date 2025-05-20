@@ -3,11 +3,11 @@ void draw(){
   background(0);
   if(partita){
     drawMap();
+    drawAttacco();
     drawPlayer();
     drawMostri();
     drawRoccie();
     drawGUI();
-    drawAttacco();
   }
   else{
     if(tempoVideo==0){
@@ -430,18 +430,18 @@ void drawAttacco() {
       // Attacco verso destra
       int distanza = fineAttaccoX - playerX;
       for (int i = 0; i < distanza - 1; i++) {
-        image(pompa[0][0], (playerX * 64 + i * 64) + 30, (playerY + 1) * 64);
+        image(pompa[0][0], (playerX * 64 + i * 64) + 40, (playerY + 1) * 64);
       }
-      image(pompa[1][0], (playerX * 64 + (distanza - 1) * 64) + 30, (playerY + 1) * 64);
+      image(pompa[1][0], (playerX * 64 + (distanza - 1) * 64) + 40, (playerY + 1) * 64);
     }
 
     else if (fineAttaccoX < playerX) {
       // Attacco verso sinistra
       int distanza = playerX - fineAttaccoX;
       for (int i = 0; i < distanza - 1; i++) {
-        image(pompa[0][3], (playerX * 64 - i * 64) - 20, (playerY + 1) * 64);
+        image(pompa[0][3], (playerX * 64 - i * 64) - 30, (playerY + 1) * 64);
       }
-      image(pompa[1][3], (playerX * 64 - (distanza - 1) * 64) - 20, (playerY + 1) * 64);
+      image(pompa[1][3], (playerX * 64 - (distanza - 1) * 64) - 30, (playerY + 1) * 64);
     }
 
     else if (fineAttaccoY > playerY) {
