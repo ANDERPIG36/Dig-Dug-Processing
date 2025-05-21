@@ -245,6 +245,10 @@ void controlloEventi() {
       p.isGrabbed=false;
     }
     
+    if(p.isGrabbed){
+      p.spettro=false;
+    }
+    
     if(!mostroGrabbato){
       p.isGrabbed=false;
     }
@@ -352,6 +356,7 @@ void controlloEventi() {
     }
     
     if(f.gonfiore>0){
+      f.isShooting=false;
       if(f.gonfiore==3){
         score+=600;
         mostroGrabbato=false;
@@ -361,6 +366,10 @@ void controlloEventi() {
       if(clock%100==0){
         f.gonfiore--;
       }
+    }
+    
+    if(f.isGrabbed){
+      f.spettro=false;
     }
     
     if(f.x == fineAttaccoX && f.y == fineAttaccoY){

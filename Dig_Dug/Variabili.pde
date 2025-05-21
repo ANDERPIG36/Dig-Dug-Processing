@@ -81,12 +81,13 @@ class Pooka {
   int x, y;
   int subX, subY;
   int gonfiore;
+  int ultimaMossa;
+  int nMosse;
   boolean spettro;
   boolean isPookaSchiacciato;
   boolean isGrabbed;
   int stato;
   int tempoMorte;
-  ArrayList<Integer> strada = new ArrayList<>();
   
   Pooka(int x, int y) {
     this.x = x;
@@ -94,6 +95,7 @@ class Pooka {
     this.subX = 1;
     this.subY = 3;
     this.gonfiore = 0;
+    this.nMosse = 0;
     this.spettro = false;
     this.isPookaSchiacciato = false;
     this.isGrabbed = false;
@@ -106,7 +108,9 @@ ArrayList<Pooka> pooka = new ArrayList<Pooka>();
 class Fygar{
   int x, y;
   int subX, subY;
-  int gonfiore; 
+  int gonfiore;
+  int ultimaMossa;
+  int nMosse;
   boolean spettro;
   boolean isShooting;
   boolean isFygarSchiacciato;
@@ -115,7 +119,6 @@ class Fygar{
   int stato;
   int tempoMorte;
   int statoAttacco;
-  ArrayList<Integer> strada = new ArrayList<>();
   
   Fygar(int x, int y) {
     this.x = x;
@@ -123,6 +126,7 @@ class Fygar{
     this.subX = 1;
     this.subY = 3;
     this.gonfiore = 0;
+    this.nMosse=0;
     this.spettro = false;
     this.isShooting = false;
     this.isFygarSchiacciato = false;

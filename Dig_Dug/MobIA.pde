@@ -1,3 +1,4 @@
+/*
 void mobIA(){
   convertiMatrice();
   
@@ -8,17 +9,35 @@ void mobIA(){
     }
     switch(p.stato){
       case 0:
-      p.strada.clear();
-      visitato = new boolean[13][12];
-      boolean trovato = cercaStradaDFSPooka(p,p.x,p.y);
-      if(trovato){
-        reverseArrayList(p.strada);
-      }
-      else{
-        p.stato=2;
-      }
-      println(p.strada);
-      break;
+      case 1:
+        if(clock%100==0){
+          p.spettro = false;
+          pookaGreedy(p);
+          if(p.nMosse>50){
+            p.nMosse=0;
+            p.stato=2;
+            
+          }
+        }
+        break;
+      case 2:
+        p.nMosse=0;
+        p.spettro=true;
+        if(clock%100==0){
+          moveSpettroPooka(p);
+        }
+        break;
+      case 3:
+        if(clock%100==0){
+          p.spettro = false;
+          pookaGreedy(p);
+          if(p.nMosse>30){
+            p.nMosse=0;
+            p.stato=2;
+           
+          }
+        }
+        break;
     }
   }
   
@@ -27,7 +46,7 @@ void mobIA(){
     if(ultimoMostro){
       f.stato=3;
     }
-    else if(playerX >= f.x - 3 && playerX <= f.x + 3 && playerY >= f.y - 1 && playerY <= f.y + 1){
+    else if(playerX >= f.x - 3 && playerX <= f.x + 3 && playerY >= f.y - 1 && playerY <= f.y + 1 && f.gonfiore<=0){
       if(!f.isShooting && clock%200==0){
         f.isShooting=true;
         f.stato=4;
@@ -56,40 +75,40 @@ void mobIA(){
     if(f.isShooting || f.statoAttacco>0){
       switch(f.statoAttacco){
         case -3:
-          if(clock%70==0){
+          if(clock%60==0){
             f.statoAttacco = -2;
             f.isShooting=false;
           }
         break;
         case -2:
-          if(clock%30==0){
+          if(clock%20==0){
             f.statoAttacco = f.isShooting ? -3 : -1;
           }
         break;
         case -1:
-          if(clock%30==0){
+          if(clock%20==0){
             f.statoAttacco = f.isShooting ? -2 : 0;
           }
         break;
         case 0:
-          if(clock%100==0){
+          if(clock%140==0){
             f.statoAttacco = f.direzioneAttacco ? -1 : 1;
           }
         break;
         case 1:
-          if(clock%30==0){
+          if(clock%20==0){
             f.statoAttacco = f.isShooting ? 2 : 0;
           }
         break;
         case 2:
-          if(clock%30==0){
+          if(clock%20==0){
             f.statoAttacco = f.isShooting ? 3 : 1;
             fygarFiring.rewind();
             fygarFiring.play();
           }
         break;
         case 3:
-          if(clock%70==0){
+          if(clock%60==0){
             f.statoAttacco = 2;
             f.isShooting=false;
           }
@@ -97,74 +116,269 @@ void mobIA(){
       }
     }
     
-    switch(f.stato){
+    switch (f.stato) {
       case 0:
-      cercaStradaDFSFygar(f,f.x,f.y);
-      break;
+      case 1:
+        if (clock % 100 == 0 && !f.isShooting) {
+          f.spettro = false;
+          fygarGreedy(f);
+          if (f.nMosse > 20) {
+            f.nMosse    = 0;
+            f.stato     = 2;
+          }
+        }
+        break;
+      case 2:
+        if (clock % 100 == 0) {
+          moveSpettroFygar(f);
+        }
+        break;
+      case 3:
+        if (clock % 100 == 0 && !f.isShooting) {
+          f.spettro = false;
+          fygarGreedy(f);
+          if (f.nMosse > 20) {
+            f.nMosse    = 0;
+            f.stato     = 2;
+          }
+        }
+        break;
     }
+
   }
 }
 
-boolean cercaStradaDFSPooka(Pooka m, int x, int y) {
-  // se siamo fuori dalla mappa o già visitati, ritorna falso
-  if (x < 0 || x >= percorso.length || y < 0 || y >= percorso[0].length) return false;
-  if (visitato[x][y]) return false;
+
+void pookaGreedy(Pooka m) {
+  boolean moved = false;           
+
+
+  if (!ultimoMostro) {
+    int playerTargetX = playerX; 
+    int playerTargetY = playerY;
+
+    
+    if (playerTargetY < m.y) { // Player è SOPRA
+      if (playerTargetX < m.x) { // Player è SOPRA-SINISTRA
+        
+        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; } // SU
+        else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; } // SINISTRA
+        else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; } // DESTRA (fallback)
+        else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; } // GIÙ (fallback)
+      } else if (playerTargetX > m.x) { // Player è SOPRA-DESTRA
+
+        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; } // SU
+        else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; } // DESTRA
+        else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; } // SINISTRA (fallback)
+        else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; } // GIÙ (fallback)
+      } else { // Player è DRITTO SOPRA (playerTargetX == m.x)
+        
+        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; } // SU
+        else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; } // SINISTRA (fallback)
+        else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; } // DESTRA (fallback)
+        else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; } // GIÙ (fallback)
+      }
+    } else if (playerTargetY == m.y) { // Player è sulla STESSA RIGA
+      if (playerTargetX < m.x) { // Player è a SINISTRA
+        
+        if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; } // SINISTRA
+        else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; } // SU (fallback)
+        else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; } // GIÙ (fallback)
+        else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; } // DESTRA (fallback)
+      } else if (playerTargetX > m.x) { // Player è a DESTRA
+        
+        if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; } // DESTRA
+        else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; } // SU (fallback)
+        else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; } // GIÙ (fallback)
+        else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; } // SINISTRA (fallback)
+      }
+      
+    } else { // Player è SOTTO (playerTargetY > m.y)
+      if (playerTargetX < m.x) { // Player è SOTTO-SINISTRA
+        
+        if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; } // GIÙ
+        else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; } // SINISTRA
+        else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; } // DESTRA (fallback)
+        else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; } // SU (fallback)
+      } else if (playerTargetX > m.x) { // Player è SOTTO-DESTRA
+        
+        if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; } // GIÙ
+        else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; } // DESTRA
+        else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; } // SINISTRA (fallback)
+        else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; } // SU (fallback)
+      } else { // Player è DRITTO SOTTO (playerTargetX == m.x)
+        
+        if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; } // GIÙ
+        else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; } // SINISTRA (fallback)
+        else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; } // DESTRA (fallback)
+        else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; } // SU (fallback)
+      }
+    }
+
+  } 
   
-  // segna visitato
-  visitato[x][y] = true;
-  
-  // se siamo sul player, la strada è trovata
-  if (x == playerX && y == playerY) {
-    return true;
-  }
-  
-  // esplora in ordine: su, giù, destra, sinistra (puoi cambiare)
-  
-  // Su (bit 0)
-  if ((percorso[x][y] & (1 << 0)) != 0) {
-    if (cercaStradaDFSPooka(m, x, y - 1)) {
-      m.strada.add(0);  // aggiungi la direzione usata per tornare indietro (backtracking)
-      return true;
+  else { 
+    if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) {
+      m.y--; m.ultimaMossa = 0; moved = true;
+    } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) {
+      m.x--; m.ultimaMossa = 3; moved = true;
+    } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) {
+      m.x++; m.ultimaMossa = 2; moved = true;
+    } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) {
+      m.y++; m.ultimaMossa = 1; moved = true;
     }
   }
+
+  // Se ci siamo mossi, segna la nuova cella e incrementa il contatore
+  if (moved) {
+    visitato[m.y][m.x] = true;
+    m.nMosse++;
+  } 
   
-  // Giù (bit 1)
-  if ((percorso[x][y] & (1 << 1)) != 0) {
-    if (cercaStradaDFSPooka(m, x, y + 1)) {
-      m.strada.add(1);
-      return true;
-    }
+  else {
+    m.stato = 2; // Diventa spettro se bloccato
+    // nMosse e spettro=true verranno gestiti nello switch di mobIA
   }
-  
-  // Destra (bit 2)
-  if ((percorso[x][y] & (1 << 2)) != 0) {
-    if (cercaStradaDFSPooka(m, x + 1, y)) {
-      m.strada.add(2);
-      return true;
-    }
-  }
-  
-  // Sinistra (bit 3)
-  if ((percorso[x][y] & (1 << 3)) != 0) {
-    if (cercaStradaDFSPooka(m, x - 1, y)) {
-      m.strada.add(3);
-      return true;
-    }
-  }
-  
-  return false;
 }
 
-void cercaStradaDFSFygar(Fygar m, int x, int y){
+void fygarGreedy(Fygar m) {
+  boolean moved = false;
+  // Se non è l ultimo mostro, segue logica greedy verso il player
+  if (!ultimoMostro) {
+    int playerTargetX = playerX;
+    int playerTargetY = playerY;
 
+    // Logica di movimento migliorata (identica a pookaGreedy)
+    if (playerTargetY < m.y) { // Player è SOPRA
+      if (playerTargetX < m.x) { // Player è SOPRA-SINISTRA
+        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; }
+      } else if (playerTargetX > m.x) { // Player è SOPRA-DESTRA
+        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; }
+      } else { // Player è DRITTO SOPRA
+        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; }
+      }
+    } else if (playerTargetY == m.y) { // Player è sulla STESSA RIGA
+      if (playerTargetX < m.x) { // Player è a SINISTRA
+        if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; }
+      } else if (playerTargetX > m.x) { // Player è a DESTRA
+        if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; }
+      }
+    } else { // Player è SOTTO
+      if (playerTargetX < m.x) { // Player è SOTTO-SINISTRA
+        if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; }
+      } else if (playerTargetX > m.x) { // Player è SOTTO-DESTRA
+        if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; }
+      } else { // Player è DRITTO SOTTO
+        if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) { m.y++; m.ultimaMossa = 1; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) { m.x--; m.ultimaMossa = 3; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) { m.x++; m.ultimaMossa = 2; moved = true; }
+        else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) { m.y--; m.ultimaMossa = 0; moved = true; }
+      }
+    }
+  } else { 
+    if ((percorso[m.y][m.x] & (1 << 0)) != 0 && !visitato[m.y-1][m.x]) {
+      m.y--; m.ultimaMossa = 0; moved = true;
+    } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && !visitato[m.y][m.x-1]) {
+      m.x--; m.ultimaMossa = 3; moved = true;
+    } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && !visitato[m.y][m.x+1]) {
+      m.x++; m.ultimaMossa = 2; moved = true;
+    } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && !visitato[m.y+1][m.x]) {
+      m.y++; m.ultimaMossa = 1; moved = true;
+    }
+  }
+
+  if (moved) {
+    visitato[m.y][m.x] = true;
+    m.nMosse++;
+  } else {
+    m.stato = 2; // Diventa spettro se bloccato
+    // nMosse e spettro=true verranno gestiti nello switch di mobIA
+  }
 }
 
-void reverseArrayList(ArrayList<Integer> list) {
-  int n = list.size();
-  for (int i = 0; i < n / 2; i++) {
-    int temp = list.get(i);
-    list.set(i, list.get(n - 1 - i));
-    list.set(n - 1 - i, temp);
+
+void moveSpettroPooka(Pooka m) {
+
+  int targetX = ultimoMostro ? 0 : playerX;
+  int targetY = ultimoMostro ? 0 : playerY;
+
+  int dx = (targetX > m.x) ? 1 : (targetX < m.x ? -1 : 0);
+  int dy = (targetY > m.y) ? 1 : (targetY < m.y ? -1 : 0);
+
+  
+  m.x += dx;
+  m.y += dy;
+
+  
+  if      (dx ==  0 && dy == -1) m.ultimaMossa = 0;
+  else if (dx ==  0 && dy ==  1) m.ultimaMossa = 1;
+  else if (dx ==  1 && dy ==  0) m.ultimaMossa = 2;
+  else if (dx == -1 && dy ==  0) m.ultimaMossa = 3;
+  else if (dx ==  1 && dy == -1) m.ultimaMossa = 4;
+  else if (dx == -1 && dy == -1) m.ultimaMossa = 5;
+  else if (dx ==  1 && dy ==  1) m.ultimaMossa = 6;
+  else if (dx == -1 && dy ==  1) m.ultimaMossa = 7;
+
+
+  m.nMosse++;
+  
+  
+  if (m.nMosse >= 2 && mappa[m.y][m.x] != 65535) { 
+
+    m.stato = ultimoMostro ? 3 : 1;
+    m.spettro = false;
+    m.nMosse = 0; 
+  }
+}
+
+
+void moveSpettroFygar(Fygar m) {
+  int targetX = ultimoMostro ? 0 : playerX;
+  int targetY = ultimoMostro ? 0 : playerY;
+  int dx      = (targetX > m.x) ? 1 : (targetX < m.x ? -1 : 0);
+  int dy      = (targetY > m.y) ? 1 : (targetY < m.y ? -1 : 0);
+
+  m.x += dx;
+  m.y += dy;
+
+  if      (dx ==  0 && dy == -1) m.ultimaMossa = 0;
+  else if (dx ==  0 && dy ==  1) m.ultimaMossa = 1;
+  else if (dx ==  1 && dy ==  0) m.ultimaMossa = 2;
+  else if (dx == -1 && dy ==  0) m.ultimaMossa = 3;
+  else if (dx ==  1 && dy == -1) m.ultimaMossa = 4;
+  else if (dx == -1 && dy == -1) m.ultimaMossa = 5;
+  else if (dx ==  1 && dy ==  1) m.ultimaMossa = 6;
+  else if (dx == -1 && dy ==  1) m.ultimaMossa = 7;
+
+  m.nMosse++;
+  m.spettro = true; 
+
+  
+  if (m.nMosse >= 20 && mappa[m.y][m.x] != 65535) { 
+    m.stato     = ultimoMostro ? 3 : 1;
+    m.spettro = false;
+    m.nMosse    = 0; 
   }
 }
 
@@ -197,4 +411,4 @@ void convertiMatrice() {
       percorso[y][x] = val;
     }
   }
-}
+} */
