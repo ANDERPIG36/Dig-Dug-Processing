@@ -31,7 +31,7 @@ void update() {
     controlloEventi();
     controlloNextLevel();
     gestioneAttacco();
-    //mobIA();
+    mobIA();
     
     if (!playerFermo) {
       if (!ultimoMostro) {

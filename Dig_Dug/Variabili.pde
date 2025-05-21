@@ -8,6 +8,7 @@ int direzionePlayer; // direzionePlayer
 
 int frameDelay = 10; // cambia sprite ogni 10 frame
 int currentFrame = (clock / frameDelay) % 2;
+int dir;
 
 boolean staScavando=false;
 boolean isPlayerSchiacciato=false;

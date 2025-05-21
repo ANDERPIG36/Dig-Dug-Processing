@@ -335,13 +335,26 @@ void drawMostri(){
   
   // Disegna i Pooka
   for (Pooka p : pooka) {
+    switch(p.ultimaMossa){
+      case 0:
+        dir=0;
+        break;
+      case 1:
+        dir=1;
+        break;
+      case 2:
+        dir=1;
+        break;
+      case 3:
+        dir=0;
+        break;
+      }
     int xPos = (p.x * 64 + p.subX * 16) + 16;
     int yPos = (p.y * 64 + p.subY * 16) + 52;
     
     if (p.gonfiore > 0) {
       // Pooka gonfiato
-      int frame = (clock / 10) % 2; // Animazione più lenta per il gonfiore
-      image(animazionePookaGonfiato[p.gonfiore-1][frame], xPos, yPos);
+      image(animazionePookaGonfiato[p.gonfiore-1][dir], xPos, yPos);
     } 
     else if (p.spettro) {
       // Pooka in modalità fantasma
@@ -349,25 +362,37 @@ void drawMostri(){
       image(animazionePookaFantasma[frame], xPos, yPos);
     } 
     else if (p.isPookaSchiacciato){
-      image(pookaSchiacciato[0], xPos, yPos);
+      image(pookaSchiacciato[dir], xPos, yPos);
       
     }else{
       // Pooka normale
       int frame = (clock / 10) % 2; // Animazione più veloce per il movimento normale
-      int dir = (p.stato == 0) ? 0 : 1; // 0=sinistra, 1=destra
       image(animazionePooka[dir][frame], xPos, yPos);
     }
   }
   
   for (Fygar f : fygar) {
+      switch(f.ultimaMossa){
+        case 0:
+          dir=0;
+          break;
+        case 1:
+          dir=1;
+          break;
+        case 2:
+          dir=1;
+          break;
+        case 3:
+          dir=0;
+          break;
+      }
     int dirAttack;
     int xPos = (f.x * 64 + f.subX * 16) + 16;
     int yPos = (f.y * 64 + f.subY * 16) + 48;
     
     if (f.gonfiore > 0) {
       // Fygar gonfiato
-      int frame = (clock / 10) % 2; // Animazione più lenta per il gonfiore
-      image(fygarGonfiore[f.gonfiore-1][frame], xPos, yPos);
+      image(fygarGonfiore[f.gonfiore-1][dir], xPos, yPos);
     } 
     else if (f.spettro) {
       // Fygar in modalità fantasma
@@ -375,7 +400,7 @@ void drawMostri(){
       image(fygarFantasma[frame], xPos, yPos);
     } 
     else if (f.isFygarSchiacciato){
-      image(fygarSchiacciato[0], xPos, yPos);
+      image(fygarSchiacciato[dir], xPos, yPos);
     }else if(f.isShooting){
       if (f.direzioneAttacco)
         dirAttack=0;
@@ -410,7 +435,6 @@ void drawMostri(){
     }else {
       // Fygar normale
       int frame = (clock / 10) % 2; // Animazione più veloce per il movimento normale
-      int dir = 0; // Qua va messa la direzione
       image(fygarAnimazione[dir][frame], xPos, yPos);
     }
   }
