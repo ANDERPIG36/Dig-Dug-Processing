@@ -50,12 +50,13 @@ void assegnaLivello(){
     fygar.add(new Fygar(0,2)); 
     fygar.add(new Fygar(7,6)); 
   }
-  
-  if(livello<50){
-    assegnaLivello049();
-  }
   else{
-    assegnaLivello5099();
+    if(livello<50){
+    assegnaLivello049();
+    }
+    else{
+      assegnaLivello5099();
+    }
   }
   
 }

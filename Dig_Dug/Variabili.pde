@@ -79,6 +79,7 @@ int xStampa, yStampa;
 int fioriGrandi,fioriPiccoli;
 
 class Pooka {
+  int Xiniziale, Yiniziale;
   int x, y;
   int subX, subY;
   int gonfiore;
@@ -91,6 +92,8 @@ class Pooka {
   int tempoMorte;
   
   Pooka(int x, int y) {
+    this.Xiniziale=x;
+    this.Yiniziale=y;
     this.x = x;
     this.y = y;
     this.subX = 1;
@@ -107,6 +110,7 @@ class Pooka {
 ArrayList<Pooka> pooka = new ArrayList<Pooka>();
 
 class Fygar{
+  int Xiniziale, Yiniziale;
   int x, y;
   int subX, subY;
   int gonfiore;
@@ -122,6 +126,8 @@ class Fygar{
   int statoAttacco;
   
   Fygar(int x, int y) {
+    this.Xiniziale=x;
+    this.Yiniziale=y;
     this.x = x;
     this.y = y;
     this.subX = 1;

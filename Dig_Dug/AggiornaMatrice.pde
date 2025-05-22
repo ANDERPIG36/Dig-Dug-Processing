@@ -232,7 +232,7 @@ void controlloEventi() {
       }
     }
     
-    if(p.x == fineAttaccoX && p.y == fineAttaccoY){
+    if(p.x == fineAttaccoX && p.y == fineAttaccoY && !mostroGrabbato){
       mostroGrabbato=true;
       p.isGrabbed=true;
     }
@@ -281,13 +281,10 @@ void controlloEventi() {
       int xPos = (f.x * 64 + f.subX * 16) + 16;
       int yPos = (f.y * 64 + f.subY * 16) + 48;
       int playerPixelX = (playerX * 64 + playerSubX * 16) + 16;
-      int playerPixelY = (playerY * 64 + playerSubY * 16) + 48;
+      int playerPixelY = (playerY * 64 + playerSubY * 16) + 80;
       switch (f.statoAttacco) {
         case -3:
-            if (!(playerPixelX + 32 < (xPos - 110 - 188 / 2) ||
-                  playerPixelX - 32 > (xPos - 110 + 188 / 2) ||
-                  playerPixelY + 32 < (yPos - 64 / 2) ||
-                  playerPixelY - 32 > (yPos + 64 / 2))) {
+            if (playerPixelX<=xPos&&playerPixelX>=(xPos-240)&&playerPixelY<(yPos+56)&&playerPixelY>(yPos-56)){
               monsterTouchingDigDug.rewind();
               monsterTouchingDigDug.play();
               morte();
@@ -295,10 +292,7 @@ void controlloEventi() {
             break;
     
         case -2:
-            if (!(playerPixelX + 32 < (xPos - 80 - 128 / 2) ||
-                  playerPixelX - 32 > (xPos - 80 + 128 / 2) ||
-                  playerPixelY + 32 < (yPos - 64 / 2) ||
-                  playerPixelY - 32 > (yPos + 64 / 2))) {
+            if (playerPixelX<=xPos&&playerPixelX>=(xPos-186)&&playerPixelY<(yPos+56)&&playerPixelY>(yPos-56)){
               monsterTouchingDigDug.rewind();
               monsterTouchingDigDug.play();
               morte();
@@ -306,10 +300,7 @@ void controlloEventi() {
             break;
     
         case -1:
-            if (!(playerPixelX + 32 < (xPos - 32 - 64 / 2) ||
-                  playerPixelX - 32 > (xPos - 32 + 64 / 2) ||
-                  playerPixelY + 32 < (yPos - 64 / 2) ||
-                  playerPixelY - 32 > (yPos + 64 / 2))) {
+            if (playerPixelX<=xPos&&playerPixelX>=(xPos-128)&&playerPixelY<(yPos+56)&&playerPixelY>(yPos-56)){
               monsterTouchingDigDug.rewind();
               monsterTouchingDigDug.play();
               morte();
@@ -317,10 +308,7 @@ void controlloEventi() {
             break;
     
         case 1:
-            if (!(playerPixelX + 32 < (xPos + 32 - 64 / 2) ||
-                  playerPixelX - 32 > (xPos + 32 + 64 / 2) ||
-                  playerPixelY + 32 < (yPos - 64 / 2) ||
-                  playerPixelY - 32 > (yPos + 64 / 2))) {
+            if (playerPixelX>=xPos&&playerPixelX<=(xPos+128)&&playerPixelY<(yPos+56)&&playerPixelY>(yPos-56)){
               monsterTouchingDigDug.rewind();
               monsterTouchingDigDug.play();
               morte();
@@ -328,10 +316,7 @@ void controlloEventi() {
             break;
     
         case 2:
-            if (!(playerPixelX + 32 < (xPos + 80 - 128 / 2) ||
-                  playerPixelX - 32 > (xPos + 80 + 128 / 2) ||
-                  playerPixelY + 32 < (yPos - 64 / 2) ||
-                  playerPixelY - 32 > (yPos + 64 / 2))) {
+            if (playerPixelX>=xPos&&playerPixelX<=(xPos+186)&&playerPixelY<(yPos+56)&&playerPixelY>(yPos-56)){
               monsterTouchingDigDug.rewind();
               monsterTouchingDigDug.play();
               morte();
@@ -339,16 +324,14 @@ void controlloEventi() {
             break;
     
         case 3:
-            if (!(playerPixelX + 32 < (xPos + 110 - 188 / 2) ||
-                  playerPixelX - 32 > (xPos + 110 + 188 / 2) ||
-                  playerPixelY + 32 < (yPos - 64 / 2) ||
-                  playerPixelY - 32 > (yPos + 64 / 2))) {
+            if (playerPixelX>=xPos&&playerPixelX<=(xPos+240)&&playerPixelY<(yPos+64)&&playerPixelY>(yPos-56)){
               monsterTouchingDigDug.rewind();
               monsterTouchingDigDug.play();
               morte();
             }
             break;
-       }
+      }
+
 
       break;
     }
@@ -370,7 +353,7 @@ void controlloEventi() {
       f.spettro=false;
     }
     
-    if(f.x == fineAttaccoX && f.y == fineAttaccoY){
+    if(f.x == fineAttaccoX && f.y == fineAttaccoY && !mostroGrabbato){
       mostroGrabbato=true;
       f.isGrabbed=true;
     }

@@ -14,13 +14,17 @@ void mobIA(){
   if(p.tempoMorte==-1 && !p.isPookaSchiacciato && !p.isGrabbed && p.gonfiore==0){  
     switch(p.stato){
       case 0:
-      case 1:
         if(clock%40==0){
           pookaGreedy(p);
           if(p.nMosse>50){
             p.nMosse=0;
             p.stato=2;
           }
+        }
+        break;
+      case 1:
+        if(clock%40==0){
+          pookaGreedy(p);
         }
         break;
       case 2:
@@ -45,7 +49,7 @@ void mobIA(){
     if(ultimoMostro){
       f.stato=3;
     }
-    else if(playerX >= f.x - 3 && playerX <= f.x + 3 && playerY >= f.y - 1 && playerY <= f.y + 1 && f.gonfiore<=0){
+    else if(playerX >= f.x - 3 && playerX <= f.x + 3 && playerY >= f.y - 1 && playerY <= f.y + 1 && f.gonfiore<=0 && !f.spettro){
       if(!f.isShooting && clock%200==0){
         f.isShooting=true;
         f.stato=4;
@@ -77,6 +81,7 @@ void mobIA(){
           if(clock%60==0){
             f.statoAttacco = -2;
             f.isShooting=false;
+            f.stato=1;  
           }
         break;
         case -2:
@@ -110,15 +115,41 @@ void mobIA(){
           if(clock%60==0){
             f.statoAttacco = 2;
             f.isShooting=false;
+            f.stato=1;
           }
         break;
       }
     }
     
-    switch(f.stato){
-      case 0:
-      
-      break;
+    if(f.tempoMorte==-1 && !f.isFygarSchiacciato && !f.isGrabbed && f.gonfiore==0){  
+      switch(f.stato){
+        case 0:
+          if(clock%40==0){
+            fygarGreedy(f);
+            if(f.nMosse>50){
+              f.nMosse=0;
+              f.stato=2;
+            }
+          }
+          break;
+        case 1:
+          if(clock%40==0){
+            fygarGreedy(f);
+          }
+          break;
+        case 2:
+          f.spettro=true;
+          break;
+        case 3:
+          if(clock%40==0){
+            fygarGreedy(f);
+            if(f.nMosse>30){
+              f.nMosse=0;
+              f.stato=2;
+            }
+          }
+          break;
+      }
     }
   }
 }
@@ -141,6 +172,27 @@ void pookaGreedy(Pooka m) {
           } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
             m.y++;
             m.ultimaMossa=1;
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
           }
         
         }
@@ -158,6 +210,27 @@ void pookaGreedy(Pooka m) {
           } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
             m.y++;
             m.ultimaMossa=1;
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
           }
           
         }
@@ -175,6 +248,27 @@ void pookaGreedy(Pooka m) {
           } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
             m.y++;
             m.ultimaMossa=1;
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
           }
           
         }
@@ -195,7 +289,28 @@ void pookaGreedy(Pooka m) {
           } else if((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3)  {
             m.x++;
             m.ultimaMossa=2;
-          }  
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
+          }
           
         }
         else if (playerX > m.x) {
@@ -212,7 +327,28 @@ void pookaGreedy(Pooka m) {
           } else if((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=3)  {
             m.x--;
             m.ultimaMossa=2;
-          }    
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
+          }
           
         }
     }
@@ -231,7 +367,28 @@ void pookaGreedy(Pooka m) {
           } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
             m.y--;
             m.ultimaMossa=0;
-          }  
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
+          }
           
         }
         else if (playerX == m.x) {
@@ -248,7 +405,28 @@ void pookaGreedy(Pooka m) {
           } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
             m.y--;
             m.ultimaMossa=0;
-          } 
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
+          }
           
         }
         else { // playerX > m.x
@@ -265,7 +443,28 @@ void pookaGreedy(Pooka m) {
           } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
             m.y--;
             m.ultimaMossa=0;
-          } 
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
+          }
             
         }
     }
@@ -273,30 +472,403 @@ void pookaGreedy(Pooka m) {
     m.nMosse++;
   }
   else{
-    println("mossa del ultimo:");
     
     if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa != 1) {
-      println("su");
       m.y--;
       m.ultimaMossa=0;
     } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa != 2) {
-      println("sinistra");
       m.x--;
       m.ultimaMossa=3;
     } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa != 3) {
-      println("destra");
       m.x++;
       m.ultimaMossa=2;
     } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa != 0)  {
-      println("giu");
       m.y++;
       m.ultimaMossa=1;
+    } else {
+    
+      switch(m.ultimaMossa){
+        case 0:
+          m.y++;
+          m.ultimaMossa=1;
+          break;
+        case 1:
+          m.y--;
+          m.ultimaMossa=0;
+          break;
+        case 2:
+          m.x--;
+          m.ultimaMossa=3;
+          break;
+        case 3:
+          m.x++;
+          m.ultimaMossa=2;
+          break;
+      }
+      
     }
     
     m.nMosse++;
   }
 }
 
+void fygarGreedy(Fygar m) {
+  if(!ultimoMostro){
+    
+    if (playerY < m.y) {           // Player sopra
+        if (playerX < m.x) {
+            
+          if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+            m.y--;
+            m.ultimaMossa=0;
+          } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+            m.x--;
+            m.ultimaMossa=3;
+          } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+            m.x++;
+            m.ultimaMossa=2;
+          } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
+            m.y++;
+            m.ultimaMossa=1;
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
+          }
+        
+        }
+        else if (playerX == m.x) {
+        
+          if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+            m.y--;
+            m.ultimaMossa=0;
+          } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+            m.x--;
+            m.ultimaMossa=3;
+          } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+            m.x++;
+            m.ultimaMossa=2;
+          } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
+            m.y++;
+            m.ultimaMossa=1;
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
+          }
+          
+        }
+        else { // playerX > m.x
+            
+          if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+            m.y--;
+            m.ultimaMossa=0;
+          } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+            m.x++;
+            m.ultimaMossa=2;
+          } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+            m.x--;
+            m.ultimaMossa=3;
+          } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
+            m.y++;
+            m.ultimaMossa=1;
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
+          }
+          
+        }
+        
+    }
+    else if (playerY == m.y) {   // stessa riga
+        if (playerX < m.x) {
+            
+          if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+            m.x--;
+            m.ultimaMossa=3;
+          } else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+            m.y--;
+            m.ultimaMossa=0;
+          } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+            m.y++;
+            m.ultimaMossa=1;
+          } else if((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3)  {
+            m.x++;
+            m.ultimaMossa=2;
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
+          }
+          
+        }
+        else if (playerX > m.x) {
+            
+          if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+            m.x++;
+            m.ultimaMossa=2;
+          } else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+            m.y--;
+            m.ultimaMossa=0;
+          } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+            m.y++;
+            m.ultimaMossa=1;
+          } else if((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=3)  {
+            m.x--;
+            m.ultimaMossa=2;
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
+          }
+          
+        }
+    }
+    else {                       // playerY > m.y  player sotto
+        if (playerX < m.x) {
+            
+          if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+            m.y++;
+            m.ultimaMossa=1;
+          } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+            m.x--;
+            m.ultimaMossa=3;
+          } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+            m.x++;
+            m.ultimaMossa=2;
+          } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
+            m.y--;
+            m.ultimaMossa=0;
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
+          }
+          
+        }
+        else if (playerX == m.x) {
+            
+          if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+            m.y++;
+            m.ultimaMossa=1;
+          } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+            m.x--;
+            m.ultimaMossa=3;
+          } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+            m.x++;
+            m.ultimaMossa=2;
+          } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
+            m.y--;
+            m.ultimaMossa=0;
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
+          }
+          
+        }
+        else { // playerX > m.x
+            
+            if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+            m.y++;
+            m.ultimaMossa=1;
+          } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+            m.x++;
+            m.ultimaMossa=2;
+          } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+            m.x--;
+            m.ultimaMossa=3;
+          } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
+            m.y--;
+            m.ultimaMossa=0;
+          } else {
+          
+            switch(m.ultimaMossa){
+              case 0:
+                m.y++;
+                m.ultimaMossa=1;
+                break;
+              case 1:
+                m.y--;
+                m.ultimaMossa=0;
+                break;
+              case 2:
+                m.x--;
+                m.ultimaMossa=3;
+                break;
+              case 3:
+                m.x++;
+                m.ultimaMossa=2;
+                break;
+            }
+            
+          }
+            
+        }
+    }
+    
+    m.nMosse++;
+  }
+  else{
+    
+    if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa != 1) {
+      m.y--;
+      m.ultimaMossa=0;
+    } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa != 2) {
+      m.x--;
+      m.ultimaMossa=3;
+    } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa != 3) {
+      m.x++;
+      m.ultimaMossa=2;
+    } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa != 0)  {
+      m.y++;
+      m.ultimaMossa=1;
+    } else {
+    
+      switch(m.ultimaMossa){
+        case 0:
+          m.y++;
+          m.ultimaMossa=1;
+          break;
+        case 1:
+          m.y--;
+          m.ultimaMossa=0;
+          break;
+        case 2:
+          m.x--;
+          m.ultimaMossa=3;
+          break;
+        case 3:
+          m.x++;
+          m.ultimaMossa=2;
+          break;
+      }
+      
+    }
+    
+    m.nMosse++;
+  }
+}
 
 void convertiMatrice() {
   for (int y = 0; y < 13; y++) {

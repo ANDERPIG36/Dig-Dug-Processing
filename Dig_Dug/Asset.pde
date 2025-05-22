@@ -89,8 +89,8 @@ void inizializzaAsset(){
   fygarFuoco[4] = loadImage("cpu/fygar/fuoco/fygarFuoco2R.png");
   fygarFuoco[5] = loadImage("cpu/fygar/fuoco/fygarFuoco3R.png");
   
-  fygarAttacco[0] = loadImage("cpu/fygar/fygarPreparazioneR.png");
-  fygarAttacco[1] = loadImage("cpu/fygar/fygarPreparazioneL.png");
+  fygarAttacco[1] = loadImage("cpu/fygar/fygarPreparazioneR.png");
+  fygarAttacco[0] = loadImage("cpu/fygar/fygarPreparazioneL.png");
   fygarAnimazione[0][0] = loadImage("cpu/fygar/fygarL.png");
   fygarAnimazione[1][0] = loadImage("cpu/fygar/fygarR.png");
   fygarAnimazione[0][1] = loadImage("cpu/fygar/fygarAnimazioneL.png");

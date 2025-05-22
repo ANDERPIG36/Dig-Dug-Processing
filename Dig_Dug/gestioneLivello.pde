@@ -1,6 +1,7 @@
 void morte(){
   nVite--;
   delay(1000);
+  resettaNemici();
   digDugWalking.pause();
   digDugWalkingFast.pause();
   deathDigDug.rewind();
@@ -37,4 +38,15 @@ void controlloNextLevel(){
     roccieCadute=0;
     assegnaLivello();
    }
+}
+
+void resettaNemici() {
+  for (Pooka p : pooka) {
+    p.x = p.Xiniziale;
+    p.y = p.Yiniziale;
+  }
+  for (Fygar f : fygar) {
+    f.x = f.Xiniziale;
+    f.y = f.Yiniziale;
+  }
 }
