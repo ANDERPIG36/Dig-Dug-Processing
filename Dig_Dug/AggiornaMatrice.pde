@@ -101,6 +101,7 @@ void aggiornaMatrice() {
 }
 
 void controlloEventi() {
+  
   for(Roccia r : roccia){
     int centroCasella = (1 << 5) | (1 << 6) | (1 << 9) | (1 << 10);    
 
@@ -198,6 +199,21 @@ void controlloEventi() {
   }
   
   for (Pooka p : pooka) {
+    
+    if(ultimoMostro && p.x==0 && p.y==0){
+      monsterEscaped.rewind();
+      monsterEscaped.play();
+      delay(700);
+      nVite--;
+      roundClear.rewind();
+      roundClear.play();
+      delay(1800);
+      livello++;
+      roccieCadute=0;
+      assegnaLivello();
+      break;
+    }
+    
     if(p.tempoMorte>=0){
       p.tempoMorte--;
       if(p.tempoMorte==0){
@@ -254,6 +270,20 @@ void controlloEventi() {
   }
   
   for (Fygar f : fygar) {
+    
+    if(ultimoMostro && f.x==0 && f.y==0){
+      monsterEscaped.rewind();
+      monsterEscaped.play();
+      delay(700);
+      nVite--;
+      roundClear.rewind();
+      roundClear.play();
+      delay(1800);
+      livello++;
+      roccieCadute=0;
+      assegnaLivello();
+      break;
+    }
     
     if(f.tempoMorte>=0){
       f.tempoMorte--;

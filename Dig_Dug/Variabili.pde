@@ -81,7 +81,7 @@ int fioriGrandi,fioriPiccoli;
 class Pooka {
   int Xiniziale, Yiniziale;
   int x, y;
-  int subX, subY;
+  int drawX, drawY;
   int gonfiore;
   int ultimaMossa;
   int nMosse;
@@ -96,8 +96,8 @@ class Pooka {
     this.Yiniziale=y;
     this.x = x;
     this.y = y;
-    this.subX = 1;
-    this.subY = 3;
+    this.drawX = x*64;
+    this.drawY = y*64;
     this.gonfiore = 0;
     this.nMosse = 0;
     this.spettro = false;
@@ -112,7 +112,7 @@ ArrayList<Pooka> pooka = new ArrayList<Pooka>();
 class Fygar{
   int Xiniziale, Yiniziale;
   int x, y;
-  int subX, subY;
+  int drawX, drawY;
   int gonfiore;
   int ultimaMossa;
   int nMosse;
@@ -131,8 +131,8 @@ class Fygar{
     this.Yiniziale=y;
     this.x = x;
     this.y = y;
-    this.subX = 1;
-    this.subY = 3;
+    this.drawX = x*64;
+    this.drawY = y*64;
     this.gonfiore = 0;
     this.nMosse=0;
     this.spettro = false;
