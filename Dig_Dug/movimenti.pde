@@ -124,7 +124,7 @@ void move() {
 
 void gestioneAttacco() {
   if (!mostroGrabbato) {
-    if(clock%15==0){
+    if(clock%16==0){
       bordiAttacco();
       controlloAvanzamentoAttacco();
       attacco();
@@ -139,6 +139,11 @@ void gestioneAttacco() {
 
 void attacco() {
   int centroCasella = (1 << 5) | (1 << 6) | (1 << 9) | (1 << 10);
+  
+  if(attaccoAvanzando){  
+    precedenteAttaccoX = fineAttaccoX;
+    precedenteAttaccoY = fineAttaccoY;
+  }
 
   switch (direzionePlayer) {
     case 0: // destra

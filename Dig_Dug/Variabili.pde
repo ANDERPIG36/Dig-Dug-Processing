@@ -54,7 +54,7 @@ int score;
 //numero vite
 int nVite;
 
-int fineAttaccoX, fineAttaccoY;
+int fineAttaccoX, fineAttaccoY, precedenteAttaccoX, precedenteAttaccoY;
 boolean attaccoAvanzando=false;
 boolean mostroGrabbato=false;
 boolean staAttaccando=false;
@@ -124,6 +124,7 @@ class Fygar{
   int stato;
   int tempoMorte;
   int statoAttacco;
+  int clockAttacco;
   
   Fygar(int x, int y) {
     this.Xiniziale=x;
@@ -141,6 +142,7 @@ class Fygar{
     this.stato = 0;
     this.tempoMorte=-1;
     this.statoAttacco=0;
+    this.clockAttacco=0;
   }
 }
 ArrayList<Fygar> fygar = new ArrayList<Fygar>();

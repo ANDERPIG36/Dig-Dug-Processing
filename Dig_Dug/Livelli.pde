@@ -13,6 +13,12 @@ void assegnaLivello(){
   staAttaccando=false;
   attaccoAvanzando=false;
   mostroGrabbato=false;
+  monsterRunningAway.rewind();
+  fineAttaccoX=playerX;
+  fineAttaccoY=playerY;
+  attaccoAvanzando=false;
+  mostroGrabbato=false;
+  staAttaccando=false;
   
   coloreLivello=(int)(livello+1)/5;
   coloreLivello=coloreLivello%3;

@@ -32,43 +32,10 @@ void update() {
     controlloNextLevel();
     gestioneAttacco();
     mobIA();
-    
-    if (!playerFermo) {
-      if (!ultimoMostro) {
-        // Se non sta già suonando, fallo partire
-        if (!digDugWalking.isPlaying()) {
-          digDugWalking.rewind();
-          digDugWalking.play();
-        }
-    
-        // Metti in pausa e riavvolgi l'altro solo se sta suonando
-        if (digDugWalkingFast.isPlaying()) {
-          digDugWalkingFast.pause();
-          digDugWalkingFast.rewind();
-        }
-      } else {
-        if (!digDugWalkingFast.isPlaying()) {
-          digDugWalkingFast.rewind();
-          digDugWalkingFast.play();
-        }
-    
-        if (digDugWalking.isPlaying()) {
-          digDugWalking.pause();
-          digDugWalking.rewind();
-        }
-      }
-    } else {
-      if (digDugWalking.isPlaying()) {
-        digDugWalking.pause();
-        digDugWalking.rewind();
-      }
-      if (digDugWalkingFast.isPlaying()) {
-        digDugWalkingFast.pause();
-        digDugWalkingFast.rewind();
-      }
-    }
-    
+    suoni();
+
   }
+    
   tempi();
   
 }
@@ -90,4 +57,51 @@ void tempi(){
   if(timerPompaggio<0){
     pompaggio=1;
   }
+  for(Fygar f : fygar){
+    if(f.isShooting){
+      f.clockAttacco++;
+    }
+  }
+}
+
+void suoni(){
+  if (!playerFermo) {
+    if (!ultimoMostro) {
+      // Se non sta già suonando, fallo partire
+      if (!digDugWalking.isPlaying()) {
+        digDugWalking.rewind();
+        digDugWalking.play();
+      }
+  
+      // Metti in pausa e riavvolgi l'altro solo se sta suonando
+      if (digDugWalkingFast.isPlaying()) {
+        digDugWalkingFast.pause();
+        digDugWalkingFast.rewind();
+      }
+    } else {
+      if (!digDugWalkingFast.isPlaying()) {
+        digDugWalkingFast.rewind();
+        digDugWalkingFast.play();
+      }
+  
+      if (digDugWalking.isPlaying()) {
+        digDugWalking.pause();
+        digDugWalking.rewind();
+      }
+    }
+  } else {
+    if (digDugWalking.isPlaying()) {
+      digDugWalking.pause();
+      digDugWalking.rewind();
+    }
+    if (digDugWalkingFast.isPlaying()) {
+      digDugWalkingFast.pause();
+      digDugWalkingFast.rewind();
+    }
+  }
+  
+  if(!monsterMoving.isPlaying()){
+    monsterMoving.rewind();
+  }
+  monsterMoving.play();
 }

@@ -1,7 +1,6 @@
 void morte(){
   nVite--;
   delay(1000);
-  resettaNemici();
   digDugWalking.pause();
   digDugWalkingFast.pause();
   deathDigDug.rewind();
@@ -15,6 +14,12 @@ void morte(){
     ultimaMossa=3;
     direzionePlayer=0;
     isPlayerSchiacciato = false;
+    fineAttaccoX=playerX;
+    fineAttaccoY=playerY;
+    attaccoAvanzando=false;
+    mostroGrabbato=false;
+    staAttaccando=false;
+    resettaNemici();
   }
   else{
     gameover.rewind();

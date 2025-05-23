@@ -14,7 +14,7 @@ void mobIA(){
   if(p.tempoMorte==-1 && !p.isPookaSchiacciato && !p.isGrabbed && p.gonfiore==0){  
     switch(p.stato){
       case 0:
-        if(clock%40==0){
+        if(clock%35==0){
           pookaGreedy(p);
           if(p.nMosse>50){
             p.nMosse=0;
@@ -23,7 +23,7 @@ void mobIA(){
         }
         break;
       case 1:
-        if(clock%40==0){
+        if(clock%35==0){
           pookaGreedy(p);
         }
         break;
@@ -31,7 +31,7 @@ void mobIA(){
         p.spettro=true;
         break;
       case 3:
-        if(clock%40==0){
+        if(clock%35==0){
           pookaGreedy(p);
           if(p.nMosse>30){
             p.nMosse=0;
@@ -49,9 +49,10 @@ void mobIA(){
     if(ultimoMostro){
       f.stato=3;
     }
-    else if(playerX >= f.x - 3 && playerX <= f.x + 3 && playerY >= f.y - 1 && playerY <= f.y + 1 && f.gonfiore<=0 && !f.spettro){
+    else if(playerX >= f.x - 3 && playerX <= f.x + 3 && playerY >= f.y - 1 && playerY <= f.y + 1 && f.gonfiore<=0 && !f.spettro && !f.isGrabbed){
       if(!f.isShooting && clock%200==0){
         f.isShooting=true;
+        f.clockAttacco=0;
         f.stato=4;
         if (playerX > f.x) {
           //spara a destra
@@ -78,41 +79,41 @@ void mobIA(){
     if(f.isShooting || f.statoAttacco>0){
       switch(f.statoAttacco){
         case -3:
-          if(clock%60==0){
+          if(f.clockAttacco%60==0){
             f.statoAttacco = -2;
             f.isShooting=false;
             f.stato=1;  
           }
         break;
         case -2:
-          if(clock%20==0){
+          if(f.clockAttacco%20==0){
             f.statoAttacco = f.isShooting ? -3 : -1;
           }
         break;
         case -1:
-          if(clock%20==0){
+          if(f.clockAttacco%20==0){
             f.statoAttacco = f.isShooting ? -2 : 0;
           }
         break;
         case 0:
-          if(clock%140==0){
+          if(f.clockAttacco%140==0){
             f.statoAttacco = f.direzioneAttacco ? -1 : 1;
           }
         break;
         case 1:
-          if(clock%20==0){
+          if(f.clockAttacco%20==0){
             f.statoAttacco = f.isShooting ? 2 : 0;
           }
         break;
         case 2:
-          if(clock%20==0){
+          if(f.clockAttacco%20==0){
             f.statoAttacco = f.isShooting ? 3 : 1;
             fygarFiring.rewind();
             fygarFiring.play();
           }
         break;
         case 3:
-          if(clock%60==0){
+          if(f.clockAttacco%60==0){
             f.statoAttacco = 2;
             f.isShooting=false;
             f.stato=1;
@@ -124,7 +125,7 @@ void mobIA(){
     if(f.tempoMorte==-1 && !f.isFygarSchiacciato && !f.isGrabbed && f.gonfiore==0){  
       switch(f.stato){
         case 0:
-          if(clock%40==0){
+          if(clock%35==0){
             fygarGreedy(f);
             if(f.nMosse>50){
               f.nMosse=0;
@@ -133,7 +134,7 @@ void mobIA(){
           }
           break;
         case 1:
-          if(clock%40==0){
+          if(clock%35==0){
             fygarGreedy(f);
           }
           break;
@@ -141,7 +142,7 @@ void mobIA(){
           f.spettro=true;
           break;
         case 3:
-          if(clock%40==0){
+          if(clock%35==0){
             fygarGreedy(f);
             if(f.nMosse>30){
               f.nMosse=0;

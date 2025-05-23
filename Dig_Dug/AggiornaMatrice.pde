@@ -232,12 +232,12 @@ void controlloEventi() {
       }
     }
     
-    if(p.x == fineAttaccoX && p.y == fineAttaccoY && !mostroGrabbato){
+    if(((p.x == fineAttaccoX && p.y == fineAttaccoY) || (p.x == precedenteAttaccoX && p.y == precedenteAttaccoY)) && !mostroGrabbato){
       mostroGrabbato=true;
       p.isGrabbed=true;
     }
     
-    if(p.isGrabbed&&clock%130==0){
+    if(p.isGrabbed&&clock%130==0&&p.gonfiore==0){
       mostroGrabbato=false;
       attaccoAvanzando=false;
       p.isGrabbed=false;
@@ -353,12 +353,12 @@ void controlloEventi() {
       f.spettro=false;
     }
     
-    if(f.x == fineAttaccoX && f.y == fineAttaccoY && !mostroGrabbato){
+    if(((f.x == fineAttaccoX && f.y == fineAttaccoY) || (f.x == precedenteAttaccoX && f.y == precedenteAttaccoY)) && !mostroGrabbato){
       mostroGrabbato=true;
       f.isGrabbed=true;
     }
     
-    if(f.isGrabbed&&clock%130==0){
+    if(f.isGrabbed&&clock%130==0&&f.gonfiore==0){
       mostroGrabbato=false;
       attaccoAvanzando=false;
       f.isGrabbed=false;
@@ -394,4 +394,7 @@ void controlloEventi() {
   }
   
   ultimoMostro = (pooka.size() + fygar.size() == 1);
+  if(ultimoMostro){
+    monsterRunningAway.play();
+  }
 }
