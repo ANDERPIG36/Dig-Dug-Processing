@@ -49,9 +49,19 @@ void resettaNemici() {
   for (Pooka p : pooka) {
     p.x = p.Xiniziale;
     p.y = p.Yiniziale;
+    p.subX = 1;
+    p.subY = 3;
+    p.stato = 0;
+    p.spettro = false;
+    p.nMosse = 0;
   }
   for (Fygar f : fygar) {
     f.x = f.Xiniziale;
     f.y = f.Yiniziale;
+    f.subX = 1;
+    f.subY = 3;
+    f.stato = 0;
+    f.spettro = false;
+    f.nMosse = 0;
   }
 }

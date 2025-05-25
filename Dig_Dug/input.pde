@@ -38,12 +38,12 @@ void keyPressed() {
       }
       break;
     case 'Z':
-      if(mostroGrabbato&&tempoPompa>20){
+      if(mostroGrabbato&&tempoPompa>20&&partita){
         pompaMostro();
         pompaggio=0;
         timerPompaggio=15;
       }
-      else if(!staAttaccando){
+      else if(!staAttaccando&&partita){
         staAttaccando=true;
         attaccoAvanzando=true;
         fineAttaccoX=playerX;

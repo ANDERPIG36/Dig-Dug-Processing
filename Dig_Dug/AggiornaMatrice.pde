@@ -261,6 +261,8 @@ void controlloEventi() {
     
     if(p.isGrabbed){
       p.spettro=false;
+      p.stato=0;
+      p.nMosse=0;
     }
     
     if(!mostroGrabbato){
@@ -381,6 +383,8 @@ void controlloEventi() {
     
     if(f.isGrabbed){
       f.spettro=false;
+      f.stato=0;
+      f.nMosse=0;
     }
     
     if(((f.x == fineAttaccoX && f.y == fineAttaccoY) || (f.x == precedenteAttaccoX && f.y == precedenteAttaccoY)) && !mostroGrabbato){

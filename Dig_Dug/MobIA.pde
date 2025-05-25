@@ -2,132 +2,79 @@ void mobIA(){
   convertiMatrice();
   
   for (Pooka p : pooka) {
+  
+    if(playerX >= p.x - 2 && playerX <= p.x + 2 && playerY >= p.y - 2 && playerY <= p.y + 2 && p.gonfiore<=0 && !p.spettro && !p.isGrabbed && !ultimoMostro && p.stato!=2){
+      p.stato=1;
+    }
+    else if(p.gonfiore<=0 && !p.spettro && !p.isGrabbed && !ultimoMostro && p.stato!=2){
+      p.stato=0;
+    }
     
-    if(ultimoMostro){
+    if(ultimoMostro && !p.spettro && p.stato!=2){
       p.stato=3;
     }
     
-    if(!p.spettro){
-      p.stato = (!ultimoMostro) ? 1 : 3;
-    }
-  
-  if(p.tempoMorte==-1 && !p.isPookaSchiacciato && !p.isGrabbed && p.gonfiore==0){  
-    switch(p.stato){
-      case 0:
-        if(clock%35==0){
-          pookaGreedy(p);
-          if(p.nMosse>50){
-            p.nMosse=0;
-            p.stato=2;
+    if(p.tempoMorte==-1 && !p.isPookaSchiacciato && !p.isGrabbed && p.gonfiore==0){  
+      switch(p.stato){
+        case 0:
+          if(clock%35==0){
+            pookaGreedy(p);
+            if(p.nMosse>30){
+              p.nMosse=0;
+              p.stato=2;
+            }
           }
-        }
-        break;
-      case 1:
-        if(clock%35==0){
-          pookaGreedy(p);
-        }
-        break;
-      case 2:
-        p.spettro=true;
-        break;
-      case 3:
-        if(clock%35==0){
-          pookaGreedy(p);
-          if(p.nMosse>30){
-            p.nMosse=0;
-            p.stato=2;
+          break;
+        case 1:
+          if(clock%35==0){
+            pookaGreedy(p);
           }
-        }
-        break;
+          break;
+        case 2:
+          p.spettro=true;
+          if(clock%25==0){
+            pookaMoveSpettro(p);
+          }
+          if(((mappa[p.y][p.x] >> 5) & 1) == 0 && ((mappa[p.y][p.x] >> 6) & 1) == 0 && ((mappa[p.y][p.x] >> 9) & 1) == 0 && ((mappa[p.y][p.x] >> 10) & 1) == 0 && p.nMosse>12){
+            p.spettro=false;
+            p.subX=1;
+            p.subY=3;
+            p.stato = 0;
+          }
+          break;
+        case 3:
+          if(clock%35==0){
+            pookaGreedy(p);
+          }
+          break;
+      }
     }
-  }
     
   }
   
   for (Fygar f : fygar) {
     
-    if(ultimoMostro){
+    if(playerX >= f.x - 2 && playerX <= f.x + 2 && playerY >= f.y - 2 && playerY <= f.y + 2 && f.gonfiore<=0 && !f.spettro && !f.isGrabbed && !ultimoMostro && f.stato!=4 && f.stato!=2){
+      f.stato=1;
+    }
+    else if(f.gonfiore<=0 && !f.spettro && !f.isGrabbed && !ultimoMostro && f.stato!=4 && f.stato!=2){
+      f.stato=0;
+    }
+    
+    if(ultimoMostro && !f.spettro && f.stato!=4 && f.stato!=2){
       f.stato=3;
     }
-    else if(playerX >= f.x - 3 && playerX <= f.x + 3 && playerY >= f.y - 1 && playerY <= f.y + 1 && f.gonfiore<=0 && !f.spettro && !f.isGrabbed){
-      if(!f.isShooting && clock%200==0){
-        f.isShooting=true;
-        f.clockAttacco=0;
-        f.stato=4;
-        if (playerX > f.x) {
-          //spara a destra
-          f.direzioneAttacco=false;
-        } 
-        else if (playerX < f.x) {
-          //spara a sinistra
-          f.direzioneAttacco=true;
-        } 
-        else {
-          if(ultimaMossa==3){
-            //spara a destra
-            f.direzioneAttacco=false;
-          }
-          else{
-            //spara a sinistra
-            f.direzioneAttacco=true;
-          }
-        }
-      }
-    }
     
+    controlloAttaccoFygar(f);
     
-    if(f.isShooting || f.statoAttacco>0){
-      switch(f.statoAttacco){
-        case -3:
-          if(f.clockAttacco%60==0){
-            f.statoAttacco = -2;
-            f.isShooting=false;
-            f.stato=1;  
-          }
-        break;
-        case -2:
-          if(f.clockAttacco%20==0){
-            f.statoAttacco = f.isShooting ? -3 : -1;
-          }
-        break;
-        case -1:
-          if(f.clockAttacco%20==0){
-            f.statoAttacco = f.isShooting ? -2 : 0;
-          }
-        break;
-        case 0:
-          if(f.clockAttacco%140==0){
-            f.statoAttacco = f.direzioneAttacco ? -1 : 1;
-          }
-        break;
-        case 1:
-          if(f.clockAttacco%20==0){
-            f.statoAttacco = f.isShooting ? 2 : 0;
-          }
-        break;
-        case 2:
-          if(f.clockAttacco%20==0){
-            f.statoAttacco = f.isShooting ? 3 : 1;
-            fygarFiring.rewind();
-            fygarFiring.play();
-          }
-        break;
-        case 3:
-          if(f.clockAttacco%60==0){
-            f.statoAttacco = 2;
-            f.isShooting=false;
-            f.stato=1;
-          }
-        break;
-      }
-    }
+    attaccoFygar(f);
     
     if(f.tempoMorte==-1 && !f.isFygarSchiacciato && !f.isGrabbed && f.gonfiore==0){  
       switch(f.stato){
         case 0:
           if(clock%35==0){
             fygarGreedy(f);
-            if(f.nMosse>50){
+            if(f.nMosse>30){
               f.nMosse=0;
               f.stato=2;
             }
@@ -140,14 +87,19 @@ void mobIA(){
           break;
         case 2:
           f.spettro=true;
+          if(clock%25==0){
+            fygarMoveSpettro(f);
+          }
+          if(((mappa[f.y][f.x] >> 5) & 1) == 0 && ((mappa[f.y][f.x] >> 6) & 1) == 0 && ((mappa[f.y][f.x] >> 9) & 1) == 0 && ((mappa[f.y][f.x] >> 10) & 1) == 0 && f.nMosse>12){
+            f.spettro=false;
+            f.subX=1;
+            f.subY=3;
+            f.stato = 0;
+          }
           break;
         case 3:
           if(clock%35==0){
             fygarGreedy(f);
-            if(f.nMosse>30){
-              f.nMosse=0;
-              f.stato=2;
-            }
           }
           break;
       }
@@ -511,6 +463,22 @@ void pookaGreedy(Pooka m) {
     
     m.nMosse++;
   }
+  if(m.subX>3){
+      m.subX-=3;
+      m.x++;
+    }
+  if(m.subX<0){
+      m.subX+=3;
+      m.x--;
+    }
+  if(m.subY>3){
+      m.subY-=3;
+      m.y++;
+    }
+  if(m.subY<0){
+    m.subY+=3;
+    m.y--;
+  }
 }
 
 void fygarGreedy(Fygar m) {
@@ -868,6 +836,164 @@ void fygarGreedy(Fygar m) {
     }
     
     m.nMosse++;
+  }
+  if(m.subX>3){
+      m.subX-=3;
+      m.x++;
+    }
+  if(m.subX<0){
+      m.subX+=3;
+      m.x--;
+    }
+  if(m.subY>3){
+      m.subY-=3;
+      m.y++;
+    }
+  if(m.subY<0){
+    m.subY+=3;
+    m.y--;
+  }
+}
+
+void pookaMoveSpettro(Pooka m){
+ if(playerX>m.x && m.x<11){
+    m.subX++;
+    if(m.subX>3){
+      m.subX-=3;
+      m.x++;
+    }
+  }
+  if(playerX<m.x && m.x>0){
+    m.subX--;
+    if(m.subX<0){
+      m.subX+=3;
+      m.x--;
+    }
+  }
+  if(playerY>m.y && m.y<11){
+    m.subY++;
+    if(m.subY>3){
+      m.subY-=3;
+      m.y++;
+    }
+  }
+  if(playerY<m.y && m.y>0){
+    m.subY--;
+    if(m.subY<0){
+      m.subY+=3;
+      m.y--;
+    }
+  }
+  
+  m.nMosse++;
+}
+
+void fygarMoveSpettro(Fygar m){
+  if(playerX>m.x && m.x<11){
+    m.subX++;
+    if(m.subX>3){
+      m.subX-=3;
+      m.x++;
+    }
+  }
+  if(playerX<m.x && m.x>0){
+    m.subX--;
+    if(m.subX<0){
+      m.subX+=3;
+      m.x--;
+    }
+  }
+  if(playerY>m.y && m.y<12){
+    m.subY++;
+    if(m.subY>3){
+      m.subY-=3;
+      m.y++;
+    }
+  }
+  if(playerY<m.y && m.y>0){
+    m.subY--;
+    if(m.subY<0){
+      m.subY+=3;
+      m.y--;
+    }
+  }
+  
+  m.nMosse++;
+}
+
+void controlloAttaccoFygar(Fygar f){
+  if(playerX >= f.x - 3 && playerX <= f.x + 3 && playerY >= f.y - 1 && playerY <= f.y + 1 && f.gonfiore<=0 && !f.spettro && !f.isGrabbed && !ultimoMostro){
+    if(!f.isShooting && clock%200==0){
+      f.isShooting=true;
+      f.clockAttacco=0;
+      f.stato=4;
+      if (playerX > f.x) {
+        //spara a destra
+        f.direzioneAttacco=false;
+      } 
+      else if (playerX < f.x) {
+        //spara a sinistra
+        f.direzioneAttacco=true;
+      } 
+      else {
+        if(ultimaMossa==3){
+          //spara a destra
+          f.direzioneAttacco=false;
+        }
+        else{
+          //spara a sinistra
+          f.direzioneAttacco=true;
+        }
+      }
+    }
+  }
+}
+
+void attaccoFygar(Fygar f){
+  if(f.isShooting || f.statoAttacco>0){
+    switch(f.statoAttacco){
+      case -3:
+        if(f.clockAttacco%60==0){
+          f.statoAttacco = -2;
+          f.isShooting=false;
+          f.stato=1;  
+        }
+      break;
+      case -2:
+        if(f.clockAttacco%20==0){
+          f.statoAttacco = f.isShooting ? -3 : -1;
+        }
+      break;
+      case -1:
+        if(f.clockAttacco%20==0){
+          f.statoAttacco = f.isShooting ? -2 : 0;
+        }
+      break;
+      case 0:
+        if(f.clockAttacco%140==0){
+          f.statoAttacco = f.direzioneAttacco ? -1 : 1;
+        }
+      break;
+      case 1:
+        if(f.clockAttacco%20==0){
+          f.statoAttacco = f.isShooting ? 2 : 0;
+        }
+      break;
+      case 2:
+        if(f.clockAttacco%20==0){
+          f.statoAttacco = f.isShooting ? 3 : 1;
+          fygarFiring.rewind();
+          fygarFiring.play();
+        }
+      break;
+      case 3:
+        if(f.clockAttacco%60==0){
+          f.statoAttacco = 2;
+          f.isShooting=false;
+          f.stato=1;
+        }
+      break;
+    }
   }
 }
 
