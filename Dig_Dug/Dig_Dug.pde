@@ -32,7 +32,6 @@ void update() {
     controlloNextLevel();
     gestioneAttacco();
     mobIA();
-    movimentoMostriDraw();
     suoni();
 
   }
@@ -105,8 +104,4 @@ void suoni(){
     monsterMoving.rewind();
   }
   monsterMoving.play();
-}
-
-void movimentoMostriDraw(){
-
 }
