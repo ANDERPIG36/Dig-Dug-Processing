@@ -33,11 +33,11 @@ Hai **due armi principali** a disposizione:
 
 1. **Pompa ad aria**  
    - Premi `Z` vicino a un nemico per iniziare a gonfiarlo.  
-   - Tieni premuto `Z` finché non esplode. 💥
+   - Premi nuovamente `Z` finché non esplode. 💥
 
 2. **Rocce**  
    - Scava sotto una roccia e falle cadere al momento giusto.  
-   - Se colpisci più nemici con una roccia ottieni **punti bonus**! 🪨
+   - Se colpisci i nemici con una roccia ottieni **punti bonus**! 🪨
 
 ---
 
@@ -68,7 +68,7 @@ Hai **due armi principali** a disposizione:
 - 🧠 **Pianifica il percorso**: evita di rimanere intrappolato nei tuoi stessi tunnel.
 - ⏱️ **Tempismo**: aspetta il momento giusto per far cadere una roccia.
 - 🔥 **Fygar è più pericoloso di Pooka**: affrontalo con cautela, lateralmente è letale.
-- 👻 **Attenzione!** I nemici possono **attraversare i muri** se non vedono altre vie.
+- 👻 **Attenzione!** I nemici possono **attraversare i muri** per acciuffarti.
 
 ---
 
@@ -76,27 +76,17 @@ Hai **due armi principali** a disposizione:
 
 | Azione                          | Punti    |
 |--------------------------------|----------|
-| Gonfiare e far esplodere un nemico | 200–400 |
-| Schiacciare un nemico con una roccia | 1000+  |
-| Schiacciare più nemici insieme     | Moltiplicatore x2, x3, ... |
-
----
-
-## 🧩 Modalità e Livelli
-
-- I livelli diventano **più difficili** man mano che avanzi:
-  - Più nemici
-  - Più aggressivi
-  - Meno tempo di reazione
-- Aumenta la **velocità** dei nemici e la frequenza del fuoco di Fygar.
+| Gonfiare e far esplodere un nemico | 400–600 |
+| Schiacciare un nemico con una roccia | 800  |
+| Scavare le caselle     | 10 per casella |
+| Raccogliere un frutto | 100-1000 |
 
 ---
 
 ## 🧑‍💻 Extra: Curiosità
 
 - Dig Dug è un classico arcade rilasciato da Namco nel 1982.
-- È famoso per la **meccanica unica di gonfiaggio** dei nemici.
-- È stato ispirazione per altri giochi "underground" (es. Mr. Driller).
+- È famoso per la **meccanica unica di scavo** della mappa.
 
 ---
 
