@@ -431,4 +431,9 @@ void controlloEventi() {
   if(ultimoMostro){
     monsterRunningAway.play();
   }
+  
+  if(!staAttaccando){
+    fineAttaccoX=playerX;
+    fineAttaccoY=playerY;
+  }
 }

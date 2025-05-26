@@ -2,19 +2,23 @@ void keyPressed() {
   switch (keyCode) {
     case UP:
       comandoMossa=1;
-      if(ultimaMossa==3)
+      if(ultimaMossa==3){
         direzionePlayerSalita=1;
-      else if(ultimaMossa==4)
+      }
+      else if(ultimaMossa==4){
         direzionePlayerSalita=2;
+      }
       staAttaccando=false;
       mostroGrabbato=false;
       break;
     case DOWN:
       comandoMossa=2;
-      if(ultimaMossa==3)
+      if(ultimaMossa==3){
         direzionePlayerSalita=1;
-      else if(ultimaMossa==4)
-        direzionePlayerSalita=2; 
+      }
+      else if(ultimaMossa==4){
+        direzionePlayerSalita=2;
+      }
       staAttaccando=false;
       mostroGrabbato=false;
       break;
