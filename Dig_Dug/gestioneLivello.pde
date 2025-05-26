@@ -54,6 +54,7 @@ void resettaNemici() {
     p.stato = 0;
     p.spettro = false;
     p.nMosse = 0;
+    p.gonfiore=0;
   }
   for (Fygar f : fygar) {
     f.x = f.Xiniziale;
@@ -63,5 +64,6 @@ void resettaNemici() {
     f.stato = 0;
     f.spettro = false;
     f.nMosse = 0;
+    f.gonfiore = 0;
   }
 }

@@ -89,6 +89,7 @@ class Pooka {
   boolean spettro;
   boolean isPookaSchiacciato;
   boolean isGrabbed;
+  boolean passatoDalVia;
   int stato;
   int tempoMorte;
   
@@ -106,6 +107,7 @@ class Pooka {
     this.spettro = false;
     this.isPookaSchiacciato = false;
     this.isGrabbed = false;
+    this.passatoDalVia = false;
     this.stato = 0;
     this.tempoMorte=-1;
   }
@@ -125,6 +127,7 @@ class Fygar{
   boolean isFygarSchiacciato;
   boolean isGrabbed;
   boolean direzioneAttacco;
+  boolean passatoDalVia;
   int stato;
   int tempoMorte;
   int statoAttacco;
@@ -145,6 +148,7 @@ class Fygar{
     this.isShooting = false;
     this.isFygarSchiacciato = false;
     this.isGrabbed = false;
+    this.passatoDalVia = false;
     this.stato = 0;
     this.tempoMorte=-1;
     this.statoAttacco=0;
