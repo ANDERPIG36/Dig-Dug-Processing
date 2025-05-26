@@ -42,6 +42,7 @@ void keyPressed() {
       }
       break;
     case 'Z':
+      comandoMossa=0;
       if(mostroGrabbato&&tempoPompa>20&&partita){
         pompaMostro();
         pompaggio=0;

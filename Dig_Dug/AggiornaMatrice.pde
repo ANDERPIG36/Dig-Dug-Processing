@@ -240,6 +240,7 @@ void controlloEventi() {
       if(p.gonfiore==3){
         score+=400;
         mostroGrabbato=false;
+        staAttaccando=false;
         p.tempoMorte=30;
         break;
       }
@@ -373,6 +374,7 @@ void controlloEventi() {
       if(f.gonfiore==3){
         score+=600;
         mostroGrabbato=false;
+        staAttaccando=false;
         f.tempoMorte=30;
         break;
       }
@@ -435,5 +437,7 @@ void controlloEventi() {
   if(!staAttaccando){
     fineAttaccoX=playerX;
     fineAttaccoY=playerY;
+    precedenteAttaccoX=playerX;
+    precedenteAttaccoY=playerY;
   }
 }

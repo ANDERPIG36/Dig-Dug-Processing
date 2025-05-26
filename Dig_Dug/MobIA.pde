@@ -886,7 +886,7 @@ void pookaMoveSpettro(Pooka m){
       m.x--;
     }
   }
-  if(playerY>m.y && m.y<11){
+  if(playerY>m.y && m.y<12){
     m.subY++;
     if(m.subY>3){
       m.subY-=3;
