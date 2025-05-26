@@ -17,16 +17,16 @@ void mobIA(){
     if(p.tempoMorte==-1 && !p.isPookaSchiacciato && !p.isGrabbed && p.gonfiore==0){  
       switch(p.stato){
         case 0:
-          if(clock%35==0){
+          if(clock%10==0){
             pookaGreedy(p);
-            if(p.nMosse>30){
+            if(p.nMosse>60){
               p.nMosse=0;
               p.stato=2;
             }
           }
           break;
         case 1:
-          if(clock%35==0){
+          if(clock%10==0){
             pookaGreedy(p);
           }
           break;
@@ -40,10 +40,11 @@ void mobIA(){
             p.subX=1;
             p.subY=3;
             p.stato = 0;
+            p.nMosse = 0;
           }
           break;
         case 3:
-          if(clock%35==0){
+          if(clock%10==0){
             pookaGreedy(p);
           }
           break;
@@ -72,16 +73,16 @@ void mobIA(){
     if(f.tempoMorte==-1 && !f.isFygarSchiacciato && !f.isGrabbed && f.gonfiore==0){  
       switch(f.stato){
         case 0:
-          if(clock%35==0){
+          if(clock%10==0){
             fygarGreedy(f);
-            if(f.nMosse>30){
+            if(f.nMosse>60){
               f.nMosse=0;
               f.stato=2;
             }
           }
           break;
         case 1:
-          if(clock%35==0){
+          if(clock%10==0){
             fygarGreedy(f);
           }
           break;
@@ -95,10 +96,11 @@ void mobIA(){
             f.subX=1;
             f.subY=3;
             f.stato = 0;
+            f.nMosse = 0;
           }
           break;
         case 3:
-          if(clock%35==0){
+          if(clock%10==0){
             fygarGreedy(f);
           }
           break;
@@ -114,34 +116,34 @@ void pookaGreedy(Pooka m) {
         if (playerX < m.x) {
             
           if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
-            m.x--;
+            m.subX--;
             m.ultimaMossa=3;
           } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -152,34 +154,34 @@ void pookaGreedy(Pooka m) {
         else if (playerX == m.x) {
         
           if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
-            m.x--;
+            m.subX--;
             m.ultimaMossa=3;
           } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -190,34 +192,34 @@ void pookaGreedy(Pooka m) {
         else { // playerX > m.x
             
           if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
-            m.x--;
+            m.subX--;
             m.ultimaMossa=3;
           } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -231,34 +233,34 @@ void pookaGreedy(Pooka m) {
         if (playerX < m.x) {
             
           if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
-            m.x--;
+            m.subX--;
             m.ultimaMossa=3;
           } else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
           } else if((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3)  {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -269,34 +271,34 @@ void pookaGreedy(Pooka m) {
         else if (playerX > m.x) {
             
           if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
-          } else if((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=3)  {
-            m.x--;
-            m.ultimaMossa=2;
+          } else if((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2)  {
+            m.subX--;
+            m.ultimaMossa=3;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -309,34 +311,34 @@ void pookaGreedy(Pooka m) {
         if (playerX < m.x) {
             
           if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
           } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
-            m.x--;
+            m.subX--;
             m.ultimaMossa=3;
           } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -347,34 +349,34 @@ void pookaGreedy(Pooka m) {
         else if (playerX == m.x) {
             
           if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
           } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
-            m.x--;
+            m.subX--;
             m.ultimaMossa=3;
           } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -385,34 +387,34 @@ void pookaGreedy(Pooka m) {
         else { // playerX > m.x
             
             if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
           } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
-            m.x--;
+            m.subX--;
             m.ultimaMossa=3;
           } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -427,34 +429,34 @@ void pookaGreedy(Pooka m) {
   else{
     
     if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa != 1) {
-      m.y--;
+      m.subY--;
       m.ultimaMossa=0;
     } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa != 2) {
-      m.x--;
+      m.subX--;
       m.ultimaMossa=3;
     } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa != 3) {
-      m.x++;
+      m.subX++;
       m.ultimaMossa=2;
     } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa != 0)  {
-      m.y++;
+      m.subY++;
       m.ultimaMossa=1;
     } else {
     
       switch(m.ultimaMossa){
         case 0:
-          m.y++;
+          m.subY++;
           m.ultimaMossa=1;
           break;
         case 1:
-          m.y--;
+          m.subY--;
           m.ultimaMossa=0;
           break;
         case 2:
-          m.x--;
+          m.subX--;
           m.ultimaMossa=3;
           break;
         case 3:
-          m.x++;
+          m.subX++;
           m.ultimaMossa=2;
           break;
       }
@@ -478,6 +480,13 @@ void pookaGreedy(Pooka m) {
   if(m.subY<0){
     m.subY+=3;
     m.y--;
+  }
+  
+  if(m.ultimaMossa!=0 && m.ultimaMossa!=1){
+    m.subY=3;
+  }
+  if(m.ultimaMossa!=2 && m.ultimaMossa!=3){
+    m.subX=1;
   }
 }
 
@@ -488,34 +497,34 @@ void fygarGreedy(Fygar m) {
         if (playerX < m.x) {
             
           if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
-            m.x--;
+            m.subX--;
             m.ultimaMossa=3;
           } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -526,34 +535,34 @@ void fygarGreedy(Fygar m) {
         else if (playerX == m.x) {
         
           if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
-            m.x--;
+            m.subX--;
             m.ultimaMossa=3;
           } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -564,34 +573,34 @@ void fygarGreedy(Fygar m) {
         else { // playerX > m.x
             
           if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
-            m.x--;
+            m.subX--;
             m.ultimaMossa=3;
           } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -605,34 +614,34 @@ void fygarGreedy(Fygar m) {
         if (playerX < m.x) {
             
           if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
-            m.x--;
+            m.subX--;
             m.ultimaMossa=3;
           } else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
           } else if((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3)  {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -643,34 +652,34 @@ void fygarGreedy(Fygar m) {
         else if (playerX > m.x) {
             
           if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
-          } else if((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=3)  {
-            m.x--;
-            m.ultimaMossa=2;
+          } else if((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2)  {
+            m.subX--;
+            m.ultimaMossa=3;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -683,34 +692,34 @@ void fygarGreedy(Fygar m) {
         if (playerX < m.x) {
             
           if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
           } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
-            m.x--;
+            m.subX--;
             m.ultimaMossa=3;
           } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -721,34 +730,34 @@ void fygarGreedy(Fygar m) {
         else if (playerX == m.x) {
             
           if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
           } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
-            m.x--;
+            m.subX--;
             m.ultimaMossa=3;
           } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -759,34 +768,34 @@ void fygarGreedy(Fygar m) {
         else { // playerX > m.x
             
             if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
-            m.y++;
+            m.subY++;
             m.ultimaMossa=1;
           } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
-            m.x++;
+            m.subX++;
             m.ultimaMossa=2;
           } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
-            m.x--;
+            m.subX--;
             m.ultimaMossa=3;
           } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
-            m.y--;
+            m.subY--;
             m.ultimaMossa=0;
           } else {
           
             switch(m.ultimaMossa){
               case 0:
-                m.y++;
+                m.subY++;
                 m.ultimaMossa=1;
                 break;
               case 1:
-                m.y--;
+                m.subY--;
                 m.ultimaMossa=0;
                 break;
               case 2:
-                m.x--;
+                m.subX--;
                 m.ultimaMossa=3;
                 break;
               case 3:
-                m.x++;
+                m.subX++;
                 m.ultimaMossa=2;
                 break;
             }
@@ -801,34 +810,34 @@ void fygarGreedy(Fygar m) {
   else{
     
     if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa != 1) {
-      m.y--;
+      m.subY--;
       m.ultimaMossa=0;
     } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa != 2) {
-      m.x--;
+      m.subX--;
       m.ultimaMossa=3;
     } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa != 3) {
-      m.x++;
+      m.subX++;
       m.ultimaMossa=2;
     } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa != 0)  {
-      m.y++;
+      m.subY++;
       m.ultimaMossa=1;
     } else {
     
       switch(m.ultimaMossa){
         case 0:
-          m.y++;
+          m.subY++;
           m.ultimaMossa=1;
           break;
         case 1:
-          m.y--;
+          m.subY--;
           m.ultimaMossa=0;
           break;
         case 2:
-          m.x--;
+          m.subX--;
           m.ultimaMossa=3;
           break;
         case 3:
-          m.x++;
+          m.subX++;
           m.ultimaMossa=2;
           break;
       }
@@ -852,6 +861,13 @@ void fygarGreedy(Fygar m) {
   if(m.subY<0){
     m.subY+=3;
     m.y--;
+  }
+  
+  if(m.ultimaMossa!=0 && m.ultimaMossa!=1){
+    m.subY=3;
+  }
+  if(m.ultimaMossa!=2 && m.ultimaMossa!=3){
+    m.subX=1;
   }
 }
 
