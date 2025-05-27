@@ -919,39 +919,104 @@ void attaccoFygar(Fygar f){
       break;
       case -2:
         if(f.clockAttacco%20==0){
-          if((mappa[f.yAttacco][f.xAttacco] & ((1 << 5) | (1 << 6) | (1 << 9) | (1 << 10))) == 0) {
-            f.statoAttacco = f.isShooting ? -3 : -1;
+          if(f.x>3){
+            if((mappa[f.y][f.x-3] & ((1 << 5) | (1 << 6) | (1 << 9) | (1 << 10))) == 0) {
+              f.statoAttacco = f.isShooting ? -3 : -1;
+            }
+            else{
+              f.statoAttacco = -1;
+              f.isShooting=false;
+              f.stato=1;
+            }
+          }
+          else{
+            f.statoAttacco = -1;
+            f.isShooting=false;
+            f.stato=1;
           }
         }
       break;
       case -1:
         if(f.clockAttacco%20==0){
-          if((mappa[f.yAttacco][f.xAttacco] & ((1 << 5) | (1 << 6) | (1 << 9) | (1 << 10))) == 0) {
-            f.statoAttacco = f.isShooting ? -2 : 0;
-          }  
+          if(f.x>2){
+            if((mappa[f.y][f.x-2] & ((1 << 5) | (1 << 6) | (1 << 9) | (1 << 10))) == 0) {
+              f.statoAttacco = f.isShooting ? -2 : 0;
+            }
+            else{
+              f.statoAttacco = 0;
+              f.isShooting=false;
+              f.stato=1;
+            }
+          }
+          else{
+            f.statoAttacco = 0;
+            f.isShooting=false;
+            f.stato=1;
+          }
         }
       break;
       case 0:
         if(f.clockAttacco%140==0){
-          if((mappa[f.yAttacco][f.xAttacco] & ((1 << 5) | (1 << 6) | (1 << 9) | (1 << 10))) == 0) {
-            f.statoAttacco = f.direzioneAttacco ? -1 : 1;
-            fygarFiring.rewind();
-            fygarFiring.play();
+          if(f.direzioneAttacco){  
+            if((mappa[f.y][f.x-1] & ((1 << 5) | (1 << 6) | (1 << 9) | (1 << 10))) == 0) {
+              f.statoAttacco = -1;
+              fygarFiring.rewind();
+              fygarFiring.play();
+            }
+            else{
+              f.isShooting=false;
+              f.stato=1;
+            }
+          }
+          else{
+            if((mappa[f.y][f.x+1] & ((1 << 5) | (1 << 6) | (1 << 9) | (1 << 10))) == 0) {
+              f.statoAttacco = 1;
+              fygarFiring.rewind();
+              fygarFiring.play();
+            }
+            else{
+              f.isShooting=false;
+              f.stato=1;
+            }
           }
         }
       break;
       case 1:
         if(f.clockAttacco%20==0){
-          if((mappa[f.yAttacco][f.xAttacco] & ((1 << 5) | (1 << 6) | (1 << 9) | (1 << 10))) == 0) {
-            f.statoAttacco = f.isShooting ? 2 : 0;
-          }  
+          if(f.x<10){
+            if((mappa[f.y][f.x+2] & ((1 << 5) | (1 << 6) | (1 << 9) | (1 << 10))) == 0) {
+              f.statoAttacco = f.isShooting ? 2 : 0;
+            }
+            else{
+              f.statoAttacco = 0;
+              f.isShooting=false;
+              f.stato=1;
+            }
+          }
+          else{
+            f.statoAttacco = 0;
+            f.isShooting=false;
+            f.stato=1;
+          }
         }
       break;
       case 2:
         if(f.clockAttacco%20==0){
-            if((mappa[f.yAttacco][f.xAttacco] & ((1 << 5) | (1 << 6) | (1 << 9) | (1 << 10))) == 0) {
+          if(f.x<9){  
+            if((mappa[f.y][f.x+3] & ((1 << 5) | (1 << 6) | (1 << 9) | (1 << 10))) == 0) {
               f.statoAttacco = f.isShooting ? 3 : 1;
-            }  
+            }
+            else{
+              f.statoAttacco = 1;
+              f.isShooting=false;
+              f.stato=1;
+            }
+          }
+          else{
+            f.statoAttacco = 0;
+            f.isShooting=false;
+            f.stato=1;
+          }
         }
       break;
       case 3:

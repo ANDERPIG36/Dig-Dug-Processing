@@ -65,5 +65,8 @@ void resettaNemici() {
     f.spettro = false;
     f.nMosse = 0;
     f.gonfiore = 0;
+    f.statoAttacco = 0;
+    f.isShooting=false;
+    f.stato=1;
   }
 }
