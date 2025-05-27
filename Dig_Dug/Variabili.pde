@@ -122,6 +122,7 @@ class Fygar{
   int gonfiore;
   int ultimaMossa;
   int nMosse;
+  int xAttacco, yAttacco;
   boolean spettro;
   boolean isShooting;
   boolean isFygarSchiacciato;
@@ -144,6 +145,8 @@ class Fygar{
     this.drawY = y*64;
     this.gonfiore = 0;
     this.nMosse=0;
+    this.xAttacco = x;
+    this.yAttacco = y;
     this.spettro = false;
     this.isShooting = false;
     this.isFygarSchiacciato = false;

@@ -226,7 +226,7 @@ void controlloEventi() {
         }
         pooka.remove(p);
       }
-     break;
+      break;
     }
     
     if (p.x == playerX && p.y == playerY && p.gonfiore==0 && !p.spettro) {
@@ -237,7 +237,7 @@ void controlloEventi() {
     }
     
     if(p.gonfiore>0){
-      if(p.gonfiore==3){
+      if(p.gonfiore>=3){
         score+=400;
         mostroGrabbato=false;
         staAttaccando=false;
@@ -311,13 +311,9 @@ void controlloEventi() {
     }
     
     if(f.isShooting&&f.statoAttacco!=0){
-      int xPos = (f.x * 64 + f.subX * 16) + 16;
-      int yPos = (f.y * 64 + f.subY * 16) + 48;
-      int playerPixelX = (playerX * 64 + playerSubX * 16) + 16;
-      int playerPixelY = (playerY * 64 + playerSubY * 16) + 80;
       switch (f.statoAttacco) {
         case -3:
-            if (playerPixelX<=xPos&&playerPixelX>=(xPos-240)&&playerPixelY<(yPos+56)&&playerPixelY>(yPos-56)){
+            if ((playerX>=f.x-3)&&(playerX<=f.x) && playerY==f.y){
               monsterTouchingDigDug.rewind();
               monsterTouchingDigDug.play();
               morte();
@@ -325,7 +321,7 @@ void controlloEventi() {
             break;
     
         case -2:
-            if (playerPixelX<=xPos&&playerPixelX>=(xPos-186)&&playerPixelY<(yPos+56)&&playerPixelY>(yPos-56)){
+            if ((playerX>=f.x-2)&&(playerX<=f.x) && playerY==f.y){
               monsterTouchingDigDug.rewind();
               monsterTouchingDigDug.play();
               morte();
@@ -333,7 +329,7 @@ void controlloEventi() {
             break;
     
         case -1:
-            if (playerPixelX<=xPos&&playerPixelX>=(xPos-128)&&playerPixelY<(yPos+56)&&playerPixelY>(yPos-56)){
+            if ((playerX>=f.x-1)&&(playerX<=f.x) && playerY==f.y){
               monsterTouchingDigDug.rewind();
               monsterTouchingDigDug.play();
               morte();
@@ -341,7 +337,7 @@ void controlloEventi() {
             break;
     
         case 1:
-            if (playerPixelX>=xPos&&playerPixelX<=(xPos+128)&&playerPixelY<(yPos+56)&&playerPixelY>(yPos-56)){
+            if ((playerX<=f.x+1)&&(playerX>=f.x) && playerY==f.y){
               monsterTouchingDigDug.rewind();
               monsterTouchingDigDug.play();
               morte();
@@ -349,7 +345,7 @@ void controlloEventi() {
             break;
     
         case 2:
-            if (playerPixelX>=xPos&&playerPixelX<=(xPos+186)&&playerPixelY<(yPos+56)&&playerPixelY>(yPos-56)){
+            if ((playerX<=f.x+2)&&(playerX>=f.x) && playerY==f.y){
               monsterTouchingDigDug.rewind();
               monsterTouchingDigDug.play();
               morte();
@@ -357,16 +353,13 @@ void controlloEventi() {
             break;
     
         case 3:
-            if (playerPixelX>=xPos&&playerPixelX<=(xPos+240)&&playerPixelY<(yPos+64)&&playerPixelY>(yPos-56)){
+            if ((playerX<=f.x+3)&&(playerX>=f.x) && playerY==f.y){
               monsterTouchingDigDug.rewind();
               monsterTouchingDigDug.play();
               morte();
             }
             break;
       }
-
-
-      break;
     }
     
     if(f.gonfiore>0){
