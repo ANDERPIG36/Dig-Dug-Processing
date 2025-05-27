@@ -126,20 +126,21 @@ void pookaGreedy(Pooka m) {
   if (ricercaY < m.y) {           // Player sopra
       if (ricercaX < m.x) {
           
-        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1) {
           m.subY--;
           m.ultimaMossa=0;
-        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2  && m.ultimoArrivo!=2) {
           m.subX--;
           m.ultimaMossa=3;
-        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3  && m.ultimoArrivo!=3) {
           m.subX++;
           m.ultimaMossa=2;
-        } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
+        } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=3)  {
           m.subY++;
           m.ultimaMossa=1;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -164,20 +165,21 @@ void pookaGreedy(Pooka m) {
       }
       else if (ricercaX == m.x) {
       
-        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1) {
           m.subY--;
           m.ultimaMossa=0;
-        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2 && m.ultimoArrivo!=2) {
           m.subX--;
           m.ultimaMossa=3;
-        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3 && m.ultimoArrivo!=3) {
           m.subX++;
           m.ultimaMossa=2;
-        } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
+        } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=4)  {
           m.subY++;
           m.ultimaMossa=1;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -202,20 +204,21 @@ void pookaGreedy(Pooka m) {
       }
       else { // playerX > m.x
           
-        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1) {
           m.subY--;
           m.ultimaMossa=0;
-        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3 && m.ultimoArrivo!=3) {
           m.subX++;
           m.ultimaMossa=2;
-        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2 && m.ultimoArrivo!=2) {
           m.subX--;
           m.ultimaMossa=3;
-        } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
+        } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=0)  {
           m.subY++;
           m.ultimaMossa=1;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -243,20 +246,21 @@ void pookaGreedy(Pooka m) {
   else if (ricercaY == m.y) {   // stessa riga
       if (ricercaX < m.x) {
           
-        if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+        if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2 && m.ultimoArrivo!=2) {
           m.subX--;
           m.ultimaMossa=3;
-        } else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+        } else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1) {
           m.subY--;
           m.ultimaMossa=0;
-        } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+        } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=0) {
           m.subY++;
           m.ultimaMossa=1;
-        } else if((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3)  {
+        } else if((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3 && m.ultimoArrivo!=3)  {
           m.subX++;
           m.ultimaMossa=2;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -281,20 +285,21 @@ void pookaGreedy(Pooka m) {
       }
       else if (ricercaX > m.x) {
           
-        if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+        if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3 && m.ultimoArrivo!=3) {
           m.subX++;
           m.ultimaMossa=2;
-        } else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+        } else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1) {
           m.subY--;
           m.ultimaMossa=0;
-        } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+        } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=0) {
           m.subY++;
           m.ultimaMossa=1;
-        } else if((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2)  {
+        } else if((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2 && m.ultimoArrivo!=2)  {
           m.subX--;
           m.ultimaMossa=3;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -321,20 +326,21 @@ void pookaGreedy(Pooka m) {
   else {                       // playerY > m.y  player sotto
       if (ricercaX < m.x) {
           
-        if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+        if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=0) {
           m.subY++;
           m.ultimaMossa=1;
-        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2 && m.ultimoArrivo!=2) {
           m.subX--;
           m.ultimaMossa=3;
-        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3 && m.ultimoArrivo!=3) {
           m.subX++;
           m.ultimaMossa=2;
-        } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
+        } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1)  {
           m.subY--;
           m.ultimaMossa=0;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -359,20 +365,21 @@ void pookaGreedy(Pooka m) {
       }
       else if (ricercaX == m.x) {
           
-        if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+        if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=0) {
           m.subY++;
           m.ultimaMossa=1;
-        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2 && m.ultimoArrivo!=2) {
           m.subX--;
           m.ultimaMossa=3;
-        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3 && m.ultimoArrivo!=3) {
           m.subX++;
           m.ultimaMossa=2;
-        } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
+        } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1)  {
           m.subY--;
           m.ultimaMossa=0;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -397,20 +404,21 @@ void pookaGreedy(Pooka m) {
       }
       else { // playerX > m.x
           
-          if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+          if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=0) {
           m.subY++;
           m.ultimaMossa=1;
-        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3 && m.ultimoArrivo!=3) {
           m.subX++;
           m.ultimaMossa=2;
-        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2 && m.ultimoArrivo!=2) {
           m.subX--;
           m.ultimaMossa=3;
-        } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
+        } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1)  {
           m.subY--;
           m.ultimaMossa=0;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -438,26 +446,31 @@ void pookaGreedy(Pooka m) {
   m.nMosse++;
   
   if(m.subX>3){
-      m.subX-=3;
-      m.x++;
-    }
+    m.subX-=3;
+    m.x++;
+    m.ultimoArrivo=2;
+  }
   if(m.subX<0){
-      m.subX+=3;
-      m.x--;
-    }
+    m.subX+=3;
+    m.x--;
+    m.ultimoArrivo=3;
+  }
   if(m.subY>3){
-      m.subY-=3;
-      m.y++;
-    }
+    m.subY-=3;
+    m.y++;
+    m.ultimoArrivo=1;
+  }
   if(m.subY<0){
     m.subY+=3;
     m.y--;
+    m.ultimoArrivo=0;
   }
   
-  if(m.ultimaMossa!=0 && m.ultimaMossa!=1){
+  //allineamento ai tunnel
+  if(m.ultimaMossa==2 || m.ultimaMossa==3){
     m.subY=3;
   }
-  if(m.ultimaMossa!=2 && m.ultimaMossa!=3){
+  if(m.ultimaMossa==0 || m.ultimaMossa==1){
     m.subX=1;
   }
   
@@ -473,20 +486,21 @@ void fygarGreedy(Fygar m) {
   if (ricercaY < m.y) {           // Player sopra
       if (ricercaX < m.x) {
           
-        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1) {
           m.subY--;
           m.ultimaMossa=0;
-        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2  && m.ultimoArrivo!=2) {
           m.subX--;
           m.ultimaMossa=3;
-        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3  && m.ultimoArrivo!=3) {
           m.subX++;
           m.ultimaMossa=2;
-        } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
+        } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=3)  {
           m.subY++;
           m.ultimaMossa=1;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -511,20 +525,21 @@ void fygarGreedy(Fygar m) {
       }
       else if (ricercaX == m.x) {
       
-        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1) {
           m.subY--;
           m.ultimaMossa=0;
-        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2 && m.ultimoArrivo!=2) {
           m.subX--;
           m.ultimaMossa=3;
-        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3 && m.ultimoArrivo!=3) {
           m.subX++;
           m.ultimaMossa=2;
-        } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
+        } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=4)  {
           m.subY++;
           m.ultimaMossa=1;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -549,20 +564,21 @@ void fygarGreedy(Fygar m) {
       }
       else { // playerX > m.x
           
-        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+        if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1) {
           m.subY--;
           m.ultimaMossa=0;
-        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3 && m.ultimoArrivo!=3) {
           m.subX++;
           m.ultimaMossa=2;
-        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2 && m.ultimoArrivo!=2) {
           m.subX--;
           m.ultimaMossa=3;
-        } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0)  {
+        } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=0)  {
           m.subY++;
           m.ultimaMossa=1;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -590,20 +606,21 @@ void fygarGreedy(Fygar m) {
   else if (ricercaY == m.y) {   // stessa riga
       if (ricercaX < m.x) {
           
-        if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+        if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2 && m.ultimoArrivo!=2) {
           m.subX--;
           m.ultimaMossa=3;
-        } else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+        } else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1) {
           m.subY--;
           m.ultimaMossa=0;
-        } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+        } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=0) {
           m.subY++;
           m.ultimaMossa=1;
-        } else if((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3)  {
+        } else if((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3 && m.ultimoArrivo!=3)  {
           m.subX++;
           m.ultimaMossa=2;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -628,20 +645,21 @@ void fygarGreedy(Fygar m) {
       }
       else if (ricercaX > m.x) {
           
-        if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+        if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3 && m.ultimoArrivo!=3) {
           m.subX++;
           m.ultimaMossa=2;
-        } else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1) {
+        } else if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1) {
           m.subY--;
           m.ultimaMossa=0;
-        } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+        } else if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=0) {
           m.subY++;
           m.ultimaMossa=1;
-        } else if((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2)  {
+        } else if((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2 && m.ultimoArrivo!=2)  {
           m.subX--;
           m.ultimaMossa=3;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -668,20 +686,21 @@ void fygarGreedy(Fygar m) {
   else {                       // playerY > m.y  player sotto
       if (ricercaX < m.x) {
           
-        if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+        if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=0) {
           m.subY++;
           m.ultimaMossa=1;
-        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2 && m.ultimoArrivo!=2) {
           m.subX--;
           m.ultimaMossa=3;
-        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3 && m.ultimoArrivo!=3) {
           m.subX++;
           m.ultimaMossa=2;
-        } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
+        } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1)  {
           m.subY--;
           m.ultimaMossa=0;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -706,20 +725,21 @@ void fygarGreedy(Fygar m) {
       }
       else if (ricercaX == m.x) {
           
-        if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+        if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=0) {
           m.subY++;
           m.ultimaMossa=1;
-        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2 && m.ultimoArrivo!=2) {
           m.subX--;
           m.ultimaMossa=3;
-        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3 && m.ultimoArrivo!=3) {
           m.subX++;
           m.ultimaMossa=2;
-        } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
+        } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1)  {
           m.subY--;
           m.ultimaMossa=0;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -744,20 +764,21 @@ void fygarGreedy(Fygar m) {
       }
       else { // playerX > m.x
           
-          if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0) {
+          if ((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa !=0 && m.ultimoArrivo!=0) {
           m.subY++;
           m.ultimaMossa=1;
-        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3) {
+        } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa !=3 && m.ultimoArrivo!=3) {
           m.subX++;
           m.ultimaMossa=2;
-        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2) {
+        } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa !=2 && m.ultimoArrivo!=2) {
           m.subX--;
           m.ultimaMossa=3;
-        } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1)  {
+        } else if((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa !=1 && m.ultimoArrivo!=1)  {
           m.subY--;
           m.ultimaMossa=0;
         } else {
         
+          m.ultimoArrivo=-1;
           switch(m.ultimaMossa){
             case 0:
               m.subY++;
@@ -785,26 +806,31 @@ void fygarGreedy(Fygar m) {
   m.nMosse++;
   
   if(m.subX>3){
-      m.subX-=3;
-      m.x++;
-    }
+    m.subX-=3;
+    m.x++;
+    m.ultimoArrivo=2;
+  }
   if(m.subX<0){
-      m.subX+=3;
-      m.x--;
-    }
+    m.subX+=3;
+    m.x--;
+    m.ultimoArrivo=3;
+  }
   if(m.subY>3){
-      m.subY-=3;
-      m.y++;
-    }
+    m.subY-=3;
+    m.y++;
+    m.ultimoArrivo=1;
+  }
   if(m.subY<0){
     m.subY+=3;
     m.y--;
+    m.ultimoArrivo=0;
   }
   
-  if(m.ultimaMossa!=0 && m.ultimaMossa!=1){
+  //allineamento ai tunnel
+  if(m.ultimaMossa==2 || m.ultimaMossa==3){
     m.subY=3;
   }
-  if(m.ultimaMossa!=2 && m.ultimaMossa!=3){
+  if(m.ultimaMossa==0 || m.ultimaMossa==1){
     m.subX=1;
   }
   
@@ -1032,20 +1058,21 @@ void attaccoFygar(Fygar f){
 
 void fugaFinalePooka(Pooka m){
     
-  if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa != 1 && m.y>0) {
+  if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa != 1 && m.y>0 && m.ultimoArrivo!=1) {
     m.subY--;
     m.ultimaMossa=0;
-  } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa != 2 && m.x>0) {
+  } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa != 2 && m.x>0 && m.ultimoArrivo!=2) {
     m.subX--;
     m.ultimaMossa=3;
-  } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa != 3 && m.x<11) {
+  } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa != 3 && m.x<11 && m.ultimoArrivo!=3) {
     m.subX++;
     m.ultimaMossa=2;
-  } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa != 0 && m.y<12)  {
+  } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa != 0 && m.y<12 && m.ultimoArrivo!=0)  {
     m.subY++;
     m.ultimaMossa=1;
   } else {
   
+    m.ultimoArrivo=-1;
     switch(m.ultimaMossa){
       case 0:
         m.subY++;
@@ -1070,46 +1097,52 @@ void fugaFinalePooka(Pooka m){
   m.nMosse++;
   
   if(m.subX>3){
-      m.subX-=3;
-      m.x++;
-    }
+    m.subX-=3;
+    m.x++;
+    m.ultimoArrivo=2;
+  }
   if(m.subX<0){
-      m.subX+=3;
-      m.x--;
-    }
+    m.subX+=3;
+    m.x--;
+    m.ultimoArrivo=3;
+  }
   if(m.subY>3){
-      m.subY-=3;
-      m.y++;
-    }
+    m.subY-=3;
+    m.y++;
+    m.ultimoArrivo=1;
+  }
   if(m.subY<0){
     m.subY+=3;
     m.y--;
+    m.ultimoArrivo=0;
   }
   
-  if(m.ultimaMossa!=0 && m.ultimaMossa!=1){
+  //allineamento ai tunnel
+  if(m.ultimaMossa==2 || m.ultimaMossa==3){
     m.subY=3;
   }
-  if(m.ultimaMossa!=2 && m.ultimaMossa!=3){
+  if(m.ultimaMossa==0 || m.ultimaMossa==1){
     m.subX=1;
   }
 }
 
 void fugaFinaleFygar(Fygar m){
   
-  if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa != 1 && m.y>0) {
+  if ((percorso[m.y][m.x] & (1 << 0)) != 0 && m.ultimaMossa != 1 && m.y>0 && m.ultimoArrivo!=1) {
     m.subY--;
     m.ultimaMossa=0;
-  } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa != 2 && m.x>0) {
+  } else if ((percorso[m.y][m.x] & (1 << 3)) != 0 && m.ultimaMossa != 2 && m.x>0 && m.ultimoArrivo!=2) {
     m.subX--;
     m.ultimaMossa=3;
-  } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa != 3 && m.x<11) {
+  } else if ((percorso[m.y][m.x] & (1 << 2)) != 0 && m.ultimaMossa != 3 && m.x<11 && m.ultimoArrivo!=3) {
     m.subX++;
     m.ultimaMossa=2;
-  } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa != 0 && m.y<12)  {
+  } else if((percorso[m.y][m.x] & (1 << 1)) != 0 && m.ultimaMossa != 0 && m.y<12 && m.ultimoArrivo!=0)  {
     m.subY++;
     m.ultimaMossa=1;
   } else {
   
+    m.ultimoArrivo=-1;
     switch(m.ultimaMossa){
       case 0:
         m.subY++;
@@ -1134,26 +1167,31 @@ void fugaFinaleFygar(Fygar m){
   m.nMosse++;
   
   if(m.subX>3){
-      m.subX-=3;
-      m.x++;
-    }
+    m.subX-=3;
+    m.x++;
+    m.ultimoArrivo=2;
+  }
   if(m.subX<0){
-      m.subX+=3;
-      m.x--;
-    }
+    m.subX+=3;
+    m.x--;
+    m.ultimoArrivo=3;
+  }
   if(m.subY>3){
-      m.subY-=3;
-      m.y++;
-    }
+    m.subY-=3;
+    m.y++;
+    m.ultimoArrivo=1;
+  }
   if(m.subY<0){
     m.subY+=3;
     m.y--;
+    m.ultimoArrivo=0;
   }
   
-  if(m.ultimaMossa!=0 && m.ultimaMossa!=1){
+  //allineamento ai tunnel
+  if(m.ultimaMossa==2 || m.ultimaMossa==3){
     m.subY=3;
   }
-  if(m.ultimaMossa!=2 && m.ultimaMossa!=3){
+  if(m.ultimaMossa==0 || m.ultimaMossa==1){
     m.subX=1;
   }
 }

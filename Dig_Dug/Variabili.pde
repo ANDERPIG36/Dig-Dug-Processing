@@ -85,6 +85,7 @@ class Pooka {
   int drawX, drawY;
   int gonfiore;
   int ultimaMossa;
+  int ultimoArrivo;
   int nMosse;
   boolean spettro;
   boolean isPookaSchiacciato;
@@ -121,6 +122,7 @@ class Fygar{
   int drawX, drawY;
   int gonfiore;
   int ultimaMossa;
+  int ultimoArrivo;
   int nMosse;
   boolean spettro;
   boolean isShooting;
