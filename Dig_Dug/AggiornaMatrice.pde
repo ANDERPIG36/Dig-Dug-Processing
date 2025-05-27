@@ -364,7 +364,7 @@ void controlloEventi() {
     
     if(f.gonfiore>0){
       f.isShooting=false;
-      if(f.gonfiore==3){
+      if(f.gonfiore>=3){
         score+=600;
         mostroGrabbato=false;
         staAttaccando=false;
