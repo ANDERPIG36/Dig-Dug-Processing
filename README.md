@@ -100,3 +100,14 @@ Grazie per aver giocato! ✨
 *Scava, schiaccia, esplodi… e sopravvivi!*
 
 ---
+
+## 🎮 Processing
+
+**Progetto realizzato in processing:**
+- *Maggiori info:*
+https://processing.org/
+
+- *Utilizzate le librerie minim e processing video* 
+ 
+
+
